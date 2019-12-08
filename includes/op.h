@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2019/11/26 17:00:20 by stherkil         ###   ########.fr       */
+/*   Updated: 2019/12/08 17:41:00 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Toutes les tailles sont en octets.
-** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
-*/
+ ** Toutes les tailles sont en octets.
+ ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
+ */
 
 #define IND_SIZE				2
 #define REG_SIZE				4
@@ -39,7 +39,7 @@
 #define LABEL_CHARS				"abcdefghijklmnopqrstuvwxyz_0123456789"
 
 #define NAME_CMD_STRING			".name"
-#define COMMENT_CMD_STRING		".comment"
+#define COMMENT_CMD_STRING	".comment"
 
 #define REG_NUMBER				16
 
@@ -49,8 +49,8 @@
 #define MAX_CHECKS				10
 
 /*
-**
-*/
+ **
+ */
 
 typedef char	t_arg_type;
 
@@ -60,17 +60,16 @@ typedef char	t_arg_type;
 #define T_LAB					8
 
 /*
-**
-*/
+ **
+ */
 
-# define PROG_NAME_LENGTH		(128)
-# define COMMENT_LENGTH			(2048)
-# define COREWAR_EXEC_MAGIC		0xea83f3
+# define PROG_NAME_LENGTH		128
+# define COMMENT_LENGTH			2048
+# define COREWAR_EXEC_MAGIC 0xea83f3
 
 typedef struct		header_s
 {
-  unsigned int		magic;
-  char				prog_name[PROG_NAME_LENGTH + 1];
-  unsigned int		prog_size;
-  char				comment[COMMENT_LENGTH + 1];
+	char				prog_name[PROG_NAME_LENGTH + 1];
+	unsigned int		prog_size;
+	char				comment[COMMENT_LENGTH + 1];
 }					header_t;
