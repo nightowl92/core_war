@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2019/12/08 17:53:05 by stherkil         ###   ########.fr       */
+/*   Updated: 2019/12/15 19:47:08 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,13 @@ void			parserbit(char *addr, header_t *header)
 	if (!(bittoint(BUF[PROG_NAME_LENGTH + 4]) == 0 && bittoint(BUF[PROG_NAME_LENGTH + 1 + 4]) == 0
 	&& bittoint(BUF[PROG_NAME_LENGTH + 2 + 4]) == 0 && bittoint(BUF[PROG_NAME_LENGTH + 3 + 4] == 0)))
 		errorparser("zeros after name missing", header);
+	int i = -1;
+	while (++i < 128 + 2048 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4)
+		printf("buf %d, %X\n", i, BUF[i]);
 	strbitcpy(BUF + 4 + 4 + 4 + PROG_NAME_LENGTH, header->comment, COMMENT_LENGTH);
 	printf("name %s\n", header->prog_name);
 	printf("comment %s\n", header->comment);
+	open();
 	free(header);
     close(fd);
 }

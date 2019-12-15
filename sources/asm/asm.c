@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2019/12/08 17:19:49 by stherkil         ###   ########.fr       */
+/*   Updated: 2019/12/15 16:29:57 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	if (ft_strrchr(argv[1], '.') && ft_strcmp(ft_strrchr(argv[1], '.'), ".s")
 	&& ft_strcmp(ft_strrchr(argv[1], '.'), ".cor"))
 			errorparser("only .s or .cor", header);
-	if (ft_strrchr(argv[1], '.'), ".s")
+	if (!ft_strcmp(ft_strrchr(argv[1], '.'), ".cor"))
 	{
 		parserbit(argv[1], header);
 	}
