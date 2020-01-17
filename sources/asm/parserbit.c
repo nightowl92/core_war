@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2019/12/15 19:47:08 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/17 16:24:43 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void			parserbit(char *addr, header_t *header)
 {
     unsigned char	BUF[2192];
     int				fd;
+	int				fdout;
 
     fd = open(addr, O_RDONLY);
 	if (fd < 0)
@@ -73,7 +74,9 @@ void			parserbit(char *addr, header_t *header)
 	strbitcpy(BUF + 4 + 4 + 4 + PROG_NAME_LENGTH, header->comment, COMMENT_LENGTH);
 	printf("name %s\n", header->prog_name);
 	printf("comment %s\n", header->comment);
-	open();
+	fdout = open("weshh.s", O_CREAT | O_RDWR, 0644);
+	write(fdout, "wesh\n" ,5);
+	close(fdout);
 	free(header);
     close(fd);
 }
