@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2019/12/15 16:29:57 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/17 16:39:15 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		;
+		write(1, "nop\n", 3);
 	}
 	return (0);
 }

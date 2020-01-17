@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/17 16:24:43 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/17 17:06:30 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void strbitcpy(unsigned char *src, char *dest, int bits)
 	while (++i < bits)
 		dest[i] = bittoint(src[i]);
 	dest[i] = '\0';
+}	
+
+int	replaceend(char *addr, char *newend)
+{
+	
 }
 
 void			parserbit(char *addr, header_t *header)
@@ -53,6 +58,7 @@ void			parserbit(char *addr, header_t *header)
     unsigned char	BUF[2192];
     int				fd;
 	int				fdout;
+	char			*outname;
 
     fd = open(addr, O_RDONLY);
 	if (fd < 0)
@@ -74,9 +80,14 @@ void			parserbit(char *addr, header_t *header)
 	strbitcpy(BUF + 4 + 4 + 4 + PROG_NAME_LENGTH, header->comment, COMMENT_LENGTH);
 	printf("name %s\n", header->prog_name);
 	printf("comment %s\n", header->comment);
-	fdout = open("weshh.s", O_CREAT | O_RDWR, 0644);
+	outname = ft_strnew(ft_strlen(addr));
+	ft_strcpy(outname, addr);
+	ft_strcpy(addr + ft_strlen(addr) - 2, "s");
+	printf("addr is %s\n", outname);
+	fdout = open(outname, O_CREAT | O_RDWR, 0644);
 	write(fdout, "wesh\n" ,5);
 	close(fdout);
 	free(header);
+	free(outname);
     close(fd);
 }
