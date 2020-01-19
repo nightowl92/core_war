@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/17 17:06:30 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/19 13:13:59 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,17 @@ void strbitcpy(unsigned char *src, char *dest, int bits)
 	dest[i] = '\0';
 }	
 
-int	replaceend(char *addr, char *newend)
+int findlastpt(char *addr)
 {
-	
+	int		len;
+	char	*cpyaddr;
+
+	cpyaddr = NULL;
+	len = ft_strlen(addr);
+	while (--len)
+		if (addr[len - 1] == '.')
+			break ;
+	return (len);
 }
 
 void			parserbit(char *addr, header_t *header)
@@ -58,7 +66,6 @@ void			parserbit(char *addr, header_t *header)
     unsigned char	BUF[2192];
     int				fd;
 	int				fdout;
-	char			*outname;
 
     fd = open(addr, O_RDONLY);
 	if (fd < 0)
@@ -74,20 +81,17 @@ void			parserbit(char *addr, header_t *header)
 	if (!(bittoint(BUF[PROG_NAME_LENGTH + 4]) == 0 && bittoint(BUF[PROG_NAME_LENGTH + 1 + 4]) == 0
 	&& bittoint(BUF[PROG_NAME_LENGTH + 2 + 4]) == 0 && bittoint(BUF[PROG_NAME_LENGTH + 3 + 4] == 0)))
 		errorparser("zeros after name missing", header);
-	int i = -1;
-	while (++i < 128 + 2048 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4)
-		printf("buf %d, %X\n", i, BUF[i]);
 	strbitcpy(BUF + 4 + 4 + 4 + PROG_NAME_LENGTH, header->comment, COMMENT_LENGTH);
 	printf("name %s\n", header->prog_name);
 	printf("comment %s\n", header->comment);
-	outname = ft_strnew(ft_strlen(addr));
-	ft_strcpy(outname, addr);
-	ft_strcpy(addr + ft_strlen(addr) - 2, "s");
-	printf("addr is %s\n", outname);
-	fdout = open(outname, O_CREAT | O_RDWR, 0644);
-	write(fdout, "wesh\n" ,5);
+	addr[findlastpt(addr)] = 's';
+	addr[findlastpt(addr) + 1] = '\0';
+	fdout = open(addr, O_CREAT | O_RDWR, 0644);
+	int i = -1;
+	/*while (++i < 128 + 2048 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4)
+		printf("buf %d, %X\n", i, BUF[i]);*/
+	write(fdout, BUF, 2608);
 	close(fdout);
 	free(header);
-	free(outname);
     close(fd);
 }
