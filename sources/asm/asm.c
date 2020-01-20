@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/20 17:42:40 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/20 18:03:46 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,10 @@ static void		asmtofile(header_t *header, char *name1)
 	BUF[1] = 234;
 	BUF[2] = 131;
 	BUF[3] = 243;
-	ft_strcpy(BUF + 4, (unsigned char*)(header->prog_name));
-	write(fd, BUF, 4);
-	//write(fd, "bonjour\n", 8);
+	ft_memcpy(BUF + 4, header->prog_name, ft_strlen(header->prog_name));
+	ft_bzero(BUF + 4 + ft_strlen(header->prog_name), 10);
+	ft_memcpy(BUF + 4 + ft_strlen(header->prog_name) + 10, header->comment, ft_strlen(header->comment));
+	write(fd, BUF, 4 + ft_strlen(header->prog_name) + ft_strlen(header->comment) + 10);
 	free(name2);
 	close(fd);
 }
