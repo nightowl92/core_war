@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:21:16 by stherkil          #+#    #+#             */
-/*   Updated: 2019/09/14 19:32:43 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/20 12:00:21 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void					ft_strclr(char *s);
 void					ft_strdel(char **as);
 char					*ft_strcpy(char *dst, const char *src);
 char					*ft_strdup(const char *s1);
+char					*ft_strndup(const char *s1, int n);
 void					ft_striter(char *s, void (*f)(char *));
 void					ft_striteri(char *s, void (*f)(unsigned int, char *));
 char					*ft_strstr(const char *haystack, const char *needle);

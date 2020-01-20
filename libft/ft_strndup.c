@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asmerror.c                                         :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stherkil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/02 17:07:11 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/20 11:46:40 by stherkil         ###   ########.fr       */
+/*   Created: 2019/01/13 18:43:15 by stherkil          #+#    #+#             */
+/*   Updated: 2020/01/20 12:00:29 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/asm.h"
+#include "libft.h"
 
-void	errorparser(const char *s, header_t *header)
+char	*ft_strndup(const char *s1, int n)
 {
-	if (header)
-		free(header);
-	ft_putendl(s);
-	exit(0);
+	char *out;
+
+	if (!(out = (char*)malloc(sizeof(char) * (n + 1))))
+		return (NULL);
+	ft_strncpy(out, s1, n);
+	out[n] = '\n';
+	return (out);
 }

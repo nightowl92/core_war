@@ -2,6 +2,7 @@ NAME = libft.a
 
 SRCS = ft_atoi.c ft_itoa.c\
 	   ft_bzero.c \
+	   ft_strndup.c \
 	   ft_strdel.c \
 	   ft_memalloc.c \
 	   ft_memdel.c \

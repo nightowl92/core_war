@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2019/12/08 17:41:00 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/20 12:25:49 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef char	t_arg_type;
 
 typedef struct		header_s
 {
+	int					fd;
 	char				prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int		prog_size;
 	char				comment[COMMENT_LENGTH + 1];
