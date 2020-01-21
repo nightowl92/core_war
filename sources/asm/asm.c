@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/20 18:03:46 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/21 13:23:17 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static void		asmtofile(header_t *header, char *name1)
 	unsigned char	BUF[2192];
 	int				fd;
 	char			*name2;
+	int				bufpt;
 
 	if (findlastpt(name1) == ft_strlen(name1))
 		errorparser("Writing output program to .cor", header);
@@ -80,14 +81,24 @@ static void		asmtofile(header_t *header, char *name1)
 	BUF[1] = 234;
 	BUF[2] = 131;
 	BUF[3] = 243;
-	ft_memcpy(BUF + 4, header->prog_name, ft_strlen(header->prog_name));
-	ft_bzero(BUF + 4 + ft_strlen(header->prog_name), 10);
-	ft_memcpy(BUF + 4 + ft_strlen(header->prog_name) + 10, header->comment, ft_strlen(header->comment));
-	write(fd, BUF, 4 + ft_strlen(header->prog_name) + ft_strlen(header->comment) + 10);
+	bufpt = 4;
+	/* exceptions because of length? */
+	ft_memcpy(BUF + bufpt, header->prog_name, ft_strlen(header->prog_name));
+	bufpt += ft_strlen(header->prog_name);
+	ft_bzero(BUF + bufpt, PROG_NAME_LENGTH - ft_strlen(header->prog_name) + 7);
+	bufpt += PROG_NAME_LENGTH - ft_strlen(header->prog_name) + 7;
+	BUF[bufpt] = 5;
+	bufpt += 1;
+	ft_memcpy(BUF + bufpt, header->comment, ft_strlen(header->comment));
+	bufpt += ft_strlen(header->comment);
+	ft_bzero(BUF + bufpt, COMMENT_LENGTH - ft_strlen(header->comment) + 4);
+	bufpt += COMMENT_LENGTH - ft_strlen(header->comment) + 4;
+	BUF[bufpt] = 1;
+	bufpt += 1;
+	write(fd, BUF, bufpt);
 	free(name2);
 	close(fd);
 }
-
 
 int			main(int argc, char **argv)
 {
@@ -96,7 +107,7 @@ int			main(int argc, char **argv)
 	header = NULL;
 	header = malloc(sizeof(header_t));
 	if (argc != 2)
-		errorparser("Usage: ./asm [-a] <sourcefile.s>\n -a : Instead of creating a .cor file, outputs a stripped and annotated version of the code to the standard output", header);		
+		errorparser("Usage: ./asm [-a] <sourcefile.s>\n -a : Instead of creating a .cor file, outputs a stripped and annotated version of the code to the standard output", header);
 	if ((header->fd = open(argv[1], O_RDONLY)) < 0)
 	{
 		ft_putstr("Can't read source file ");
