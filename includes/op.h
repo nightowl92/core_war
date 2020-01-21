@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/01/20 12:25:49 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:01:21 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,18 @@ typedef char	t_arg_type;
 # define PROG_NAME_LENGTH		128
 # define COMMENT_LENGTH			2048
 # define COREWAR_EXEC_MAGIC 0xea83f3
+
+typedef struct		s_op
+{
+	char instr[4];
+	int nb;
+	int nb2;
+	int nb3;
+	int nb4;
+	char instr1[12];
+	int nb5;
+	int nb6;
+}					t_op;
 
 typedef struct		header_s
 {
