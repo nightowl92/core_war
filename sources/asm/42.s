@@ -1,4 +1,4 @@
-.name "nombre"
-.comment "o"
+.name "okok"
+.comment "sisiis"
 
-live	%42
+live %42
