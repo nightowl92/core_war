@@ -6,7 +6,7 @@
 #    By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 10:33:13 by vlaroque          #+#    #+#              #
-#    Updated: 2020/01/23 16:09:29 by vlaroque         ###   ########.fr        #
+#    Updated: 2020/01/23 20:41:51 by vlaroque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CFLAGS = -Wextra -Werror -Wall
 # SOURCES
 
 SRC_ASM = 
-SRC_VM = 
+SRC_VM = main.c debug.c battle.c
 SRC_COMMON = 
 
 # PATH
@@ -43,7 +43,7 @@ VM_SRC_FILES += $(addprefix $(COMMON_PATH)/,$(SRC_COMMON))
 ASM_OBJ = $(addprefix $(OBJ_PATH)/,$(ASM_SRC_FILES:.c=.o))
 VM_OBJ = $(addprefix $(OBJ_PATH)/,$(VM_SRC_FILES:.c=.o))
 
-DEPENDS = $(ASM_OBJ:%.o=%.d) 
+EPENDS = $(ASM_OBJ:%.o=%.d) 
 DEPENDS += $(VM_OBJ:%.o=%.d) 
 
 .PHONY: all
