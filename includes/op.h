@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/01/22 12:16:05 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/25 15:54:08 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct		s_op
 
 typedef struct		header_s
 {
+	char				NUM[4];
 	int					fd;
 	char				prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int		prog_size;

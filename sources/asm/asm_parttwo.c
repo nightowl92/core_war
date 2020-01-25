@@ -6,13 +6,13 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/22 14:24:27 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/25 15:55:14 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/asm.h"
 
-static t_op    op_tab[17] =
+static t_op		op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
@@ -39,26 +39,76 @@ static t_op    op_tab[17] =
 	{0, 0, 0, 0, 0, 0, 0, 0}
 };
 
+char			decitohex(int nb)
+{
+	return (nb);
+}
 
-void asm_live(t_op fct)
+void			putmax(char *NUM)
+{
+	int i;
+
+	i = -1;
+	while (++i < 8)
+		NUM[i] = 'f';
+}
+
+void			hexlittle(char *NUM, long long nb)
+{
+	if (nb / 4294967296 > 0)
+	{
+		putmax(NUM);
+		return ;
+	}
+	NUM[0] = decitohex(nb / 268435456);
+	nb -= 268435456 * (nb / 268435456);
+	NUM[1] = decitohex(nb / 16777216);
+	nb -= 16777216 * (nb / 16777216);
+	NUM[0] = NUM[0] * 16 + NUM[1];
+	NUM[2] = decitohex(nb / 1048576);
+	nb -= 1048576 * (nb / 1048576);
+	NUM[3] = decitohex(nb / 65536);
+	nb -= 65536 * (nb / 65536);
+
+
+	NUM[1] = NUM[2] * 16 + NUM[3];
+	NUM[4] = decitohex(nb / 4096);
+	nb -= 4096 * (nb / 4096);
+	NUM[5] = decitohex(nb / 256);
+	nb -= 256 * (nb / 256);
+
+
+	NUM[2] = NUM[4] * 16 + NUM[5];
+	NUM[6] = decitohex(nb / 16);
+	nb -= 16 * (nb / 16);
+	NUM[7] = decitohex(nb);
+
+
+	NUM[3] = NUM[6] * 16 + NUM[7];
+}
+
+void			asm_live(t_op fct)
 {
      printf("is %s\n", fct.instr);
 }
 
-void		parttwo(unsigned char *BUF, int *bufptout, header_t *header)
+void			parttwo(unsigned char *BUF, int *bufptout, header_t *header)
 {
 	int bufpt;
     int i;
 
+	hexlittle(header->NUM, 123123);
     i = -1;
 	bufpt = *bufptout;
     pt[0] = asm_live;
     while (++i < 17)
-    {
         if (!ft_strncmp((op_tab[i]).instr, header->first, ft_strlen((op_tab[i]).instr)) && (op_tab[i]).instr[0] != 0)
             (pt[i])(op_tab[i]);
-    }
 	BUF[bufpt] = 1;
 	bufpt += 1;
+	printf("little hex is %s\n", header->NUM);
+	ft_memcpy(BUF + bufpt, header->NUM, 4);
+	bufpt += 4;
+	
 	*bufptout = bufpt;
 }
