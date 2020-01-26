@@ -5,7 +5,6 @@
 # include <stdio.h>
 # include "op.h"
 # include "libft.h"
-# include "get_next_line.h"
 
 void			(*pt[17]) (t_op fct, unsigned char *BUF, int *bufptout);
 void			asmparsing(header_t *header);
