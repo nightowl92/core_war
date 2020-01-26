@@ -14,14 +14,14 @@
 
 NAME1 = asm
 NAME2 = corewar
-CC = gcc
+CC = clang
 CFLAGS = -Wextra -Werror -Wall
 
 # SOURCES
 
 SRC_ASM = 
 SRC_VM = main.c debug.c battle.c
-SRC_COMMON = 
+SRC_COMMON = op.c
 
 # PATH
 

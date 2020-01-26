@@ -12,6 +12,7 @@
 
 #ifndef COREWAR_H
 # define COREWAR_H
+# include "op.h"
 
 typedef unsigned char	t_octet;
 typedef struct			s_process
@@ -28,6 +29,15 @@ typedef struct			s_data
 	t_process			*processes;
 }						t_data;
 
+/*
+** champion
+*/
+
+typedef struct			s_champ
+{
+	int			prog_id;
+	header_t	header;
+}						t_champ;
 
 /*
 ** debug

@@ -17,7 +17,7 @@ int		init(t_data *data, int ac, char **av)
 {
 	if (ac == -1 || av == 0)
 		return (0);
-	*(int *)data->mars = 1234567890;
+	*(int *)data->mars = 0xabcdef10;
 	return (0);
 }
 
