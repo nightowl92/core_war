@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:21:16 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/20 12:00:21 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/26 18:26:03 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ unsigned long long int	ft_numulen(unsigned long long int nb, int base);
 int						ft_max(int a, int b);
 int						ft_min(int a, int b);
 intmax_t				ft_abs(intmax_t nb);
+void					ft_bzero(void *s, size_t n);
+void					op_bzero(void *s, size_t n);
 
 typedef	struct			s_list
 {

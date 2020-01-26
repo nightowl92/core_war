@@ -6,7 +6,7 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:19:57 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/01/23 20:33:35 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/01/26 18:37:31 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,27 @@ typedef struct			s_process
 	struct s_process	*next;
 }						t_process;
 
-typedef struct			s_data
-{
-	t_octet				mars[MEM_SIZE];
-	int					colors[MEM_SIZE];
-	t_process			*processes;
-}						t_data;
-
 /*
 ** champion
 */
 
 typedef struct			s_champ
 {
-	int			prog_id;
-	header_t	header;
+	int				magic_nbr;
+	int				prog_id;
+	header_t		header;
+	struct s_champ	*next;
+
 }						t_champ;
+
+
+typedef struct			s_data
+{
+	t_octet				mars[MEM_SIZE];
+	int					colors[MEM_SIZE];
+	t_process			*processes;
+	t_champ				*champs;
+}						t_data;
 
 /*
 ** debug
