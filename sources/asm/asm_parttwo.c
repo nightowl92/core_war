@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/25 15:55:14 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/26 17:03:24 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,138 @@ void			hexlittle(char *NUM, long long nb)
 	NUM[3] = NUM[6] * 16 + NUM[7];
 }
 
-void			asm_live(t_op fct)
+void			asm_live(t_op fct, unsigned char *BUF, int *bufptout)
 {
      printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 1;
+	*bufptout += 1;
+}
+
+void			asm_ld(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 2;
+	*bufptout += 1;
+}
+
+void			asm_st(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 3;
+	*bufptout += 1;
+}
+
+void			asm_add(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 4;
+	*bufptout += 1;
+}
+
+void			asm_sub(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 5;
+	*bufptout += 1;
+}
+
+void			asm_and(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 6;
+	*bufptout += 1;
+}
+
+void			asm_or(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 7;
+	*bufptout += 1;
+}	
+
+void			asm_xor(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 8;
+	*bufptout += 1;
+}
+
+void			asm_zjmp(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 9;
+	*bufptout += 1;
+}
+
+void			asm_ldi(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 10;
+	*bufptout += 1;
+}
+
+void			asm_sti(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 11;
+	*bufptout += 1;
+}
+
+void			asm_fork(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("isss %s\n", fct.instr);
+	BUF[*bufptout] = 12;
+	*bufptout += 1;
+	//ft_memcpy(BUF + *bufptout, header->NUM, 4);
+	//bufpt += 4;
+}
+
+void			asm_lld(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 13;
+	*bufptout += 1;
+}
+
+void			asm_lldi(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 14;
+	*bufptout += 1;
+}
+
+void			asm_lfork(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 15;
+	*bufptout += 1;
+}
+
+void			asm_aff(t_op fct, unsigned char *BUF, int *bufptout)
+{
+     printf("is %s\n", fct.instr);
+	BUF[*bufptout] = 16;
+	*bufptout += 1;
+}
+
+void initpt()
+{
+    pt[0] = asm_live;
+	pt[1] = asm_ld;
+	pt[2] = asm_st;
+	pt[3] = asm_add;
+	pt[4] = asm_sub;
+	pt[5] = asm_and;
+	pt[6] = asm_or;
+	pt[7] = asm_xor;
+	pt[8] = asm_zjmp;
+	pt[9] = asm_ldi;
+	pt[10] = asm_sti;
+	pt[11] = asm_fork;
+	pt[12] = asm_lld;
+	pt[13] = asm_lldi;
+	pt[14] = asm_lfork;
+	pt[15] = asm_aff;
 }
 
 void			parttwo(unsigned char *BUF, int *bufptout, header_t *header)
@@ -97,15 +226,14 @@ void			parttwo(unsigned char *BUF, int *bufptout, header_t *header)
 	int bufpt;
     int i;
 
-	hexlittle(header->NUM, 123123);
+	initpt();
+	hexlittle(header->NUM, 42);
     i = -1;
 	bufpt = *bufptout;
-    pt[0] = asm_live;
     while (++i < 17)
         if (!ft_strncmp((op_tab[i]).instr, header->first, ft_strlen((op_tab[i]).instr)) && (op_tab[i]).instr[0] != 0)
-            (pt[i])(op_tab[i]);
-	BUF[bufpt] = 1;
-	bufpt += 1;
+            (pt[i])(op_tab[i], BUF, &bufpt);
+			
 	printf("little hex is %s\n", header->NUM);
 	ft_memcpy(BUF + bufpt, header->NUM, 4);
 	bufpt += 4;

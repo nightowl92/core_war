@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/01/25 15:57:39 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/26 18:34:46 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,23 @@ typedef struct		s_op
 	int nb6;
 }					t_op;
 
+typedef struct		instr_s
+{
+	int instr;
+	unsigned char enc;
+	int r1;
+	int r2;
+	int r3;
+	int num1;
+	int num2;
+	int num3;
+	int len;
+	struct		instr_s *next;
+}					instr_t;
+
 typedef struct		header_s
 {
+	instr_t				*instr;
 	char				NUM[8];
 	int					fd;
 	char				prog_name[PROG_NAME_LENGTH + 1];
