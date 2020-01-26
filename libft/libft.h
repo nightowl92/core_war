@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:21:16 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/26 18:26:03 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/01/26 18:59:38 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@
 # include <libc.h>
 # include <stddef.h>
 # include <unistd.h>
+# define BUFF_SIZE 32
+
+int						get_next_line(const int fd, char **line);
+typedef struct s_file	t_file;
+struct					s_file
+{
+	int					i;
+	size_t				len;
+	char				*rest;
+	t_file				*next;
+};
 
 int						ft_atoi(const char *c);
 void					ft_bzero(void *s, size_t n);
@@ -95,6 +106,7 @@ int						ft_min(int a, int b);
 intmax_t				ft_abs(intmax_t nb);
 void					ft_bzero(void *s, size_t n);
 void					op_bzero(void *s, size_t n);
+int						get_next_line(const int fd, char **line);
 
 typedef	struct			s_list
 {
