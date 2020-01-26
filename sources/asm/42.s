@@ -1,4 +1,250 @@
-.name "nombre"
-.comment "elcommento"
+.name "NOM"
+.comment "COMMENYTAIRE"
 
-et voila que allah wakhbar
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+st r4,487
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
