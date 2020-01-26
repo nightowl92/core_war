@@ -6,7 +6,7 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:56:00 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/01/23 20:33:05 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/01/26 21:14:16 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ int			show_mars(t_data *data)
 	i = 0;
 	while (i < MEM_SIZE)
 	{
+		if (i == 1023)
+			write(1, "@", 1);
+		if (i == 684)
+			write(1, "@", 1);
 		if (i != 0 && i % 64 == 0)
 			write(1, "\n", 1);
 		else if (i != 0)
