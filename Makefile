@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+         #
+#    By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 10:33:13 by vlaroque          #+#    #+#              #
-#    Updated: 2020/01/26 18:32:05 by vlaroque         ###   ########.fr        #
+#    Updated: 2020/01/26 18:51:57 by stherkil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS = -Wextra -Werror -Wall
 
 # SOURCES
 
-SRC_ASM = 
+SRC_ASM = asm.c errors.c asm_parttwo.c asm_parsing.c
 SRC_VM = main.c debug.c battle.c champ_load.c
 SRC_COMMON = #op.c
 
