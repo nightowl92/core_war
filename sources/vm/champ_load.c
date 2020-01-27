@@ -6,7 +6,7 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 14:52:08 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/01/26 21:01:26 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/01/27 21:19:56 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,17 @@ unsigned int		big_little_endian(unsigned int nbr)
 	ptr_new[1] = ptr_nbr[2];
 	ptr_new[2] = ptr_nbr[1];
 	ptr_new[3] = ptr_nbr[0];
-	printf("new = %d\n", new);
 	return (new);
-}
-
-int		mars_fill(t_data *data)
-{
-	int		i;
-
-	i = 0;
-	while (i < CHAMP_MAX_SIZE)
-	{
-		data->mars[i] = data->champs->content[i];
-		i++;
-	}
-	return (0);
 }
 
 int		champ_fill(t_champ *champ)
 {
 	t_octet			tmp[4];
 
-	if (4 != read(champ->fd, &champ->magic_nbr, 4))
+	if (4 != read(champ->fd, tmp, 4))
 		return (-1);
-//	if (champ->magic_nbr != COREWAR_EXEC_MAGIC)
-////		return (-2);
-	printf("lol\n");
+	if (*(unsigned int *)tmp != big_little_endian(COREWAR_EXEC_MAGIC))
+		return (-2);
 	if (PROG_NAME_LENGTH != read(champ->fd, champ->prog_name, PROG_NAME_LENGTH))
 		return (-3);
 	if (4 != read(champ->fd, tmp, 4))
@@ -70,22 +55,30 @@ int		champ_fill(t_champ *champ)
 	return (0);
 }
 
-int		champ_load(t_data *data, char *source)
+int		new_champ(t_data *data, char *source, int id)
 {
 	int		fd;
 	t_champ	*champ;
+	t_champ	*last;
 
+	printf("new champ\n");
 	if (!(fd = open(source, O_RDONLY)))
 		return (-1);
 	if (!(champ = (t_champ *)malloc(sizeof(t_champ))))
 		return (-1);
+	data->nbr_champs++;
 	op_bzero(champ, sizeof(t_champ));
-	
-	if (data->champs == champ)
-		champ->next = data->champs;
-	data->champs = champ;
+	champ->id = id;
+	if (!data->champs)
+		data->champs = champ;
+	else
+	{
+		last = data->champs;
+		while (last->next)
+			last = last->next;
+		last->next = champ;
+	}
 	data->champs->fd = fd;
 	champ_fill(champ);
-	mars_fill(data);
 	return (1);
 }

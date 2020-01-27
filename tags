@@ -275,7 +275,7 @@ cc4ld	ressources/champs/examples/helltrain.s	/^cc4ld:$/;"	l
 cc_live	ressources/champs/examples/helltrain.s	/^cc_live:$/;"	l
 cc_spawn	ressources/champs/examples/helltrain.s	/^cc_spawn:$/;"	l
 cf	ressources/champs/championships/2014/tdemay/champ.s	/^cf:$/;"	l
-champ_load	sources/vm/champ_load.c	/^int		champ_load(t_data *data, char *source)$/;"	f
+champ_fill	sources/vm/champ_load.c	/^int		champ_fill(t_champ *champ)$/;"	f
 champs	includes/corewar.h	/^	t_champ				*champs;$/;"	m	struct:s_data
 char_hexa	sources/vm/debug.c	/^void		char_hexa(t_octet c)$/;"	f
 checkbit	sources/asm/makecor.c	/^static char		checkbit(unsigned char c, int bit)$/;"	f	file:
@@ -286,10 +286,12 @@ clear	ressources/champs/championships/2014/hmoutaou/Misaka_Mikoto.s	/^clear:$/;"
 code	ressources/champs/Gagnant.s	/^code:		live %42			# 5$/;"	l
 code	ressources/champs/toto.s	/^code:		live %42			# 5$/;"	l
 colors	includes/corewar.h	/^	int					colors[MEM_SIZE];$/;"	m	struct:s_data
+comment	includes/corewar.h	/^	char				comment[COMMENT_LENGTH + 1];$/;"	m	struct:s_champ
 comment	includes/op.h	/^	char				comment[COMMENT_LENGTH + 1];$/;"	m	struct:header_s
 complicate	ressources/champs/championships/2014/kelickel/Varimathras.s	/^complicate:$/;"	l
 cont	ressources/42.s	/^cont:	add	r6,r6,r6$/;"	l
 cont	ressources/champs/42.s	/^cont:	add	r6,r6,r6$/;"	l
+content	includes/corewar.h	/^	t_octet				content[CHAMP_MAX_SIZE];$/;"	m	struct:s_champ
 content	libft/libft.h	/^	void				*content;$/;"	m	struct:s_list
 content_size	libft/libft.h	/^	size_t				content_size;$/;"	m	struct:s_list
 copie	ressources/42.s	/^copie:  ld      %1,r1$/;"	l
@@ -397,6 +399,7 @@ f6	ressources/champs/Death.s	/^f6:	fork	%:f7$/;"	l
 f7	ressources/champs/Death.s	/^f7:	fork	%:f8$/;"	l
 f8	ressources/champs/Death.s	/^f8:	fork	%:f9$/;"	l
 f9	ressources/champs/Death.s	/^f9:	fork	%:f10$/;"	l
+fd	includes/corewar.h	/^	int					fd;$/;"	m	struct:s_champ
 fd	includes/op.h	/^	int					fd;$/;"	m	struct:header_s
 feuille	ressources/champs/championships/2014/ekocevar/mandragore.s	/^feuille:$/;"	l
 ff1	ressources/champs/championships/2017/tbillard/Douceur_power.s	/^ff1:$/;"	l
@@ -594,7 +597,6 @@ haki_of_kings	ressources/champs/championships/2017/nolivier/run_Kitty_RUN.s	/^ha
 hanibalsmith	ressources/champs/championships/2014/cdivry/youforkmytralala.s	/^hanibalsmith:$/;"	l
 hanibalsmith2	ressources/champs/championships/2014/cdivry/youforkmytralala.s	/^hanibalsmith2:$/;"	l
 head	ressources/champs/championships/2014/gbir/_.s	/^head:$/;"	l
-header	includes/corewar.h	/^	header_t		header;$/;"	m	struct:s_champ
 header_s	includes/op.h	/^typedef struct		header_s$/;"	s
 header_t	includes/op.h	/^}					header_t;$/;"	t	typeref:struct:header_s
 hello	ressources/champs/championships/2014/gmange/corelol.s	/^hello:$/;"	l
@@ -1112,7 +1114,6 @@ loop_live	ressources/champs/championships/2014/dcohen/loose.s	/^loop_live:$/;"	l
 machine_gun_gen	ressources/champs/championships/2014/bguy/sam_2.0.s	/^machine_gun_gen:$/;"	l
 machine_gun_init	ressources/champs/championships/2014/bguy/sam_2.0.s	/^machine_gun_init:$/;"	l
 machinerie	ressources/champs/championships/2017/jaustry/mise_a_jour_windows95.s	/^machinerie:$/;"	l
-magic_nbr	includes/corewar.h	/^	int				magic_nbr;$/;"	m	struct:s_champ
 magic_poney	ressources/champs/championships/2017/agregoir/Kittystrophic.s	/^magic_poney:$/;"	l
 main	ressources/champs/championships/2014/mbacoux/meowluigi.s	/^main:$/;"	l
 main	ressources/champs/championships/2014/rmasse/THUNDER.s	/^main:$/;"	l
@@ -1122,6 +1123,7 @@ main2	ressources/champs/championships/2014/mbacoux/meowluigi.s	/^main2:$/;"	l
 main3	ressources/champs/championships/2014/mbacoux/meowluigi.s	/^main3:$/;"	l
 main4	ressources/champs/championships/2014/mbacoux/meowluigi.s	/^main4:$/;"	l
 mars	includes/corewar.h	/^	t_octet				mars[MEM_SIZE];$/;"	m	struct:s_data
+mars_fill	sources/vm/champ_load.c	/^int		mars_fill(t_data *data)$/;"	f
 master	ressources/champs/mortel.s	/^master:	live %66$/;"	l
 mei	ressources/champs/championships/2017/pzarmehr/overwatch.s	/^mei:$/;"	l
 mercy	ressources/champs/championships/2017/pzarmehr/overwatch.s	/^mercy:$/;"	l
@@ -1147,9 +1149,10 @@ nb3	includes/op.h	/^	int nb3;$/;"	m	struct:s_op
 nb4	includes/op.h	/^	int nb4;$/;"	m	struct:s_op
 nb5	includes/op.h	/^	int nb5;$/;"	m	struct:s_op
 nb6	includes/op.h	/^	int nb6;$/;"	m	struct:s_op
+new_champ	sources/vm/champ_load.c	/^int		new_champ(t_data *data, char *source)$/;"	f
 new_turn	sources/vm/battle.c	/^int		new_turn(t_data *data)$/;"	f
 next	gnl/get_next_line.h	/^	t_file				*next;$/;"	m	struct:s_file
-next	includes/corewar.h	/^	struct s_champ	*next;$/;"	m	struct:s_champ	typeref:struct:s_champ::s_champ
+next	includes/corewar.h	/^	struct s_champ		*next;$/;"	m	struct:s_champ	typeref:struct:s_champ::s_champ
 next	includes/corewar.h	/^	struct s_process	*next;$/;"	m	struct:s_process	typeref:struct:s_process::s_process
 next	includes/op.h	/^	struct		instr_s *next;$/;"	m	struct:instr_s	typeref:struct:instr_s::instr_s
 next	libft/libft.h	/^	struct s_list		*next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
@@ -1229,8 +1232,10 @@ prelive	ressources/champs/championships/2014/sbuono/Asombra.s	/^prelive:$/;"	l
 proc1	ressources/champs/championships/2014/gbir/_.s	/^proc1:$/;"	l
 processes	includes/corewar.h	/^	t_process			*processes;$/;"	m	struct:s_data
 prog	ressources/champs/championships/2017/iburel/gateau.s	/^prog:$/;"	l
-prog_id	includes/corewar.h	/^	int				prog_id;$/;"	m	struct:s_champ
+prog_id	includes/corewar.h	/^	int					prog_id;$/;"	m	struct:s_champ
+prog_name	includes/corewar.h	/^	char				prog_name[PROG_NAME_LENGTH + 1];$/;"	m	struct:s_champ
 prog_name	includes/op.h	/^	char				prog_name[PROG_NAME_LENGTH + 1];$/;"	m	struct:header_s
+prog_size	includes/corewar.h	/^	unsigned int		prog_size;$/;"	m	struct:s_champ
 prog_size	includes/op.h	/^	unsigned int		prog_size;$/;"	m	struct:header_s
 proloop	ressources/champs/championships/2014/mbacoux/meowluigi.s	/^proloop:$/;"	l
 proloop_2	ressources/champs/championships/2014/mbacoux/meowluigi.s	/^proloop_2:$/;"	l
