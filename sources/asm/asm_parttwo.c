@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/26 17:03:24 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/27 17:10:09 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static t_op		op_tab[17] =
 		"long load index", 1, 1},
 	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0}
 };
 
 char			decitohex(int nb)
@@ -233,8 +232,7 @@ void			parttwo(unsigned char *BUF, int *bufptout, header_t *header)
     while (++i < 17)
         if (!ft_strncmp((op_tab[i]).instr, header->first, ft_strlen((op_tab[i]).instr)) && (op_tab[i]).instr[0] != 0)
             (pt[i])(op_tab[i], BUF, &bufpt);
-			
-	printf("little hex is %s\n", header->NUM);
+	printf("big hex is %s\n", header->NUM);
 	ft_memcpy(BUF + bufpt, header->NUM, 4);
 	bufpt += 4;
 	

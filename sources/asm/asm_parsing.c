@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/26 18:35:23 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/27 18:33:42 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ static t_op		op_tab[17] =
 	{"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50,
 		"long load index", 1, 1},
 	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
-	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0}
+	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0}
 };
 
 static void	asmparsehead(header_t *header)
 {
 	char *s;
-		if (get_next_line(header->fd, &s) > 0)
+	
+	if (get_next_line(header->fd, &s) > 0)
 	{
 		/* put exception if len not ok & progname length etc*/
 		if (ft_strncmp(NAME_CMD_STRING, s, ft_strlen(NAME_CMD_STRING)))
@@ -74,8 +74,6 @@ static void	asmparsehead(header_t *header)
 	/*
 		NL
 	*/
-	printf("%s\n", header->prog_name);
-	printf("%s\n", header->comment);
 }
 
 static int checkclean(char *s)
@@ -101,7 +99,7 @@ static char *skipnl(header_t *header)
 		free(s);
 	}
 	if (ret <= 0)
-		errorparser("instruction section empty", header);
+		return (NULL);
 	return (s);
 }
 
@@ -118,6 +116,72 @@ static int isinstruct(char *s, header_t *header, int len)
 		}
 	return (0);
 }
+
+int checkarg(char *s, int pt, int argnb, header_t *header)
+{
+	int i;
+
+	i = 1;
+	if (s[pt] == '%')
+	{
+		header->instr->data[argnb] = ft_atoi(s + pt + 1);
+	}
+	else if (s[pt] == 'r')
+	{
+		header->instr->data[argnb] = ft_atoi(s + pt + 1);
+		//header->instr->enc = (header->instr->enc & )
+	}
+	else
+		errorparser("arg format NO FINE", header);
+	while (ft_isalnum((s + pt)[i]))
+		++i;
+	return (i);
+}
+
+void	countargs(char *s, header_t *header, int expnb)
+{
+	int i;
+	int argnb;
+
+	i = 0;
+	argnb = 0;
+	header->instr->totinstr = expnb;
+	header->instr->end = 0;
+	while (s[i])
+	{
+		if (argnb >= expnb)
+			errorparser("# of args NO FINE", header);
+		i += checkarg(s, i, argnb, header);
+		++argnb;
+		while (s[i] && s[i] <= ' ')
+			++i;
+		if (s[i] && s[i] == SEPARATOR_CHAR)
+			++i;
+		while (s[i] && s[i] <= ' ')
+			++i;
+		if (s[i] == COMMENT_CHAR)
+			break ;
+	}
+	if (argnb != expnb)
+			errorparser("# of args NO FINE", header);
+}
+
+void	getparams(char *s, header_t *header)
+{
+	int i;
+	int sortie;
+
+	i = -1;
+	while ((sortie = s[++i] <= ' '))
+		;
+	if (header->instr->instr == 1 || header->instr->instr == 9 || header->instr->instr == 12 || header->instr->instr == 15 || header->instr->instr == 16)
+		countargs(s + i, header, 1);
+	else if (header->instr->instr == 2 || header->instr->instr == 3 || header->instr->instr == 13)
+		countargs(s + i, header, 2);
+	else
+		countargs(s + i, header, 3);
+}
+
 static int islinevalid(char *s, header_t *header)
 {
 	int i;
@@ -132,15 +196,15 @@ static int islinevalid(char *s, header_t *header)
 	while (s[i] <= ' ')
 		++i;
 	if (s[i] == COMMENT_CHAR)
-	{
-		free(s);
 		return (1);
-	}
-	printf("%s\n", s + i);
 	ref = i;
 	while (ft_isalnum(s[i]))
 		++i;
-	if (s[i] != LABEL_CHAR && !isinstruct(s + ref,  header, i - ref))
+	if (s[i] == LABEL_CHAR)
+		header->instr->labelnb = (header->lastlabelnb += 1);
+	else if (isinstruct(s + ref,  header, i - ref))
+		getparams(s + i, header);
+	else
 		errorparser("error label/instruc", header);
 	return (1);
 }
@@ -150,19 +214,39 @@ static void	asmparseinstr(header_t *header)
 	char *s;
 	
 	s = skipnl(header);
-	islinevalid(s, header);
-	//printf("s is %s\n", s);
+	while (s != NULL && islinevalid(s, header))
+	{
+		free(s);
+		s = skipnl(header);
+	}
+	free(s);
+}
+
+void headerinit(header_t *header)
+{
+	header->instr = NULL;
+	header->lastlabelnb = 0;
 }
 
 void	asmparsing(header_t *header)
 {
-	unsigned char	BUF[2192];
+	//unsigned char	BUF[2192];
 	char *s;
 	int ret;
 
-	header->instr = NULL;
+	s = NULL;
+	ret = 0;
+	headerinit(header);
 	asmparsehead(header);
 	asmparseinstr(header);
+	instr_t *check = header->instr;
+
+	printf("name is @%s@\n", header->prog_name);
+	printf("comment is @%s@\n", header->comment);
+	while ((check = check->next))
+	{
+		printf("instr nb val%d data: %d %d %d\n", check->instr, check->data[0], check->data[1], check->data[2]);
+	}
 	/*
 		first instruct
 	*/
