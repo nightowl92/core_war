@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/27 18:33:42 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/28 20:50:49 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static void	asmparsehead(header_t *header)
 	{
 		exit(0);
 	}
-
 	/*
 		comment
 	*/
@@ -70,7 +69,6 @@ static void	asmparsehead(header_t *header)
 	{
 		exit(0);
 	}
-
 	/*
 		NL
 	*/
@@ -125,16 +123,18 @@ int checkarg(char *s, int pt, int argnb, header_t *header)
 	if (s[pt] == '%')
 	{
 		header->instr->data[argnb] = ft_atoi(s + pt + 1);
+		header->instr->enc = (header->instr->enc & 1 << (7 - header->instr->ptlen * 2));
 	}
 	else if (s[pt] == 'r')
 	{
 		header->instr->data[argnb] = ft_atoi(s + pt + 1);
-		//header->instr->enc = (header->instr->enc & )
+		header->instr->enc = (header->instr->enc & 1 << (6 - header->instr->ptlen * 2));
 	}
 	else
 		errorparser("arg format NO FINE", header);
 	while (ft_isalnum((s + pt)[i]))
 		++i;
+	header->instr->ptlen++;
 	return (i);
 }
 
@@ -146,7 +146,8 @@ void	countargs(char *s, header_t *header, int expnb)
 	i = 0;
 	argnb = 0;
 	header->instr->totinstr = expnb;
-	header->instr->end = 0;
+	header->instr->enc = 0;
+	header->instr->ptlen = 0;
 	while (s[i])
 	{
 		if (argnb >= expnb)
@@ -186,13 +187,8 @@ static int islinevalid(char *s, header_t *header)
 {
 	int i;
 	int ref;
-	instr_t *first;
 
 	i = 0;
-	if (!(first = malloc(sizeof(instr_t))))
-		errorparser("malloc error", header);
-	first->next = header->instr;
-	header->instr = first;
 	while (s[i] <= ' ')
 		++i;
 	if (s[i] == COMMENT_CHAR)
@@ -206,6 +202,11 @@ static int islinevalid(char *s, header_t *header)
 		getparams(s + i, header);
 	else
 		errorparser("error label/instruc", header);
+	if (!(header->instr->next = malloc(sizeof(instr_t))))
+		errorparser("malloc error", header);
+	header->instr->next->instr = -1;
+	header->instr = header->instr->next;
+	header->instr->next = NULL;
 	return (1);
 }
 
@@ -224,7 +225,11 @@ static void	asmparseinstr(header_t *header)
 
 void headerinit(header_t *header)
 {
-	header->instr = NULL;
+	header->instr = malloc(sizeof(instr_t));
+	header->firstinstr = header->instr;
+	header->instr->next = NULL;
+	/*
+	header->instr = NULL;*/
 	header->lastlabelnb = 0;
 }
 
@@ -239,13 +244,15 @@ void	asmparsing(header_t *header)
 	headerinit(header);
 	asmparsehead(header);
 	asmparseinstr(header);
-	instr_t *check = header->instr;
+	instr_t *check = header->firstinstr;
 
 	printf("name is @%s@\n", header->prog_name);
 	printf("comment is @%s@\n", header->comment);
-	while ((check = check->next))
+
+	while ((check->instr != -1))
 	{
 		printf("instr nb val%d data: %d %d %d\n", check->instr, check->data[0], check->data[1], check->data[2]);
+		check = check->next;
 	}
 	/*
 		first instruct

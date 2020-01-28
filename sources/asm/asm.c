@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/27 17:10:08 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/28 21:59:55 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void		partone(unsigned char *BUF, int *bufptout, header_t *header)
 
 static void		asmtofile(header_t *header, char *name1)
 {
-	unsigned char	BUF[2192];
+	unsigned char	BUF[3000];
 	int				fd;
 	char			*name2;
 	int				bufpt;
@@ -65,6 +65,7 @@ static void		asmtofile(header_t *header, char *name1)
 	fd = open(name2, O_CREAT | O_RDWR, 0644);
 	partone(BUF, &bufpt, header);
 	parttwo(BUF, &bufpt, header);
+	printf("bufpt is %d\n", bufpt);
 	write(fd, BUF, bufpt);
 	free(name2);
 	close(fd);
@@ -85,6 +86,6 @@ int			main(int argc, char **argv)
 	}
 	asmparsing(header);
 	close(header->fd);
-	//asmtofile(header, argv[1]);
+	asmtofile(header, argv[1]);
 	return (0);
 }

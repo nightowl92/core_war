@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/01/27 17:49:56 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/28 22:00:36 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,13 @@ typedef struct		s_op
 
 typedef struct		instr_s
 {
-	int labelnb;
-	int instr;
-	unsigned char enc;
-	int totinstr;
-	int data[3];
-	int len;
+	int				labelnb;
+	int				instr;
+	unsigned char	enc;
+	int				totinstr;
+	int				data[3];
+	int				len;
+	int				ptlen;
 	struct		instr_s *next;
 }					instr_t;
 
@@ -103,7 +104,7 @@ typedef struct		header_s
 {
 	int					lastlabelnb;
 	instr_t				*instr;
-	char				NUM[8];
+	instr_t				*firstinstr;
 	int					fd;
 	char				prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int		prog_size;
