@@ -6,10 +6,11 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:08:38 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/01/27 21:17:57 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/01/28 21:00:21 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "op.h"
 #include "corewar.h"
 
@@ -23,6 +24,7 @@ int		mars_fill(t_data *data)
 	offset = 0;
 	while (champ)
 	{
+		printf("\nnew champ\n");
 		i = 0;
 		while (i < CHAMP_MAX_SIZE)
 		{
@@ -30,26 +32,37 @@ int		mars_fill(t_data *data)
 			i++;
 		}
 		champ = champ->next;
-		offset += CHAMP_MAX_SIZE / data->nbr_champs;
+		offset += MEM_SIZE / data->nbr_champs;
 	}
 	return (0);
 }
 
-int		init(t_data *data, int ac, char **av)
+void	custom_id(t_data *data, t_champid *champ_id, char *str)
 {
-	int		id;
+	int		nbr;
 
-	id = 1;
+	data = 0;
+	nbr = ft_atoi(str + 2);
+	champ_id->carry = 1;
+	champ_id->carried_nbr = nbr;
+}
+
+int		init_corewar(t_data *data, int ac, char **av)
+{
+	int				i;
+	t_champid		champ_id;
+
+	i = 1;
 	if (ac == -1 || av == 0)
 		return (0);
-	*(int *)data->mars = 0xabcdef10;
-	printf("src = %s\n", av[1]);
-	new_champ(data, av[1], id);
-	id++;
-	hex_dump(data->champs->content, CHAMP_MAX_SIZE);
-	printf("src = %s\n", av[2]);
-	new_champ(data, av[2], id);
-	printf("init checkpoint 1\n");
+	while (i < ac)
+	{
+		if (av[i][0] != '-')
+			new_champ(data, av[i], &champ_id);
+		else if (av[i][1] == 'n')
+			custom_id(data, &champ_id, av[i]);
+		i++;
+	}
 	mars_fill(data);
 	return (0);
 }

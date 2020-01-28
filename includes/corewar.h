@@ -6,7 +6,7 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:19:57 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/01/27 20:26:31 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/01/28 20:57:57 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define COREWAR_H
 # include <stdio.h>
 # include "op.h"
+# include "libft.h"
 
 typedef unsigned char	t_octet;
 typedef struct			s_process
@@ -23,18 +24,25 @@ typedef struct			s_process
 	struct s_process	*next;
 }						t_process;
 
+typedef struct			s_champid
+{
+	int					id;
+	int					carry;
+	int					carried_nbr;
+}						t_champid;
+
+
 /*
 ** champion
 */
 
 typedef struct			s_champ
 {
-	int					fd;
 	int					id;
 	t_octet				content[CHAMP_MAX_SIZE];
-	char				prog_name[PROG_NAME_LENGTH + 1];
+	t_octet				prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int		prog_size;
-	char				comment[COMMENT_LENGTH + 1];
+	t_octet				comment[COMMENT_LENGTH + 1];
 	struct s_champ		*next;
 }						t_champ;
 
@@ -42,9 +50,9 @@ typedef struct			s_data
 {
 	t_octet				mars[MEM_SIZE];
 	int					colors[MEM_SIZE];
-	t_process			*processes;
 	int					nbr_champs;
 	t_champ				*champs;
+	t_process			*processes;
 }						t_data;
 
 /*
@@ -57,9 +65,9 @@ void		hex_dump(t_octet *src, size_t len);
 /*
 ** init
 */
-int			init(t_data *data, int ac, char **av);
+int			init_corewar(t_data *data, int ac, char **av);
 
 
 
-int			new_champ(t_data *data, char *source, int id);
+int			new_champ(t_data *data, char *source, t_champid *champ_id);
 #endif
