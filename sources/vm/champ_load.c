@@ -12,6 +12,7 @@
 
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include "libft.h"
 #include "op.h"
 #include "corewar.h"
@@ -35,23 +36,33 @@ int		champ_fill(t_champ *champ)
 {
 	t_octet			tmp[4];
 
+	printf("champ fill = cp 0\n fd = %d\n", champ->fd);
 	if (4 != read(champ->fd, tmp, 4))
 		return (-1);
-	if (*(unsigned int *)tmp != big_little_endian(COREWAR_EXEC_MAGIC))
-		return (-2);
+	printf("cp 1\n");
+//	if (*(unsigned int *)tmp != big_little_endian(COREWAR_EXEC_MAGIC))
+////		return (-2);
+	printf("cp 2\n");
 	if (PROG_NAME_LENGTH != read(champ->fd, champ->prog_name, PROG_NAME_LENGTH))
 		return (-3);
+	printf("cp 3\n");
 	if (4 != read(champ->fd, tmp, 4))
 		return (-1);
+	printf("cp 4\n");
 	if (4 != read(champ->fd, tmp, 4))
 		return (-1);
+	printf("cp 5\n");
 	champ->prog_size = big_little_endian(*(int *)(tmp));
+	printf("cp 6\n");
 	if (COMMENT_LENGTH != read(champ->fd, champ->comment, COMMENT_LENGTH))
 		return (-3);
+	printf("cp 7\n");
 	if (4 != read(champ->fd, tmp, 4))
 		return (-1);
+	printf("cp 8\n");
 	if (champ->prog_size != read(champ->fd, champ->content, champ->prog_size))
 		return (-3);
+	printf("cp 9\n");
 	return (0);
 }
 
@@ -62,8 +73,10 @@ int		new_champ(t_data *data, char *source, int id)
 	t_champ	*last;
 
 	printf("new champ\n");
-	if (!(fd = open(source, O_RDONLY)))
+	fd = open(source, O_RDONLY);
+	if (fd <= 0)
 		return (-1);
+	printf("fd = %d\n", fd);
 	if (!(champ = (t_champ *)malloc(sizeof(t_champ))))
 		return (-1);
 	data->nbr_champs++;
@@ -73,12 +86,17 @@ int		new_champ(t_data *data, char *source, int id)
 		data->champs = champ;
 	else
 	{
+		printf("second champ\n");
 		last = data->champs;
 		while (last->next)
 			last = last->next;
 		last->next = champ;
 	}
 	data->champs->fd = fd;
+	printf("before fill\n");
+	printf("fddd = %d\n", fd);
 	champ_fill(champ);
+	printf("end fill\n");
+	close(fd);
 	return (1);
 }

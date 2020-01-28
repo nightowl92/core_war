@@ -52,6 +52,7 @@ typedef struct			s_data
 */
 int			show_mars(t_data *data);
 int			battle(t_data *data);
+void		hex_dump(t_octet *src, size_t len);
 
 /*
 ** init

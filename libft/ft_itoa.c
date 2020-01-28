@@ -3,54 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stherkil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/11 15:04:50 by stherkil          #+#    #+#             */
-/*   Updated: 2019/01/25 13:23:31 by stherkil         ###   ########.fr       */
+/*   Created: 2018/11/15 15:35:29 by vlaroque          #+#    #+#             */
+/*   Updated: 2018/11/21 18:20:19 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*itoa_neg(int nb)
+char		*ft_itoa(int n)
 {
-	int		l;
-	char	*s;
+	char	neg;
+	char	*nbr;
+	int		len;
 
-	l = ft_intlen(nb) + 1;
-	if (!(s = ft_strnew(l)))
+	neg = 0;
+	len = ft_nbrlen(n);
+	if (n < 0)
+		neg = 1;
+	if (n == 0)
+		len = 1;
+	if (!(nbr = ft_strnew(len + neg)))
 		return (NULL);
-	while (l - 1)
+	if (n < 0)
 	{
-		s[l - 1] = nb % 10 + '0';
-		nb /= 10;
-		l--;
+		nbr[0] = '-';
+		nbr[(len--) + neg - 1] = -(n % 10) + '0';
+		n = -(n / 10);
 	}
-	s[0] = '-';
-	return (s);
-}
-
-char		*ft_itoa(int nb)
-{
-	char	*s;
-	int		l;
-
-	if (nb == -2147483648)
+	while (--len > -1)
 	{
-		if (!(s = ft_strnew(11)))
-			return (NULL);
-		return (ft_strcpy(s, "-2147483648"));
+		nbr[len + neg] = n % 10 + '0';
+		n = n / 10;
 	}
-	l = ft_intlen(nb);
-	if (nb < 0)
-		return (itoa_neg(-nb));
-	if (!(s = ft_strnew(l)))
-		return (NULL);
-	while (l)
-	{
-		s[l - 1] = nb % 10 + '0';
-		nb /= 10;
-		l--;
-	}
-	return (s);
+	return (nbr);
 }

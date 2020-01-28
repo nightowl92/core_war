@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stherkil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/13 18:40:45 by stherkil          #+#    #+#             */
-/*   Updated: 2019/01/16 14:16:54 by stherkil         ###   ########.fr       */
+/*   Created: 2018/11/10 16:38:01 by vlaroque          #+#    #+#             */
+/*   Updated: 2018/11/24 10:51:40 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
-void	ft_bzero(void *s, size_t n)
+void	*ft_bzero(void *s, size_t n)
 {
-	ft_memset(s, 0, n);
+	size_t			i;
+	unsigned char	*str;
+
+	str = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = 0;
+		i++;
+	}
+	return ((void*)str);
 }

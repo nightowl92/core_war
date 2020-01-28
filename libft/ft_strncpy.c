@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stherkil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/13 19:10:18 by stherkil          #+#    #+#             */
-/*   Updated: 2019/01/19 17:09:29 by stherkil         ###   ########.fr       */
+/*   Created: 2018/11/12 14:33:47 by vlaroque          #+#    #+#             */
+/*   Updated: 2018/11/20 19:18:56 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	size_t	n;
+	size_t i;
 
-	n = ft_strlen(src);
-	if (n < len)
+	i = 0;
+	while (src[i] && i < len)
 	{
-		ft_memcpy(dst, src, n);
-		ft_bzero(dst + n, len - n);
+		dst[i] = src[i];
+		i++;
 	}
-	else
+	while (i < len)
 	{
-		ft_memcpy(dst, src, len);
+		dst[i] = '\0';
+		i++;
 	}
+	if (i == len - 1 && src[i] == '\0')
+		dst[i] = 0;
 	return (dst);
 }

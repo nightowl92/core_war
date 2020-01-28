@@ -20,7 +20,9 @@ int		main(int ac, char **av)
 
 	op_bzero(&data, sizeof(t_data));
 	init(&data, ac, av);
+	printf("checkpoint 1\n");
 	battle(&data);
+	printf("checkpoint 3\n");
 	show_mars(&data);
 	printf("%d ", data.champs->fd);
 

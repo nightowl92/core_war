@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stherkil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/17 23:05:52 by stherkil          #+#    #+#             */
-/*   Updated: 2019/08/31 14:01:39 by stherkil         ###   ########.fr       */
+/*   Created: 2018/11/13 17:51:25 by vlaroque          #+#    #+#             */
+/*   Updated: 2019/03/30 12:14:02 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "libft.h"
 
 void	ft_putstr_fd(char const *s, int fd)
 {
-	if (s)
-		while (*s)
-		{
-			ft_putchar_fd(*s, fd);
-			s++;
-		}
+	size_t i;
+
+	if (s == NULL)
+		return ;
+	i = ft_strlen(s);
+	write(fd, s, i);
 }

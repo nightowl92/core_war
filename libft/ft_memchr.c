@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memchr.c                                           :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stherkil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/16 16:49:37 by stherkil          #+#    #+#             */
-/*   Updated: 2019/01/17 19:17:27 by stherkil         ###   ########.fr       */
+/*   Created: 2018/11/12 12:09:23 by vlaroque          #+#    #+#             */
+/*   Updated: 2018/11/20 18:39:38 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char		*ss;
-	unsigned char		cc;
+	unsigned char	*typed_s;
+	unsigned char	typed_c;
+	size_t			i;
 
-	ss = (unsigned char*)s;
-	cc = (unsigned char)c;
-	while (n)
+	typed_s = (unsigned char *)s;
+	typed_c = (unsigned char)c;
+	i = 0;
+	while (i < n)
 	{
-		if (*ss == cc)
-			return (ss);
-		ss++;
-		n--;
+		if (typed_s[i] == typed_c)
+			return ((void *)&typed_s[i]);
+		i++;
 	}
 	return (NULL);
 }

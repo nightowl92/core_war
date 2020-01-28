@@ -3,26 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stherkil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/17 22:21:12 by stherkil          #+#    #+#             */
-/*   Updated: 2019/01/25 16:32:18 by stherkil         ###   ########.fr       */
+/*   Created: 2018/11/15 13:03:18 by vlaroque          #+#    #+#             */
+/*   Updated: 2018/11/21 16:44:44 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+static int	nothing(char c)
 {
-	size_t	len;
+	if (c == ' ' || c == '\n' || c == '\t')
+		return (1);
+	return (0);
+}
 
-	if (!s)
+char		*ft_strtrim(char const *s)
+{
+	size_t	i;
+	int		len;
+	char	*str;
+
+	i = 0;
+	if (s == NULL)
 		return (NULL);
-	while (*s == '\n' || *s == '\t' || *s == ' ')
-		s++;
-	len = ft_strlen(s) - 1;
-	if (*s)
-		while (s[len] == '\n' || s[len] == '\t' || s[len] == ' ')
-			len--;
-	return (ft_strsub(s, 0, len + 1));
+	if (!(len = ft_strlen(s)))
+		len = 1;
+	while (len > 0 && nothing(s[len - 1]))
+		len--;
+	if (len == 0)
+	{
+		if ((str = ft_strnew(1)))
+			str[0] = '\0';
+		return (str);
+	}
+	while (s[i] && nothing(s[i]))
+		i++;
+	if (!(str = ft_strnew(len - i)))
+		return (NULL);
+	str = ft_strncpy(str, s + i, len - i);
+	return (str);
 }

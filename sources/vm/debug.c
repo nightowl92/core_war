@@ -22,6 +22,24 @@ void		char_hexa(t_octet c)
 	write(1, &base[c % 16], 1);
 }
 
+void		hex_dump(t_octet *src, size_t len)
+{
+	size_t		i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (i != 0 && i % 64 == 0)
+			write(1, "\n", 1);
+		else if (i != 0)
+			write(1, " ", 1);
+		char_hexa(*src);
+		src++;
+		i++;
+	}
+	write(1, "\n", 1);
+}
+
 //128 64 32 16 8 4 2 1
 
 int			show_mars(t_data *data)

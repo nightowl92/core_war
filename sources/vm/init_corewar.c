@@ -43,8 +43,13 @@ int		init(t_data *data, int ac, char **av)
 	if (ac == -1 || av == 0)
 		return (0);
 	*(int *)data->mars = 0xabcdef10;
+	printf("src = %s\n", av[1]);
 	new_champ(data, av[1], id);
+	id++;
+	hex_dump(data->champs->content, CHAMP_MAX_SIZE);
+	printf("src = %s\n", av[2]);
 	new_champ(data, av[2], id);
+	printf("init checkpoint 1\n");
 	mars_fill(data);
 	return (0);
 }

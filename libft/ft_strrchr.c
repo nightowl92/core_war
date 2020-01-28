@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stherkil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/17 18:26:29 by stherkil          #+#    #+#             */
-/*   Updated: 2019/01/18 18:30:10 by stherkil         ###   ########.fr       */
+/*   Created: 2018/11/13 12:41:01 by vlaroque          #+#    #+#             */
+/*   Updated: 2018/11/21 19:28:12 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ char	*ft_strrchr(const char *s, int c)
 	int i;
 
 	i = ft_strlen(s);
-	while (s[i] != (char)c)
+	while (i >= 0)
 	{
-		if (!i)
-			return (NULL);
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
 		i--;
 	}
-	return ((char*)(s + i));
+	return (NULL);
 }
