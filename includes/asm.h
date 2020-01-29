@@ -6,7 +6,7 @@
 # include "op.h"
 # include "libft.h"
 
-void			(*pt[17]) (t_op fct, unsigned char *BUF, int *bufptout);
+void			itobh(unsigned char *BUF, int *bufpt, long long nb);
 void			asmparsing(header_t *header);
 void			parttwo(unsigned char *BUF, int *bufptout, header_t *header);
 void			errorparser(const char *s, header_t *header);

@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/28 20:50:49 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:16:29 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_op		op_tab[17] =
 static void	asmparsehead(header_t *header)
 {
 	char *s;
-	
+
 	if (get_next_line(header->fd, &s) > 0)
 	{
 		/* put exception if len not ok & progname length etc*/
@@ -55,8 +55,8 @@ static void	asmparsehead(header_t *header)
 		exit(0);
 	}
 	/*
-		comment
-	*/
+	   comment
+	   */
 	if (get_next_line(header->fd, &s) > 0)
 	{
 		/* put exception if len not ok & progname length etc*/
@@ -70,8 +70,8 @@ static void	asmparsehead(header_t *header)
 		exit(0);
 	}
 	/*
-		NL
-	*/
+	   NL
+	   */
 }
 
 static int checkclean(char *s)
@@ -107,9 +107,9 @@ static int isinstruct(char *s, header_t *header, int len)
 
 	i = -1;
 	while (++i < 17)
-        if (!ft_strncmp((op_tab[i]).instr, s, len) && (op_tab[i]).instr[0] != 0)
+		if (!ft_strncmp((op_tab[i]).instr, s, len) && (op_tab[i]).instr[0] != 0)
 		{
-        	header->instr->instr = i + 1;
+			header->instr->instr = i + 1;
 			return (1);
 		}
 	return (0);
@@ -123,12 +123,16 @@ int checkarg(char *s, int pt, int argnb, header_t *header)
 	if (s[pt] == '%')
 	{
 		header->instr->data[argnb] = ft_atoi(s + pt + 1);
-		header->instr->enc = (header->instr->enc & 1 << (7 - header->instr->ptlen * 2));
+		header->instr->enc = (header->instr->enc | 1 << (7 - header->instr->ptlen * 2));
+		header->tot_len += 4;
+		header->tot_len += 1;
 	}
 	else if (s[pt] == 'r')
 	{
 		header->instr->data[argnb] = ft_atoi(s + pt + 1);
-		header->instr->enc = (header->instr->enc & 1 << (6 - header->instr->ptlen * 2));
+		header->instr->enc = (header->instr->enc | 1 << (6 - header->instr->ptlen * 2));
+		header->tot_len += 1;
+		header->tot_len += 1;
 	}
 	else
 		errorparser("arg format NO FINE", header);
@@ -164,7 +168,7 @@ void	countargs(char *s, header_t *header, int expnb)
 			break ;
 	}
 	if (argnb != expnb)
-			errorparser("# of args NO FINE", header);
+		errorparser("# of args NO FINE", header);
 }
 
 void	getparams(char *s, header_t *header)
@@ -213,7 +217,7 @@ static int islinevalid(char *s, header_t *header)
 static void	asmparseinstr(header_t *header)
 {
 	char *s;
-	
+
 	s = skipnl(header);
 	while (s != NULL && islinevalid(s, header))
 	{
@@ -229,8 +233,10 @@ void headerinit(header_t *header)
 	header->firstinstr = header->instr;
 	header->instr->next = NULL;
 	/*
-	header->instr = NULL;*/
+	   header->instr = NULL;
+	   */
 	header->lastlabelnb = 0;
+	header->tot_len = 0;
 }
 
 void	asmparsing(header_t *header)
@@ -255,6 +261,6 @@ void	asmparsing(header_t *header)
 		check = check->next;
 	}
 	/*
-		first instruct
-	*/
+	   first instruct
+	   */
 }
