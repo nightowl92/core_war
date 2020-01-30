@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/29 17:16:30 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/30 18:56:06 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,24 @@ void			asm_ld(header_t *header, instr_t *instr, unsigned char *BUF, int *bufptou
 	i = -1;
 	BUF[*bufptout] = instr->instr;
 	*bufptout += 1;
-	header->tot_len += 1;
+	if (instr->instr != 1)
+	{
 	BUF[*bufptout] = instr->enc;
 	*bufptout += 1;
-	header->tot_len += 1;
+	}
 	printf("len is %d\n", instr->ptlen);
 	while (++i < instr->ptlen)
-		itobh(BUF, bufptout, instr->data[i]);
+	{
+		if (instr->instr == 1)
+		{
+			itobh(BUF, bufptout, instr->data[i]);
+		}
+		else
+		{
+			BUF[*bufptout] = instr->data[i];
+			*bufptout += 1;
+		}
+	}
 }
 
 void			parttwo(unsigned char *BUF, int *bufptout, header_t *header)

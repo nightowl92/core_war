@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/29 17:16:29 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/30 19:00:18 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,7 @@ int checkarg(char *s, int pt, int argnb, header_t *header)
 	{
 		header->instr->data[argnb] = ft_atoi(s + pt + 1);
 		header->instr->enc = (header->instr->enc | 1 << (7 - header->instr->ptlen * 2));
-		header->tot_len += 4;
-		header->tot_len += 1;
+		header->tot_len += 5;
 	}
 	else if (s[pt] == 'r')
 	{

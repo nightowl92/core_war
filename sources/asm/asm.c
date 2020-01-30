@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/29 17:16:38 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/01/30 18:39:20 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ static void		partone(unsigned char *BUF, int *bufptout, header_t *header)
 	BUF[3] = 243;
 	bufpt = 4;
 	/* exceptions because of length? */
-	ft_memcpy(BUF + bufpt, header->prog_name, ft_strlen(header->prog_name));
-	bufpt += ft_strlen(header->prog_name);
-	ft_bzero(BUF + bufpt, PROG_NAME_LENGTH - ft_strlen(header->prog_name) + 4);
-	bufpt += PROG_NAME_LENGTH - ft_strlen(header->prog_name) + 4;
-	//itobh(BUF + bufpt, &bufpt, header->tot_len);
+	ft_memcpy(BUF + bufpt, header->prog_name, ft_strlen(header->prog_name) - 1);
+	bufpt += ft_strlen(header->prog_name) - 1;
+	ft_bzero(BUF + bufpt, PROG_NAME_LENGTH - ft_strlen(header->prog_name) + 5);
+	bufpt += PROG_NAME_LENGTH - ft_strlen(header->prog_name) + 5;
+	itobh(BUF, &bufpt, header->tot_len);
 	ft_memcpy(BUF + bufpt, header->comment, ft_strlen(header->comment));
 	bufpt += ft_strlen(header->comment);
 	ft_bzero(BUF + bufpt, COMMENT_LENGTH - ft_strlen(header->comment) + 4);
@@ -64,7 +64,7 @@ static void		asmtofile(header_t *header, char *name1)
 	ft_strcpy(name2 + findlastpt(name1), "cor");
 	fd = open(name2, O_CREAT | O_RDWR, 0644);
 	partone(BUF, &bufpt, header);
-	//parttwo(BUF, &bufpt, header);
+	parttwo(BUF, &bufpt, header);
 	printf("bufpt is %d\n", bufpt);
 	write(fd, BUF, bufpt);
 	free(name2);
@@ -88,5 +88,12 @@ int			main(int argc, char **argv)
 	printf("len is %d\n", header->tot_len);
 	close(header->fd);
 	asmtofile(header, argv[1]);
+	/*
+int fd = open("okokok.cor", O_CREAT | O_RDWR, 0644);
+	int lol = 0;
+	unsigned char NUM[4];
+	itobh(NUM, &lol, 17);
+	printf("izzz %s\n", NUM);
+	write(fd, NUM, 4);*/
 	return (0);
 }
