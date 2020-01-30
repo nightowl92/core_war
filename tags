@@ -275,6 +275,8 @@ buff	ressources/champs/jumper.s	/^buff:	st r1,r1	$/;"	l
 buff_size	libft/includes/get_next_line.h	/^	int		buff_size;$/;"	m	struct:s_buff
 buldog	ressources/champs/championships/2014/kelickel/Varimathras.s	/^buldog:$/;"	l
 car	ressources/champs/championships/2017/gnebie/ultima.s	/^car les roles sont deja figées.$/;"	l
+carried_nbr	includes/corewar.h	/^	int					carried_nbr;$/;"	m	struct:s_champid
+carry	includes/corewar.h	/^	int					carry;$/;"	m	struct:s_champid
 catch	ressources/champs/leeloo.s	/^catch:	$/;"	l
 catch	ressources/champs/new.s	/^catch:	$/;"	l
 catch1	ressources/champs/leeloo.s	/^catch1:	zjmp %:catch$/;"	l
@@ -288,6 +290,7 @@ cc4ld	ressources/champs/examples/helltrain.s	/^cc4ld:$/;"	l
 cc_live	ressources/champs/examples/helltrain.s	/^cc_live:$/;"	l
 cc_spawn	ressources/champs/examples/helltrain.s	/^cc_spawn:$/;"	l
 cf	ressources/champs/championships/2014/tdemay/champ.s	/^cf:$/;"	l
+champ_dump	sources/vm/debug.c	/^int			champ_dump(t_champ *champ)$/;"	f
 champ_fill	sources/vm/champ_load.c	/^int		champ_fill(t_champ *champ, int fd)$/;"	f
 champs	includes/corewar.h	/^	t_champ				*champs;$/;"	m	struct:s_data
 char_hexa	sources/vm/debug.c	/^void		char_hexa(t_octet c)$/;"	f
@@ -325,6 +328,7 @@ corruption_second	ressources/champs/championships/2017/jaustry/mise_a_jour_windo
 corruption_second2	ressources/champs/championships/2017/gnebie/ultima.s	/^corruption_second2:$/;"	l
 couldown	includes/corewar.h	/^	int					couldown;$/;"	m	struct:s_process
 cp	ressources/champs/tdc4.s	/^cp:	$/;"	l
+custom_id	sources/vm/init_corewar.c	/^void	custom_id(t_data *data, t_champid *champ_id, char *str)$/;"	f
 data_miner	ressources/champs/championships/2014/hmoutaou/Misaka_Mikoto.s	/^data_miner:$/;"	l
 de	ressources/champs/championships/2017/gnebie/ultima.s	/^de m'échapper, de me défier$/;"	l
 deb	ressources/champs/leeloo.s	/^deb:	$/;"	l
@@ -695,6 +699,7 @@ hop	ressources/champs/new.s	/^hop:	live %1$/;"	l
 i	gnl/get_next_line.h	/^	int					i;$/;"	m	struct:s_file
 i	libft_old/libft.h	/^	int					i;$/;"	m	struct:s_file
 id	includes/corewar.h	/^	int					id;$/;"	m	struct:s_champ
+id	includes/corewar.h	/^	int					id;$/;"	m	struct:s_champid
 id	includes/corewar.h	/^	int					id;$/;"	m	struct:s_process
 infi	ressources/42.s	/^infi:	sti	r1,%:l0,%1$/;"	l
 infi	ressources/champs/42.s	/^infi:	sti	r1,%:l0,%1$/;"	l
@@ -1239,7 +1244,7 @@ nb4	includes/op.h	/^	int nb4;$/;"	m	struct:s_op
 nb5	includes/op.h	/^	int nb5;$/;"	m	struct:s_op
 nb6	includes/op.h	/^	int nb6;$/;"	m	struct:s_op
 nbr_champs	includes/corewar.h	/^	int					nbr_champs;$/;"	m	struct:s_data
-new_champ	sources/vm/champ_load.c	/^int		new_champ(t_data *data, char *source, int id)$/;"	f
+new_champ	sources/vm/champ_load.c	/^int		new_champ(t_data *data, char *source, t_champid *champ_id)$/;"	f
 new_turn	sources/vm/battle.c	/^int		new_turn(t_data *data)$/;"	f
 next	gnl/get_next_line.h	/^	t_file				*next;$/;"	m	struct:s_file
 next	includes/corewar.h	/^	struct s_champ		*next;$/;"	m	struct:s_champ	typeref:struct:s_champ::s_champ
@@ -1380,6 +1385,7 @@ s3	ressources/champs/championships/2017/adenis/Explosive_Kitty.s	/^s3:$/;"	l
 s4	ressources/champs/championships/2017/adenis/Explosive_Kitty.s	/^s4:$/;"	l
 s_buff	libft/includes/get_next_line.h	/^struct					s_buff$/;"	s
 s_champ	includes/corewar.h	/^typedef struct			s_champ$/;"	s
+s_champid	includes/corewar.h	/^typedef struct			s_champid$/;"	s
 s_data	includes/corewar.h	/^typedef struct			s_data$/;"	s
 s_file	gnl/get_next_line.h	/^struct					s_file$/;"	s
 s_file	libft_old/libft.h	/^struct					s_file$/;"	s
@@ -1605,6 +1611,7 @@ symmetra	ressources/champs/championships/2017/pzarmehr/overwatch.s	/^symmetra:$/
 t_arg_type	includes/op.h	/^typedef char	t_arg_type;$/;"	t
 t_buff	libft/includes/get_next_line.h	/^typedef struct s_buff	t_buff;$/;"	t	typeref:struct:s_buff
 t_champ	includes/corewar.h	/^}						t_champ;$/;"	t	typeref:struct:s_champ
+t_champid	includes/corewar.h	/^}						t_champid;$/;"	t	typeref:struct:s_champid
 t_data	includes/corewar.h	/^}						t_data;$/;"	t	typeref:struct:s_data
 t_file	gnl/get_next_line.h	/^typedef struct s_file	t_file;$/;"	t	typeref:struct:s_file
 t_file	libft_old/libft.h	/^typedef struct s_file	t_file;$/;"	t	typeref:struct:s_file
@@ -1906,6 +1913,7 @@ wall_prep	ressources/champs/championships/2014/bguy/sam_2.0.s	/^wall_prep:$/;"	l
 wall_prep	ressources/champs/championships/2014/lseguin/skynet.s	/^wall_prep:$/;"	l
 wall_prep	ressources/champs/examples/helltrain.s	/^wall_prep:$/;"	l
 wallstart	ressources/champs/championships/2014/hmichals/Wall.s	/^wallstart:$/;"	l
+what_id	sources/vm/champ_load.c	/^int		what_id(t_champid *champ_id)$/;"	f
 write_front	ressources/champs/championships/2014/tdemay/champ.s	/^write_front:$/;"	l
 xor	ressources/champs/examples/bee_gees.s	/^xor	r2, %15, r4		;if (r4) {carry = 0}$/;"	l
 xxx	ressources/champs/Octobre_Rouge_V4.2.s	/^xxx:		live	%42$/;"	l

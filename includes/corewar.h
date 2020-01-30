@@ -6,7 +6,7 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:19:57 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/01/28 20:57:57 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:01:42 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ typedef struct			s_champid
 typedef struct			s_champ
 {
 	int					id;
-	t_octet				content[CHAMP_MAX_SIZE];
 	t_octet				prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int		prog_size;
 	t_octet				comment[COMMENT_LENGTH + 1];
+	t_octet				content[CHAMP_MAX_SIZE];
 	struct s_champ		*next;
 }						t_champ;
 
@@ -61,6 +61,7 @@ typedef struct			s_data
 int			show_mars(t_data *data);
 int			battle(t_data *data);
 void		hex_dump(t_octet *src, size_t len);
+int			champ_dump(t_champ *champ);
 
 /*
 ** init

@@ -6,12 +6,11 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:08:38 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/01/28 21:00:21 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:15:59 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "op.h"
 #include "corewar.h"
 
 int		mars_fill(t_data *data)
@@ -64,6 +63,8 @@ int		init_corewar(t_data *data, int ac, char **av)
 		i++;
 	}
 	mars_fill(data);
+	champ_dump(data->champs);
+	champ_dump(data->champs->next);
 	return (0);
 }
 

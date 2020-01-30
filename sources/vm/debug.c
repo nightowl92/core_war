@@ -6,12 +6,11 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:56:00 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/01/26 21:14:16 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:15:42 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "op.h"
 #include "corewar.h"
 
 void		char_hexa(t_octet c)
@@ -41,6 +40,22 @@ void		hex_dump(t_octet *src, size_t len)
 }
 
 //128 64 32 16 8 4 2 1
+
+int			champ_dump(t_champ *champ)
+{
+	if (!champ)
+		return (-1);
+	ft_putstr("champ id =|");
+	ft_putstr(ft_itoa(champ->id));
+	ft_putstr("|\nNAME = |");
+	ft_putstr((char *)champ->prog_name);
+	ft_putstr("|\nCOMMENT = |");
+	ft_putstr((char *)champ->comment);
+	ft_putstr("|\nCHAMPION");
+	hex_dump(champ->content, CHAMP_MAX_SIZE);
+	ft_putstr("|\n");
+	return (0);
+}
 
 int			show_mars(t_data *data)
 {
