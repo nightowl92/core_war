@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/05 18:46:22 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/05 20:52:50 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,29 @@ static t_op		op_tab[17] =
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0}
 };
 
-static void getparam(header_t *header, char *s)
+static void getparam(header_t *header, char *s, char *str, char *dest)
 {
-	ft_strncpy(header->prog_name, s + ft_strlen(NAME_CMD_STRING, COMMENT_CHAR) + 2, ft_strlen(s) - ft_strchlen(NAME_CMD_STRING, COMMENT_CHAR) - 3);
+	int i;
+
+	i = -1;
+	s = s + (header->col = ft_strchlen(str, COMMENT_CHAR));
+	while (*s && *s <= ' ' && header->col++)
+		s++;
+	if (*s != '\"')
+		errorparserasm("", header, 1);
+	while (s[++i])
+		if (s[i] == '\"')
+			break ;
+	if (s[i] != '\"')
+		errorparserasm("", header, 1);
+	ft_strncpy(dest, s + 1, (i = ft_strchlen(s + 1, '\"')));
+	s = s + i + 2;
+	while (*s)
+	{
+		if (*s > ' ')
+			errorparserasm("", header, 1);
+		s++;
+	}
 }
 
 static void	asmparsehead(header_t *header)
@@ -51,12 +71,12 @@ static void	asmparsehead(header_t *header)
 	s = skipnl(header);
 	if (ft_strncmp(NAME_CMD_STRING, s, ft_strchlen(NAME_CMD_STRING, COMMENT_CHAR)))
 		errorparserasm("", header, 3);
-
-		free(s);
+	getparam(header, s, NAME_CMD_STRING, header->prog_name);
+	free(s);
 	s = skipnl(header);
 	if (ft_strncmp(COMMENT_CMD_STRING, s, ft_strchlen(COMMENT_CMD_STRING, COMMENT_CHAR)))
 		errorparserasm("", header, 3);
-	ft_strncpy(header->comment, s + ft_strlen(COMMENT_CMD_STRING) + 2, ft_strlen(s) - ft_strlen(COMMENT_CMD_STRING) - 3);
+	getparam(header, s, COMMENT_CMD_STRING, header->comment);
 	free(s);
 }
 

@@ -1,4 +1,4 @@
-.nam "okok" #okokolol
+.name "okok"
 .comment "yayaya"
 
 live %12
