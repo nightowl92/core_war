@@ -6,6 +6,8 @@
 # include "op.h"
 # include "libft.h"
 
+char            *skipnl(header_t *header);
+void	        errorparserasm(const char *s, header_t *header, int errtyp);
 void			itobh(unsigned char *BUF, int *bufpt, long long nb);
 void			asmparsing(header_t *header);
 void			parttwo(unsigned char *BUF, int *bufptout, header_t *header);

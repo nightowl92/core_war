@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/01/30 19:00:18 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/05 17:40:31 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,63 +42,16 @@ static void	asmparsehead(header_t *header)
 {
 	char *s;
 
-	if (get_next_line(header->fd, &s) > 0)
-	{
-		/* put exception if len not ok & progname length etc*/
-		if (ft_strncmp(NAME_CMD_STRING, s, ft_strlen(NAME_CMD_STRING)))
-			errorparser("name not ok", header);
-		ft_strncpy(header->prog_name, s + ft_strlen(NAME_CMD_STRING) + 2, ft_strlen(s) - ft_strlen(NAME_CMD_STRING) - 3);
+	s = skipnl(header);
+	if ((header->col = ft_ptstrncmp(NAME_CMD_STRING, s, ft_strlen(NAME_CMD_STRING))) != -1)
+		errorparserasm("", header, 3);
+	ft_strncpy(header->prog_name, s + ft_strlen(NAME_CMD_STRING) + 2, ft_strlen(s) - ft_strlen(NAME_CMD_STRING) - 3);
 		free(s);
-	}
-	else
-	{
-		exit(0);
-	}
-	/*
-	   comment
-	   */
-	if (get_next_line(header->fd, &s) > 0)
-	{
-		/* put exception if len not ok & progname length etc*/
-		if (ft_strncmp(COMMENT_CMD_STRING, s, ft_strlen(COMMENT_CMD_STRING)))
-			errorparser("comment not ok", header);
-		ft_strncpy(header->comment, s + ft_strlen(COMMENT_CMD_STRING) + 2, ft_strlen(s) - ft_strlen(COMMENT_CMD_STRING) - 3);
-		free(s);
-	}
-	else
-	{
-		exit(0);
-	}
-	/*
-	   NL
-	   */
-}
-
-static int checkclean(char *s)
-{
-	int i;
-
-	i = -1;
-	while (++i < ft_strlen(s))
-		if (s[i] > ' ')
-			return (0);
-	return (1);
-}
-
-static char *skipnl(header_t *header)
-{
-	char *s;
-	int ret;
-
-	while ((ret = get_next_line(header->fd, &s)))
-	{
-		if (s && s[0] && !checkclean(s))
-			break ;
-		free(s);
-	}
-	if (ret <= 0)
-		return (NULL);
-	return (s);
+	s = skipnl(header);
+	if (ft_strncmp(COMMENT_CMD_STRING, s, ft_strlen(COMMENT_CMD_STRING)))
+		errorparserasm("", header, 3);
+	ft_strncpy(header->comment, s + ft_strlen(COMMENT_CMD_STRING) + 2, ft_strlen(s) - ft_strlen(COMMENT_CMD_STRING) - 3);
+	free(s);
 }
 
 static int isinstruct(char *s, header_t *header, int len)
@@ -154,7 +107,7 @@ void	countargs(char *s, header_t *header, int expnb)
 	while (s[i])
 	{
 		if (argnb >= expnb)
-			errorparser("# of args NO FINE", header);
+			errorparserasm(op_tab[header->firstinstr->instr].instr, header, 0);
 		i += checkarg(s, i, argnb, header);
 		++argnb;
 		while (s[i] && s[i] <= ' ')
@@ -236,6 +189,9 @@ void headerinit(header_t *header)
 	   */
 	header->lastlabelnb = 0;
 	header->tot_len = 0;
+	header->col = 0;
+	header->row = 0;
+	header->par = 0;
 }
 
 void	asmparsing(header_t *header)

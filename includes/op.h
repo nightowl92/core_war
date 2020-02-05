@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/01/30 18:14:42 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/05 17:34:34 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ typedef struct		header_s
 	unsigned int		prog_size;
 	char				comment[COMMENT_LENGTH + 1];
 	int					tot_len;
+	int					col;
+	int					row;
+	int					par;
 }					header_t;
 
 #endif
