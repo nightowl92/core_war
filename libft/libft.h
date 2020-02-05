@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:21:16 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/05 17:37:34 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/05 18:16:33 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # define BUFF_SIZE 32
 
+int     				        ft_strchlen(const char *s, char ch);
 int						get_next_line(const int fd, char **line);
 typedef struct s_file	t_file;
 struct					s_file
@@ -29,7 +30,6 @@ struct					s_file
 	t_file				*next;
 };
 
-int						ft_ptstrncmp(const char *s1, const char *s2, size_t n);
 int						ft_atoi(const char *c);
 void					ft_bzero(void *s, size_t n);
 int						ft_intlen(int nb);

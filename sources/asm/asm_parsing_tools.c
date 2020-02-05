@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/05 17:18:38 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/05 17:53:19 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ static int checkclean(char *s)
 
 	i = -1;
 	while (++i < ft_strlen(s))
-		if (s[i] > ' ')
+	{
+		if (s[i] == COMMENT_CHAR)
+			break ;
+		else if (s[i] > ' ')
 			return (0);
+	}
 	return (1);
 }
 

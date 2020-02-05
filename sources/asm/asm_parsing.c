@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/05 17:40:31 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/05 18:46:22 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,23 @@ static t_op		op_tab[17] =
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0}
 };
 
+static void getparam(header_t *header, char *s)
+{
+	ft_strncpy(header->prog_name, s + ft_strlen(NAME_CMD_STRING, COMMENT_CHAR) + 2, ft_strlen(s) - ft_strchlen(NAME_CMD_STRING, COMMENT_CHAR) - 3);
+}
+
 static void	asmparsehead(header_t *header)
 {
 	char *s;
 
+	header->col = 1;
 	s = skipnl(header);
-	if ((header->col = ft_ptstrncmp(NAME_CMD_STRING, s, ft_strlen(NAME_CMD_STRING))) != -1)
+	if (ft_strncmp(NAME_CMD_STRING, s, ft_strchlen(NAME_CMD_STRING, COMMENT_CHAR)))
 		errorparserasm("", header, 3);
-	ft_strncpy(header->prog_name, s + ft_strlen(NAME_CMD_STRING) + 2, ft_strlen(s) - ft_strlen(NAME_CMD_STRING) - 3);
+
 		free(s);
 	s = skipnl(header);
-	if (ft_strncmp(COMMENT_CMD_STRING, s, ft_strlen(COMMENT_CMD_STRING)))
+	if (ft_strncmp(COMMENT_CMD_STRING, s, ft_strchlen(COMMENT_CMD_STRING, COMMENT_CHAR)))
 		errorparserasm("", header, 3);
 	ft_strncpy(header->comment, s + ft_strlen(COMMENT_CMD_STRING) + 2, ft_strlen(s) - ft_strlen(COMMENT_CMD_STRING) - 3);
 	free(s);

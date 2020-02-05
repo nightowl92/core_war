@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ptstrncmp.c                                     :+:      :+:    :+:   */
+/*   ft_strchlen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stherkil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/05 17:33:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/05 17:34:01 by stherkil         ###   ########.fr       */
+/*   Created: 2020/02/05 18:03:20 by stherkil          #+#    #+#             */
+/*   Updated: 2020/02/05 18:03:22 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_ptstrncmp(const char *s1, const char *s2, size_t n)
+int		ft_strchlen(const char *s, char ch)
 {
-	int i;
+	int		i;
+	char	*c;
 
 	i = 0;
-	while (s1[i] && s2[i] && i < n)
+	c = (char*)s;
+	while (*c && *c != ch)
 	{
-		if (s1[i] != s2[i])
-			break ;
-		++i;
+		c++;
+		i++;
 	}
-	if (i == ft_strlen(s1) && i == ft_strlen(s2))
-		return (-1);
 	return (i);
 }
