@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/05 16:33:09 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/08 17:10:37 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ static void		partone(unsigned char *BUF, int *bufptout, header_t *header)
 	char NUM[8];
 
 	bufpt = *bufptout;
-	/* find out what 0x does */
 	BUF[0] = 0;
 	BUF[1] = 234;
 	BUF[2] = 131;
 	BUF[3] = 243;
 	bufpt = 4;
-	/* exceptions because of length? */
 	ft_memcpy(BUF + bufpt, header->prog_name, ft_strlen(header->prog_name) - 1);
 	bufpt += ft_strlen(header->prog_name) - 1;
 	ft_bzero(BUF + bufpt, PROG_NAME_LENGTH - ft_strlen(header->prog_name) + 5);
@@ -88,12 +86,5 @@ int			main(int argc, char **argv)
 	printf("len is %d\n", header->tot_len);
 	close(header->fd);
 	asmtofile(header, argv[1]);
-	/*
-int fd = open("okokok.cor", O_CREAT | O_RDWR, 0644);
-	int lol = 0;
-	unsigned char NUM[4];
-	itobh(NUM, &lol, 17);
-	printf("izzz %s\n", NUM);
-	write(fd, NUM, 4);*/
 	return (0);
 }

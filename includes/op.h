@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/02/05 20:31:36 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/08 20:59:28 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,26 @@ typedef struct		instr_s
 	int				data[3];
 	int				len;
 	int				ptlen;
+	int 			pterofinstr;
 	struct		instr_s *next;
 }					instr_t;
+
+typedef struct		labels_s
+{
+	char			*name;
+	int				nb;
+	int				dist;
+	int				row;
+	int				col;
+	struct		labels_s *next;
+}					labels_t;
 
 typedef struct		header_s
 {
 	int					lastlabelnb;
 	instr_t				*instr;
 	instr_t				*firstinstr;
+	labels_t			*labels;
 	int					fd;
 	char				prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int		prog_size;

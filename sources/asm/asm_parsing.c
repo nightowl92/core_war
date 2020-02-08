@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/05 20:52:50 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/08 21:30:37 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ static void getparam(header_t *header, char *s, char *str, char *dest)
 	ft_strncpy(dest, s + 1, (i = ft_strchlen(s + 1, '\"')));
 	s = s + i + 2;
 	while (*s)
-	{
-		if (*s > ' ')
-			errorparserasm("", header, 1);
-		s++;
-	}
+		{
+			if (*s > ' ')
+				errorparserasm("", header, 1);
+			s++;
+		}
 }
 
 static void	asmparsehead(header_t *header)
@@ -94,6 +94,78 @@ static int isinstruct(char *s, header_t *header, int len)
 	return (0);
 }
 
+char	*ft_strdupspace(const char *s1)
+{
+	char *out;
+	int i;
+
+	i = 0;
+	while (s1[i] > ' ')
+		++i;
+	if (!(out = (char*)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
+	ft_strncpy(out, s1, i + 1);
+	return (out);
+}
+
+/*
+	checks that the chars correspond to LABEL_CHARS in header
+*/
+void	check_labelname(char *s, header_t *header)
+{
+	int i;
+	int j;
+	int found;
+
+	i = 0;
+	while (s[i] && s[i] > ' ')
+	{
+		found = 0;
+		j = -1;
+		while (LABEL_CHARS[++j])
+			if (LABEL_CHARS[j] == s[i])
+				found = 1;
+		if (!found)
+			errorparserasm("", header, 3);
+		++i;
+	}
+}
+
+static int		label_checkdup(labels_t *labels, char *s)
+{
+	while (labels)
+	{
+		if (!ft_strcmp(labels->name, s))
+			return (1);
+		labels = labels->next;
+	}
+	return (0);
+}
+
+/*
+	manages the label, type 0 is 4, type 1 is 2
+*/
+void	manage_label(char *s, int type, header_t *header)
+{
+	labels_t *new;
+
+	check_labelname(s, header);
+	if (label_checkdup(header->labels, ft_strdupspace(s)))
+		return ;
+	if (!(new = malloc(sizeof(labels_t))))
+		errorparser("malloc error", header);
+	new->name = ft_strdupspace(s);
+	new->nb = (header->lastlabelnb += 1);
+	new->row = header->row;
+	new->row = header->col;
+
+	new->next = header->labels;
+	header->labels = new;
+}
+
+/*
+   checks argformat
+   */
 int checkarg(char *s, int pt, int argnb, header_t *header)
 {
 	int i;
@@ -101,9 +173,14 @@ int checkarg(char *s, int pt, int argnb, header_t *header)
 	i = 1;
 	if (s[pt] == '%')
 	{
-		header->instr->data[argnb] = ft_atoi(s + pt + 1);
-		header->instr->enc = (header->instr->enc | 1 << (7 - header->instr->ptlen * 2));
-		header->tot_len += 5;
+		if (s[pt + 1] == LABEL_CHAR)
+			manage_label(s + pt + 2, 0, header);
+		else
+		{			
+			header->instr->data[argnb] = ft_atoi(s + pt + 1);
+			header->instr->enc = (header->instr->enc | 1 << (7 - header->instr->ptlen * 2));
+			header->tot_len += 5;
+		}
 	}
 	else if (s[pt] == 'r')
 	{
@@ -120,6 +197,9 @@ int checkarg(char *s, int pt, int argnb, header_t *header)
 	return (i);
 }
 
+/*
+   checks
+   */
 void	countargs(char *s, header_t *header, int expnb)
 {
 	int i;
@@ -149,6 +229,10 @@ void	countargs(char *s, header_t *header, int expnb)
 		errorparser("# of args NO FINE", header);
 }
 
+
+/*
+   Checks # of args is correct
+   */
 void	getparams(char *s, header_t *header)
 {
 	int i;
@@ -165,6 +249,10 @@ void	getparams(char *s, header_t *header)
 		countargs(s + i, header, 3);
 }
 
+/*
+   checks valid line + fills variables in instr and labels
+   */
+
 static int islinevalid(char *s, header_t *header)
 {
 	int i;
@@ -179,7 +267,8 @@ static int islinevalid(char *s, header_t *header)
 	while (ft_isalnum(s[i]))
 		++i;
 	if (s[i] == LABEL_CHAR)
-		header->instr->labelnb = (header->lastlabelnb += 1);
+		;
+		//header->instr->labelnb = (header->lastlabelnb += 1);
 	else if (isinstruct(s + ref,  header, i - ref))
 		getparams(s + i, header);
 	else
@@ -210,14 +299,12 @@ void headerinit(header_t *header)
 	header->instr = malloc(sizeof(instr_t));
 	header->firstinstr = header->instr;
 	header->instr->next = NULL;
-	/*
-	   header->instr = NULL;
-	   */
 	header->lastlabelnb = 0;
 	header->tot_len = 0;
 	header->col = 0;
 	header->row = 0;
 	header->par = 0;
+	header->labels = NULL;
 }
 
 void	asmparsing(header_t *header)
