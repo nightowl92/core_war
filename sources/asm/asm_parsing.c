@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/08 21:30:37 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/09 17:11:09 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	check_labelname(char *s, header_t *header)
 	int found;
 
 	i = 0;
-	while (s[i] && s[i] > ' ')
+	while (s[i] && s[i] > ' ' && s[i] != SEPARATOR_CHAR)
 	{
 		found = 0;
 		j = -1;
@@ -158,7 +158,6 @@ void	manage_label(char *s, int type, header_t *header)
 	new->nb = (header->lastlabelnb += 1);
 	new->row = header->row;
 	new->row = header->col;
-
 	new->next = header->labels;
 	header->labels = new;
 }
