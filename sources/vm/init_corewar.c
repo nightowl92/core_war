@@ -6,7 +6,7 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:08:38 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/01/30 15:15:59 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/02/09 21:54:13 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,8 @@ int		init_corewar(t_data *data, int ac, char **av)
 			custom_id(data, &champ_id, av[i]);
 		i++;
 	}
-	mars_fill(data);
-	champ_dump(data->champs);
-	champ_dump(data->champs->next);
+//	champ_dump(data->champs);
+//	champ_dump(data->champs->next);
 	return (0);
 }
 

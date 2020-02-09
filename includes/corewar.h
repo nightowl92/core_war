@@ -6,7 +6,7 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:19:57 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/01/30 15:01:42 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/02/09 22:14:32 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,65 @@
 # include "op.h"
 # include "libft.h"
 
-typedef unsigned char	t_octet;
+typedef unsigned char		t_octet;
+
+typedef struct			s_arg
+{
+	t_arg_type			type;
+	int					len;
+	unsigned int		content;
+}						t_arg;
+
+typedef struct			s_instruction
+{
+	int					op;
+	unsigned int		pc;
+	int					nbr_args;
+	t_arg				args[4];
+}						t_instruction;
+
+/*
+** register size determination
+*/
+
+# if REG_SIZE == 1
+typedef unsigned char		t_reg;
+# elif REG_SIZE == 2
+typedef unsigned short		t_reg;
+# elif REG_SIZE == 4
+typedef unsigned int		t_reg;
+# elif REG_SIZE == 8
+typedef unsigned long long	t_reg;
+# else
+#  error register size not accepted
+# endif
+
+typedef struct			s_op
+{
+	char	*name;
+	int		param_number;
+	int		param_possible_types[4];
+	int		op_code;
+	int		cycle;
+	char	*complete_name;
+	int		encoding_byte;
+	int		direct_size_two;
+}						t_op;
+
 typedef struct			s_process
 {
 	int					id;
+	unsigned int		pc;
+	unsigned int		carry;
+	t_reg				reg[REG_NUMBER];
+	t_instruction		instruction;
 	int					couldown;
 	struct s_process	*next;
 }						t_process;
+
+/*
+** used for bonus of champs number id
+*/
 
 typedef struct			s_champid
 {

@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/01/26 18:44:29 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/02/09 15:01:44 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct		s_num
 	int nb2;
 	int nb3;
 }					t_num;
-
+/*
 typedef struct		s_op
 {
 	char instr[10];
@@ -87,7 +87,7 @@ typedef struct		s_op
 	int nb5;
 	int nb6;
 }					t_op;
-
+*/
 typedef struct		instr_s
 {
 	int instr;

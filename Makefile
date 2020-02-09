@@ -6,7 +6,7 @@
 #    By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 10:33:13 by vlaroque          #+#    #+#              #
-#    Updated: 2020/01/27 20:28:53 by vlaroque         ###   ########.fr        #
+#    Updated: 2020/02/09 15:01:24 by vlaroque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CFLAGS = -Wextra -Werror -Wall
 
 SRC_ASM = asm.c errors.c asm_parttwo.c asm_parsing.c
 SRC_VM = main.c debug.c battle.c champ_load.c init_corewar.c
-SRC_COMMON = #op.c
+SRC_COMMON = op.c
 
 # PATH
 
