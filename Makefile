@@ -6,7 +6,7 @@
 #    By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 10:33:13 by vlaroque          #+#    #+#              #
-#    Updated: 2020/02/05 15:41:03 by stherkil         ###   ########.fr        #
+#    Updated: 2020/02/13 14:48:58 by stherkil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS = # -Wextra -Werror -Wall -Wno-missing-field-initializers
 
 # SOURCES
 
-SRC_ASM = asm.c errors.c asm_parttwo.c asm_parsing.c itobighex.c asm_parsing_tools.c
+SRC_ASM = asm.c errors.c asm_parttwo.c asm_parsing.c itobighex.c asm_parsing_tools.c asm_parsing_head.c asm_managellabels.c asm_parsing_body.c
 SRC_VM = main.c debug.c battle.c champ_load.c
 SRC_COMMON = #op.c
 

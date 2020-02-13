@@ -6,13 +6,13 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/09 16:15:20 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:57:58 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/asm.h"
 
-static int findlastpt(char *addr)
+static int		findlastpt(char *addr)
 {
 	int		len;
 	char	*cpyaddr;
@@ -27,8 +27,8 @@ static int findlastpt(char *addr)
 
 static void		partone(unsigned char *BUF, int *bufptout, header_t *header)
 {
-	int bufpt;
-	char NUM[8];
+	int		bufpt;
+	char	NUM[8];
 
 	bufpt = *bufptout;
 	BUF[0] = 0;
@@ -69,7 +69,7 @@ static void		asmtofile(header_t *header, char *name1)
 	close(fd);
 }
 
-int			main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	header_t	*header;
 
