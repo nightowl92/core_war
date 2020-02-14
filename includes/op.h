@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/02/09 16:53:55 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:37:46 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ typedef struct		instr_s
 	unsigned char	enc;
 	int				totinstr;
 	int				data[3];
+	int				islabel[3];
+	char			*labelname;
 	int				len;
 	int				ptlen;
 	int 			pterofinstr;

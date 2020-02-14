@@ -6,6 +6,7 @@
 # include "op.h"
 # include "libft.h"
 
+int		        check_labelname(char *s);
 void            asmparsehead(header_t *header);
 void            asmparseinstr(header_t *header);
 void            manage_label(char *s, int type, header_t *header);

@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/13 14:57:25 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/14 20:25:13 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,25 @@ static char	*ft_strdupspace(const char *s1)
 	return (out);
 }
 
-static void	check_labelname(char *s, header_t *header)
+int		check_labelname(char *s)
 {
 	int i;
 	int j;
-	int found;
+	int oknext;
 
 	i = 0;
-	while (s[i] && s[i] > ' ' && s[i] != SEPARATOR_CHAR)
+	while (s[i] > ' ')
 	{
-		found = 0;
+		oknext = 0;
 		j = -1;
 		while (LABEL_CHARS[++j])
 			if (LABEL_CHARS[j] == s[i])
-				found = 1;
-		if (!found)
-			errorparserasm("", header, 3);
+				oknext = 1;
+		if (!oknext)
+			return (0);
 		++i;
 	}
+	return (i);
 }
 
 static int		label_checkdup(labels_t *labels, char *s)
@@ -87,7 +88,7 @@ void	manage_label(char *s, int type, header_t *header)
 {
 	labels_t *new;
 
-	check_labelname(s, header);
+	check_labelname(s);
 	if (label_checkdup(header->labels, ft_strdupspace(s)))
 		return ;
 	if (!(new = malloc(sizeof(labels_t))))

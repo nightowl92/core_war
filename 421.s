@@ -1,4 +1,5 @@
 .name "okok"
 .comment "yayaya"
 
-and %6, %2, r7
+and r1, r9, r7
+label:   and r1, r2, r3

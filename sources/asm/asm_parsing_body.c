@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/13 14:57:47 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/14 20:43:31 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,24 @@ static t_op		op_tab[17] =
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0}
 };
 
-static int isinstruct(char *s, header_t *header, int len)
+static int isinstruct(char *s, header_t *header)
 {
 	int i;
+	int len;
 
 	i = -1;
+	len = -1;
+	while (s[++len] > ' ')
+		;
 	while (++i < 17)
 		if (!ft_strncmp((op_tab[i]).instr, s, len) && (op_tab[i]).instr[0] != 0)
 		{
 			header->instr->instr = i + 1;
-			return (1);
+			return (len);
 		}
 	return (0);
 }
+
 int checkarg(char *s, int pt, int argnb, header_t *header)
 {
 	int i;
@@ -59,9 +64,12 @@ int checkarg(char *s, int pt, int argnb, header_t *header)
 	if (s[pt] == '%')
 	{
 		if (s[pt + 1] == LABEL_CHAR)
-			manage_label(s + pt + 2, 0, header);
+		{
+			header->instr->islabel[argnb] = 1;
+			header->instr->labelname =  ft_strndup(s + pt + 2, (i += check_labelname(s + pt + 2)));
+		}
 		else
-		{			
+		{
 			header->instr->data[argnb] = ft_atoi(s + pt + 1);
 			header->instr->enc = (header->instr->enc | 1 << (7 - header->instr->ptlen * 2));
 			header->tot_len += 5;
@@ -114,10 +122,9 @@ void	countargs(char *s, header_t *header, int expnb)
 void	getparams(char *s, header_t *header)
 {
 	int i;
-	int sortie;
 
 	i = -1;
-	while ((sortie = s[++i] <= ' '))
+	while (s[++i] <= ' ')
 		;
 	if (header->instr->instr == 1 || header->instr->instr == 9 || header->instr->instr == 12 || header->instr->instr == 15 || header->instr->instr == 16)
 		countargs(s + i, header, 1);
@@ -127,29 +134,67 @@ void	getparams(char *s, header_t *header)
 		countargs(s + i, header, 3);
 }
 
+int islabel(char *s, header_t *header)
+{
+	int i;
+	int j;
+	int found;
+
+	i = -1;
+	while (s[++i])
+	{
+		found = 0;
+		j = -1;
+		if (s[i] <= ' ')
+			return (0);
+		if (s[i] == LABEL_CHAR)
+			return (i);
+		while (LABEL_CHARS[++j])
+		{
+			if (LABEL_CHARS[j] == s[i])
+			{
+				found = 1;
+				break ;
+			}
+		}
+		if (!found)
+		{
+			errorparserasm("", header, 1);
+		}
+	}
+	return (0);
+}
+
 static int parsecleanline(char *s, header_t *header)
 {
 	int i;
-	int ref;
+	int len;
 
 	i = 0;
 	while (s[i] <= ' ')
 		++i;
 	if (s[i] == COMMENT_CHAR)
 		return (1);
-	ref = i;
-	while (ft_isalnum(s[i]))
+	if ((len = islabel(s + i, header)))
+	{
+		printf("CHEKC\n");
+		i += len + 1;
+		if (s[i - 1] != LABEL_CHAR)
+			errorparserasm("", header, 1);
+		while (s[i] <= ' ')
 		++i;
-	if (s[i] == LABEL_CHAR)
-		;
-	//header->instr->labelnb = (header->lastlabelnb += 1);
-	else if (isinstruct(s + ref,  header, i - ref))
-		getparams(s + i, header);
+	}
+	printf("printing.. %s\n", s+i );
+	if ((len = isinstruct(s + i,  header)))
+		getparams(s + i + len, header);
 	else
 		errorparser("error label/instruc", header);
 	if (!(header->instr->next = malloc(sizeof(instr_t))))
 		errorparser("malloc error", header);
 	header->instr->next->instr = -1;
+	header->instr->next->islabel[0] = 0;
+	header->instr->next->islabel[1] = 0;
+	header->instr->next->islabel[2] = 0;
 	header->instr = header->instr->next;
 	header->instr->next = NULL;
 	return (1);
