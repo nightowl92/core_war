@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/14 20:43:31 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/14 20:47:34 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,19 @@ int islabel(char *s, header_t *header)
 	}
 	return (0);
 }
+
+
+/*
+	algo:
+	go thorough, keep name
+	keep name of labels
+	go thorough again, if label fits, but distance
+	if not okay, error message
+
+	check error messages (make sure the area is ok)
+
+	leaks and norm
+*/
 
 static int parsecleanline(char *s, header_t *header)
 {
