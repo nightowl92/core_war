@@ -20,8 +20,8 @@ int		main(int ac, char **av)
 
 	op_bzero(&data, sizeof(t_data));
 	init_corewar(&data, ac, av);
-//	battle(&data);
-	mars_fill(data);
+	mars_fill(&data);
+	battle(&data);
 	show_mars(&data);
 	return (0);
 }

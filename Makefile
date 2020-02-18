@@ -20,7 +20,7 @@ CFLAGS = -Wextra -Werror -Wall
 # SOURCES
 
 SRC_ASM = asm.c errors.c asm_parttwo.c asm_parsing.c
-SRC_VM = main.c debug.c battle.c champ_load.c init_corewar.c
+SRC_VM = main.c debug.c battle.c champ_load.c init_corewar.c process_new.c
 SRC_COMMON = op.c
 
 # PATH

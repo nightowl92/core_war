@@ -13,9 +13,11 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 # include <stdio.h>
+# include <stdlib.h>
 # include "op.h"
 # include "libft.h"
-
+typedef unsigned long long	t_llu;
+# include "common.h"
 typedef unsigned char		t_octet;
 
 typedef struct			s_arg
@@ -64,7 +66,7 @@ typedef struct			s_op
 typedef struct			s_process
 {
 	int					id;
-	unsigned int		pc;
+	t_reg				pc;
 	unsigned int		carry;
 	t_reg				reg[REG_NUMBER];
 	t_instruction		instruction;
@@ -119,8 +121,13 @@ int			champ_dump(t_champ *champ);
 ** init
 */
 int			init_corewar(t_data *data, int ac, char **av);
-
-
+int			mars_fill(t_data *data);
 
 int			new_champ(t_data *data, char *source, t_champid *champ_id);
+
+/*
+** process_new
+*/
+
+int			new_process(t_data *data, int loc, int champ_id);
 #endif

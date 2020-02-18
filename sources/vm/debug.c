@@ -64,10 +64,10 @@ int			show_mars(t_data *data)
 	i = 0;
 	while (i < MEM_SIZE)
 	{
-		if (i == 1023)
-			write(1, "@", 1);
-		if (i == 684)
-			write(1, "@", 1);
+//		if (i == 1023)
+//			write(1, "@", 1);
+//		if (i == 684)
+//			write(1, "@", 1);
 		if (i != 0 && i % 64 == 0)
 			write(1, "\n", 1);
 		else if (i != 0)

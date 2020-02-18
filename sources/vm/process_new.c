@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include "corewar.h"
 
-int			new_process(t_data *data, int loc, int reg_one)
+int			new_process(t_data *data, int loc, int champ_id)
 {
 	t_process		*process;
 
@@ -21,8 +21,11 @@ int			new_process(t_data *data, int loc, int reg_one)
 		return (-1);
 	op_bzero(process, sizeof(t_process));
 	if (data->processes)
+		process->id = data->processes->id + 1;
+	process->pc = loc;
+	process->reg[0] = champ_id;
+	if (data->processes)
 		process->next = data->processes;
 	data->processes = process;
-
-
+	return (0);
 }

@@ -30,6 +30,7 @@ int		mars_fill(t_data *data)
 			data->mars[offset + i] = champ->content[i];
 			i++;
 		}
+		new_process(data, offset, champ->id);
 		champ = champ->next;
 		offset += MEM_SIZE / data->nbr_champs;
 	}
