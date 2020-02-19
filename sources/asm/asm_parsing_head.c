@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 14:37:08 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/13 14:38:38 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/19 12:10:41 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void	asmparsehead(header_t *header)
 	if (ft_strncmp(COMMENT_CMD_STRING, s, ft_strchlen(COMMENT_CMD_STRING, COMMENT_CHAR)))
 		errorparserasm("", header, 3);
 	getparam(header, s, COMMENT_CMD_STRING, header->comment);
+	printf("magic nb %d\n", COREWAR_EXEC_MAGIC);
 	free(s);
 }

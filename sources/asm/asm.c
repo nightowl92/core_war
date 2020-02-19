@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/14 14:45:37 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/19 12:19:56 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,9 @@ static int		findlastpt(char *addr)
 static void		partone(unsigned char *BUF, int *bufptout, header_t *header)
 {
 	int		bufpt;
-	char	NUM[8];
 
 	bufpt = *bufptout;
-	BUF[0] = 0;
-	BUF[1] = 234;
-	BUF[2] = 131;
-	BUF[3] = 243;
-	bufpt = 4;
+	itobh(BUF, &bufpt, COREWAR_EXEC_MAGIC);
 	ft_memcpy(BUF + bufpt, header->prog_name, ft_strlen(header->prog_name) - 1);
 	bufpt += ft_strlen(header->prog_name) - 1;
 	ft_bzero(BUF + bufpt, PROG_NAME_LENGTH - ft_strlen(header->prog_name) + 5);
