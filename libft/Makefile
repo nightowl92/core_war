@@ -6,7 +6,7 @@
 #    By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 13:25:30 by vlaroque          #+#    #+#              #
-#    Updated: 2020/01/19 20:08:24 by vlaroque         ###   ########.fr        #
+#    Updated: 2020/02/19 18:53:33 by stherkil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ CC = gcc
 CFLAGS = -Werror -Wall -Wextra
 
 SRC =	ft_memset.c \
+	ft_strndup.c \
 		ft_bzero.c \
 		ft_memcpy.c \
 		ft_memccpy.c \
