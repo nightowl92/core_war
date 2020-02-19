@@ -1,6 +1,7 @@
 #ifndef ASM_H
 # define ASM_H
 
+#include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include "op.h"

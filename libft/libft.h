@@ -5,13 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD
-/*   Created: 2019/01/12 12:21:16 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/05 18:16:33 by stherkil         ###   ########.fr       */
-=======
 /*   Created: 2018/11/10 13:13:21 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/01/28 20:56:57 by vlaroque         ###   ########.fr       */
->>>>>>> e4f6ee8af640b74478e23c9b3d940b677adee35a
+/*   Updated: 2020/02/19 18:21:37 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +15,18 @@
 
 # include <string.h>
 
-<<<<<<< HEAD
+char						*ft_strndup(const char *s1, int n);
 int     				        ft_strchlen(const char *s, char ch);
 int						get_next_line(const int fd, char **line);
 typedef struct s_file	t_file;
-struct					s_file
-=======
+struct					s_file;
 typedef struct s_list	t_list;
 struct	s_list
->>>>>>> e4f6ee8af640b74478e23c9b3d940b677adee35a
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
 };
-
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);

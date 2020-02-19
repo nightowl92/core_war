@@ -6,11 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/02/19 17:36:40 by stherkil         ###   ########.fr       */
-=======
-/*   Updated: 2020/02/19 08:07:22 by vlaroque         ###   ########.fr       */
->>>>>>> e4f6ee8af640b74478e23c9b3d940b677adee35a
+/*   Updated: 2020/02/19 18:17:54 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,27 +76,12 @@ typedef struct		s_num
 	int nb3;
 }					t_num;
 
-<<<<<<< HEAD
-typedef struct		s_op
-{
-	char instr[10];
-	int nb;
-	t_num nb2;
-	int nb3;
-	int nb4;
-	char instr1[100];
-	int nb5;
-	int nb6;
-}					t_op;
-
 typedef struct		labels_s
 {
 	char		*name;
 	struct		labels_s *next;
 }					labels_t;
 
-=======
->>>>>>> e4f6ee8af640b74478e23c9b3d940b677adee35a
 typedef struct		instr_s
 {
 	int				instr;

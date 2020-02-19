@@ -6,11 +6,7 @@
 #    By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 10:33:13 by vlaroque          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2020/02/19 15:48:23 by stherkil         ###   ########.fr        #
-=======
-#    Updated: 2020/02/19 11:48:37 by vlaroque         ###   ########.fr        #
->>>>>>> e4f6ee8af640b74478e23c9b3d940b677adee35a
+#    Updated: 2020/02/19 18:22:37 by stherkil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,23 +15,13 @@
 NAME1 = asm
 NAME2 = corewar
 CC = clang
-<<<<<<< HEAD
 CFLAGS = # -Wextra -Werror -Wall -Wno-missing-field-initializers
 
 # SOURCES
 
 SRC_ASM = asm.c errors.c asm_parttwo.c asm_parsing.c itobighex.c asm_parsing_tools.c asm_parsing_head.c asm_parsing_body.c
-SRC_VM = main.c debug.c battle.c champ_load.c
-SRC_COMMON = #op.c
-=======
-CFLAGS =# -Wextra -Werror -Wall -g3
-
-# SOURCES
-
-SRC_ASM = asm.c errors.c asm_parttwo.c asm_parsing.c
 SRC_VM = main.c debug.c battle.c champ_load.c init_corewar.c process_new.c operation_reading.c
 SRC_COMMON = op.c
->>>>>>> e4f6ee8af640b74478e23c9b3d940b677adee35a
 
 # PATH
 

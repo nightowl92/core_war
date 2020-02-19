@@ -6,11 +6,11 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/19 17:37:37 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/19 18:18:41 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/asm.h"
+#include "asm.h"
 
 static t_op		op_tab[17] =
 {
