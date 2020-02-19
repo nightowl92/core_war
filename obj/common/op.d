@@ -1,1 +1,2 @@
-obj/common/op.o: sources/common/op.c includes/op.h
+obj/common/op.o: sources/common/op.c includes/op.h includes/corewar.h \
+  libft/libft.h includes/common.h
