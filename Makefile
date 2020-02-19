@@ -6,7 +6,7 @@
 #    By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 10:33:13 by vlaroque          #+#    #+#              #
-#    Updated: 2020/02/19 18:55:48 by stherkil         ###   ########.fr        #
+#    Updated: 2020/02/19 18:58:49 by vlaroque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC_COMMON = op.c
 SRC_PATH = sources
 OBJ_PATH = obj
 INC_PATH = "includes"
+INC_LIBFT = "-Ilibft/includes"
 
 ASM_PATH = asm
 VM_PATH = vm
@@ -70,7 +71,8 @@ $(LIBFT):
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(@D)
 	@echo "\tCompiling $@"
-	@$(CC) $(CFLAGS) -I$(INC_PATH) -Ilibft -MMD -c $< -o $@ 
+	@$(CC) $(CFLAGS) -I$(INC_PATH) $(INC_LIBFT) -Ilibft -MMD -c $< -o $@ 
+
 .PHONY: clean
 clean :
 	@echo "\tCleaning..."

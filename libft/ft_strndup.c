@@ -6,10 +6,11 @@
 /*   By: stherkil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/13 18:43:15 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/19 15:28:22 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/19 19:00:06 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strndup(const char *s1, int n)
