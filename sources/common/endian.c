@@ -28,3 +28,32 @@ int		big_endian_int(void *ptr)
 	}
 	return (nbr);
 }
+
+t_llu	read_bin_to_nbr(void *ptr, size_t len)
+{
+	t_llu	nbr;
+	t_octet				*octet;
+
+	nbr = 0;
+	octet = ptr;
+	while (len)
+	{
+		nbr = nbr * 256 + *octet;
+		octet += 1;
+		len--;
+	}
+	return (nbr);
+}
+
+void	write_nbr_to_bin(t_llu nbr, void *dst, size_t len)
+{
+	t_octet				*octet;
+
+	octet = dst;
+	while (len)
+	{
+		*(octet + len - 1) = nbr % 256;
+		nbr /= 256;
+		len--;
+	}
+}
