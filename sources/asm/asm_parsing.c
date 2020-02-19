@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/13 14:57:54 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/19 17:29:03 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void headerinit(header_t *header)
 {
-	header->instr = malloc(sizeof(instr_t));
+	if (!(header->instr = malloc(sizeof(instr_t))))
+		errorparser("malloc error", header);
+	header->labels = NULL;
 	header->firstinstr = header->instr;
 	header->instr->next = NULL;
 	header->lastlabelnb = 0;
@@ -22,7 +24,7 @@ void headerinit(header_t *header)
 	header->col = 0;
 	header->row = 0;
 	header->par = 0;
-	header->labels = NULL;
+
 }
 
 void	asmparsing(header_t *header)

@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/14 20:47:34 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/19 17:37:37 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,27 @@ static t_op		op_tab[17] =
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0}
 };
 
+int		check_labelname(char *s)
+{
+	int i;
+	int j;
+	int oknext;
+
+	i = 0;
+	while (s[i] > ' ')
+	{
+		oknext = 0;
+		j = -1;
+		while (LABEL_CHARS[++j])
+			if (LABEL_CHARS[j] == s[i])
+				oknext = 1;
+		if (!oknext)
+			return (0);
+		++i;
+	}
+	return (i);
+}
+
 static int isinstruct(char *s, header_t *header)
 {
 	int i;
@@ -66,7 +87,7 @@ int checkarg(char *s, int pt, int argnb, header_t *header)
 		if (s[pt + 1] == LABEL_CHAR)
 		{
 			header->instr->islabel[argnb] = 1;
-			header->instr->labelname =  ft_strndup(s + pt + 2, (i += check_labelname(s + pt + 2)));
+			//header->instr->labelname =  ft_strndup(s + pt + 2, (i += check_labelname(s + pt + 2)));
 		}
 		else
 		{
@@ -103,7 +124,7 @@ void	countargs(char *s, header_t *header, int expnb)
 	while (s[i])
 	{
 		if (argnb >= expnb)
-			errorparserasm(op_tab[header->firstinstr->instr].instr, header, 0);
+			errorparserasm(op_tab[header->firstinstr->instr].instr, header, 0, 0);
 		i += checkarg(s, i, argnb, header);
 		++argnb;
 		while (s[i] && s[i] <= ' ')
@@ -134,7 +155,7 @@ void	getparams(char *s, header_t *header)
 		countargs(s + i, header, 3);
 }
 
-int islabel(char *s, header_t *header)
+int isvalidlabel(char *s, header_t *header)
 {
 	int i;
 	int j;
@@ -159,24 +180,23 @@ int islabel(char *s, header_t *header)
 		}
 		if (!found)
 		{
-			errorparserasm("", header, 1);
+			errorparserasm("", header, 1, 0);
 		}
 	}
 	return (0);
 }
 
+void addlabel(char *s, int len, header_t *header)
+{
+	labels_t			*new;
 
-/*
-	algo:
-	go thorough, keep name
-	keep name of labels
-	go thorough again, if label fits, but distance
-	if not okay, error message
-
-	check error messages (make sure the area is ok)
-
-	leaks and norm
-*/
+	if (!(new = malloc(sizeof(labels_t))))
+		errorparser("malloc error", header);
+	if (!(new->name = ft_strndup(s, len)))
+		errorparser("malloc error", header);
+	new->next = header->labels;
+	header->labels = new;
+}
 
 static int parsecleanline(char *s, header_t *header)
 {
@@ -188,12 +208,12 @@ static int parsecleanline(char *s, header_t *header)
 		++i;
 	if (s[i] == COMMENT_CHAR)
 		return (1);
-	if ((len = islabel(s + i, header)))
+	if ((len = isvalidlabel(s + i, header)))
 	{
-		printf("CHEKC\n");
+		addlabel(s + i, len, header);
 		i += len + 1;
 		if (s[i - 1] != LABEL_CHAR)
-			errorparserasm("", header, 1);
+			errorparserasm("", header, 1, 0);
 		while (s[i] <= ' ')
 		++i;
 	}

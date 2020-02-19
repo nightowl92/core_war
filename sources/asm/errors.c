@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/14 17:14:28 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/19 15:46:33 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,7 @@ static void	printrowcol(header_t *header, int mode)
 	write(1, "]", 1);
 }
 
-static void free_labels(labels_t *labels)
-{
-	labels_t *nextone;
-
-	while (labels->next)
-	{
-		labels->next = nextone;
-		free(labels->name);
-		free(labels);
-		labels = nextone;
-	}
-	if (labels)
-		free(labels);
-}
-void	errorparserasm(const char *s, header_t *header, int errtyp)
+void	errorparserasm(char *s, header_t *header, int errtyp, int freestr)
 {
 	if (errtyp == 0)
 	{
@@ -73,7 +59,8 @@ void	errorparserasm(const char *s, header_t *header, int errtyp)
 		write(1, "Lexical error at ", 17);
 		printrowcol(header, 1);
 	}
-	free_labels(header->labels);
+	if (freestr)
+		free(s);
 	ft_putendl(s);
 	if (header)
 		free(header);

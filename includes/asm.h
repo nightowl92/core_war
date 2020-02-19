@@ -9,9 +9,8 @@
 int		        check_labelname(char *s);
 void            asmparsehead(header_t *header);
 void            asmparseinstr(header_t *header);
-void            manage_label(char *s, int type, header_t *header);
 char            *skipnl(header_t *header);
-void	        errorparserasm(const char *s, header_t *header, int errtyp);
+void            errorparserasm(char *s, header_t *header, int errtyp, int freestr);
 void			itobh(unsigned char *BUF, int *bufpt, long long nb);
 void			asmparsing(header_t *header);
 void			parttwo(unsigned char *BUF, int *bufptout, header_t *header);

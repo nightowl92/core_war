@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/02/19 12:00:25 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/19 17:36:40 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,12 @@ typedef struct		s_op
 	int nb6;
 }					t_op;
 
+typedef struct		labels_s
+{
+	char		*name;
+	struct		labels_s *next;
+}					labels_t;
+
 typedef struct		instr_s
 {
 	int				instr;
@@ -95,29 +101,18 @@ typedef struct		instr_s
 	int				totinstr;
 	int				data[3];
 	int				islabel[3];
-	char			*labelname;
+	char			*labelname[3];
 	int				len;
 	int				ptlen;
 	int 			pterofinstr;
 	struct		instr_s *next;
 }					instr_t;
 
-typedef struct		labels_s
-{
-	char			*name;
-	int				nb;
-	int				dist;
-	int				row;
-	int				col;
-	struct		labels_s *next;
-}					labels_t;
-
 typedef struct		header_s
 {
 	int					lastlabelnb;
 	instr_t				*instr;
 	instr_t				*firstinstr;
-	labels_t			*labels;
 	int					fd;
 	char				prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int		prog_size;
@@ -126,6 +121,7 @@ typedef struct		header_s
 	int					col;
 	int					row;
 	int					par;
+	labels_t			*labels;
 }					header_t;
 
 #endif
