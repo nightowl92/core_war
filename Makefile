@@ -6,7 +6,7 @@
 #    By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 10:33:13 by vlaroque          #+#    #+#              #
-#    Updated: 2020/02/09 15:01:24 by vlaroque         ###   ########.fr        #
+#    Updated: 2020/02/19 11:48:37 by vlaroque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,12 @@
 NAME1 = asm
 NAME2 = corewar
 CC = clang
-CFLAGS = -Wextra -Werror -Wall
+CFLAGS =# -Wextra -Werror -Wall -g3
 
 # SOURCES
 
 SRC_ASM = asm.c errors.c asm_parttwo.c asm_parsing.c
-SRC_VM = main.c debug.c battle.c champ_load.c init_corewar.c process_new.c
+SRC_VM = main.c debug.c battle.c champ_load.c init_corewar.c process_new.c operation_reading.c
 SRC_COMMON = op.c
 
 # PATH

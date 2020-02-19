@@ -6,7 +6,7 @@
 #    By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 13:25:30 by vlaroque          #+#    #+#              #
-#    Updated: 2020/01/19 20:08:24 by vlaroque         ###   ########.fr        #
+#    Updated: 2020/02/18 23:34:09 by vlaroque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CPPFLAGS = -I includes
 
 CC = gcc
 
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra -g3
 
 SRC =	ft_memset.c \
 		ft_bzero.c \

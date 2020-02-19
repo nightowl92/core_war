@@ -18,12 +18,13 @@ BUFF_SIZE	libft/includes/get_next_line.h	/^# define BUFF_SIZE /;"	d
 BUFF_SIZE	libft_old/libft.h	/^# define BUFF_SIZE /;"	d
 CC	Makefile	/^CC = clang$/;"	m
 CC	libft/Makefile	/^CC = gcc$/;"	m
-CFLAGS	Makefile	/^CFLAGS = -Wextra -Werror -Wall$/;"	m
-CFLAGS	libft/Makefile	/^CFLAGS = -Werror -Wall -Wextra$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Wextra -Werror -Wall -g3$/;"	m
+CFLAGS	libft/Makefile	/^CFLAGS = -Werror -Wall -Wextra -g3$/;"	m
 CHAMP_MAX_SIZE	includes/op.h	/^# define CHAMP_MAX_SIZE	/;"	d
 COMMENT_CHAR	includes/op.h	/^# define COMMENT_CHAR	/;"	d
 COMMENT_CMD_STRING	includes/op.h	/^# define COMMENT_CMD_STRING	/;"	d
 COMMENT_LENGTH	includes/op.h	/^# define COMMENT_LENGTH	/;"	d
+COMMON_H	includes/common.h	/^# define COMMON_H$/;"	d
 COMMON_PATH	Makefile	/^COMMON_PATH = common$/;"	m
 COREWAR_EXEC_MAGIC	includes/op.h	/^# define COREWAR_EXEC_MAGIC /;"	d
 COREWAR_H	includes/corewar.h	/^# define COREWAR_H$/;"	d
@@ -117,9 +118,9 @@ SEPARATOR_CHAR	includes/op.h	/^# define SEPARATOR_CHAR	/;"	d
 SRC	libft/Makefile	/^SRC =	ft_memset.c \\$/;"	m
 SRCS	libft_old/Makefile	/^SRCS = ft_atoi.c ft_itoa.c\\$/;"	m
 SRC_ASM	Makefile	/^SRC_ASM = asm.c errors.c asm_parttwo.c asm_parsing.c$/;"	m
-SRC_COMMON	Makefile	/^SRC_COMMON = #op.c$/;"	m
+SRC_COMMON	Makefile	/^SRC_COMMON = op.c$/;"	m
 SRC_PATH	Makefile	/^SRC_PATH = sources$/;"	m
-SRC_VM	Makefile	/^SRC_VM = main.c debug.c battle.c champ_load.c init_corewar.c$/;"	m
+SRC_VM	Makefile	/^SRC_VM = main.c debug.c battle.c champ_load.c init_corewar.c process_new.c$/;"	m
 Si	ressources/champs/championships/2017/adenis/Explosive_Kitty.s	/^Si vous voulez trouver les secrets de l'univers pensez en termes de fréquences, d'énergies et de vibrations. - Nikola Tesla$/;"	l
 Si	ressources/champs/championships/2017/agregoir/Kittystrophic.s	/^Si vous voulez trouver les secrets de l'univers pensez en termes de fréquences, d'énergies et de vibrations. - Nikola Tesla$/;"	l
 Si	ressources/champs/championships/2017/nolivier/run_Kitty_RUN.s	/^Si vous voulez trouver les secrets de l'univers pensez en termes de fréquences, d'énergies et de vibrations. - Nikola Tesla$/;"	l
@@ -177,6 +178,7 @@ ardefl1	ressources/champs/examples/fluttershy.s	/^ardefl1:$/;"	l
 ardefloop	ressources/champs/examples/fluttershy.s	/^ardefloop:	$/;"	l
 ardeftgt	ressources/champs/examples/fluttershy.s	/^ardeftgt:$/;"	l
 ardefwrite	ressources/champs/examples/fluttershy.s	/^ardefwrite:$/;"	l
+args	includes/corewar.h	/^	t_arg				args[4];$/;"	m	struct:s_instruction
 arriere	ressources/champs/barriere.s	/^arriere:	ld	%-5, r5$/;"	l
 arriere	ressources/champs/barriere_test.s	/^arriere:	ld	%-5, r5$/;"	l
 arriere	ressources/champs/leeloo.s	/^arriere:$/;"	l
@@ -277,6 +279,7 @@ buldog	ressources/champs/championships/2014/kelickel/Varimathras.s	/^buldog:$/;"
 car	ressources/champs/championships/2017/gnebie/ultima.s	/^car les roles sont deja figées.$/;"	l
 carried_nbr	includes/corewar.h	/^	int					carried_nbr;$/;"	m	struct:s_champid
 carry	includes/corewar.h	/^	int					carry;$/;"	m	struct:s_champid
+carry	includes/corewar.h	/^	unsigned int		carry;$/;"	m	struct:s_process
 catch	ressources/champs/leeloo.s	/^catch:	$/;"	l
 catch	ressources/champs/new.s	/^catch:	$/;"	l
 catch1	ressources/champs/leeloo.s	/^catch1:	zjmp %:catch$/;"	l
@@ -294,6 +297,7 @@ champ_dump	sources/vm/debug.c	/^int			champ_dump(t_champ *champ)$/;"	f
 champ_fill	sources/vm/champ_load.c	/^int		champ_fill(t_champ *champ, int fd)$/;"	f
 champs	includes/corewar.h	/^	t_champ				*champs;$/;"	m	struct:s_data
 char_hexa	sources/vm/debug.c	/^void		char_hexa(t_octet c)$/;"	f
+char_hexa_str	sources/vm/debug.c	/^void		char_hexa_str(t_octet c, char *str)$/;"	f
 checkbit	sources/asm/makecor.c	/^static char		checkbit(unsigned char c, int bit)$/;"	f	file:
 checkbit	sources/asm/parserbit.c	/^static char		checkbit(unsigned char c, int bit)$/;"	f	file:
 checkclean	sources/asm/asm_parsing.c	/^static int checkclean(char *s)$/;"	f	file:
@@ -304,16 +308,19 @@ code	ressources/champs/toto.s	/^code:		live %42			# 5$/;"	l
 colors	includes/corewar.h	/^	int					colors[MEM_SIZE];$/;"	m	struct:s_data
 comment	includes/corewar.h	/^	t_octet				comment[COMMENT_LENGTH + 1];$/;"	m	struct:s_champ
 comment	includes/op.h	/^	char				comment[COMMENT_LENGTH + 1];$/;"	m	struct:header_s
+complete_name	includes/corewar.h	/^	char	*complete_name;$/;"	m	struct:s_op
 complicate	ressources/champs/championships/2014/kelickel/Varimathras.s	/^complicate:$/;"	l
 cont	ressources/42.s	/^cont:	add	r6,r6,r6$/;"	l
 cont	ressources/champs/42.s	/^cont:	add	r6,r6,r6$/;"	l
 content	includes/corewar.h	/^	t_octet				content[CHAMP_MAX_SIZE];$/;"	m	struct:s_champ
+content	includes/corewar.h	/^	unsigned int		content;$/;"	m	struct:s_arg
 content	libft/includes/libft.h	/^	void			*content;$/;"	m	struct:s_list
 content	libft/libft.h	/^	void			*content;$/;"	m	struct:s_list
 content	libft_old/libft.h	/^	void				*content;$/;"	m	struct:s_list
 content_size	libft/includes/libft.h	/^	size_t			content_size;$/;"	m	struct:s_list
 content_size	libft/libft.h	/^	size_t			content_size;$/;"	m	struct:s_list
 content_size	libft_old/libft.h	/^	size_t				content_size;$/;"	m	struct:s_list
+cooldown	includes/corewar.h	/^	int					cooldown;$/;"	m	struct:s_process
 copie	ressources/42.s	/^copie:  ld      %1,r1$/;"	l
 copie	ressources/champs/42.s	/^copie:  ld      %1,r1$/;"	l
 core	ressources/champs/championships/2014/esusseli/gedeon.s	/^core:$/;"	l
@@ -326,9 +333,9 @@ corruption_first	ressources/champs/championships/2017/jaustry/mise_a_jour_window
 corruption_first2	ressources/champs/championships/2017/gnebie/ultima.s	/^corruption_first2:$/;"	l
 corruption_second	ressources/champs/championships/2017/jaustry/mise_a_jour_windows95.s	/^corruption_second:$/;"	l
 corruption_second2	ressources/champs/championships/2017/gnebie/ultima.s	/^corruption_second2:$/;"	l
-couldown	includes/corewar.h	/^	int					couldown;$/;"	m	struct:s_process
 cp	ressources/champs/tdc4.s	/^cp:	$/;"	l
 custom_id	sources/vm/init_corewar.c	/^void	custom_id(t_data *data, t_champid *champ_id, char *str)$/;"	f
+cycle	includes/corewar.h	/^	int		cycle;$/;"	m	struct:s_op
 data_miner	ressources/champs/championships/2014/hmoutaou/Misaka_Mikoto.s	/^data_miner:$/;"	l
 de	ressources/champs/championships/2017/gnebie/ultima.s	/^de m'échapper, de me défier$/;"	l
 deb	ressources/champs/leeloo.s	/^deb:	$/;"	l
@@ -363,9 +370,12 @@ defdessus	ressources/champs/championships/2014/gbir/_.s	/^defdessus:$/;"	l
 deflv	ressources/champs/maxidef.s	/^deflv:	live %1$/;"	l
 defm	ressources/champs/maxidef.s	/^defm:	st r3,-510$/;"	l
 defplus	ressources/champs/championships/2014/gbir/_.s	/^defplus:$/;"	l
+direct_size_two	includes/corewar.h	/^	int		direct_size_two;$/;"	m	struct:s_op
+dump_mars	sources/vm/debug.c	/^int			dump_mars(t_data *data)$/;"	f
 ecriture	ressources/champs/mortel.s	/^ecriture: zjmp %:wait$/;"	l
 empty	ressources/champs/championships/2014/gbir/_.s	/^empty:$/;"	l
 enc	includes/op.h	/^	unsigned char enc;$/;"	m	struct:instr_s
+encoding_byte	includes/corewar.h	/^	int		encoding_byte;$/;"	m	struct:s_op
 end1	ressources/champs/championships/2017/jaustry/mise_a_jour_windows95.s	/^end1:$/;"	l
 end2	ressources/champs/championships/2017/gnebie/ultima.s	/^end2:$/;"	l
 endwhile	ressources/champs/championships/2014/gpetrov/MarineKing.s	/^endwhile:$/;"	l
@@ -385,6 +395,7 @@ entry_l1	ressources/champs/examples/turtle.s	/^entry_l1:$/;"	l
 eraser	ressources/champs/championships/2014/sbuono/Asombra.s	/^eraser:$/;"	l
 errorparser	sources/asm/errors.c	/^void	errorparser(const char *s, header_t *header)$/;"	f
 ertuen	ressources/champs/championships/2014/kmonrose/justin_bee.s	/^ertuen:$/;"	l
+execute_operation	sources/vm/battle.c	/^int		execute_operation()$/;"	f
 f0_z	ressources/champs/championships/2014/hmoutaou/Misaka_Mikoto.s	/^f0_z:$/;"	l
 f1	ressources/champs/Death.s	/^f1:	fork	%:f2$/;"	l
 f1	ressources/champs/Survivor.s	/^f1:	ld	%4, r2$/;"	l
@@ -718,12 +729,12 @@ init_write	ressources/champs/championships/2014/tdemay/champ.s	/^init_write:$/;"
 initlive	ressources/champs/championships/2014/vrey/darksasuke.s	/^initlive:$/;"	l
 initpt	sources/asm/asm_parttwo.c	/^void initpt()$/;"	f
 inside	ressources/champs/championships/2017/adenis/Explosive_Kitty.s	/^inside:$/;"	l
-instr	includes/op.h	/^	char instr[10];$/;"	m	struct:s_op
 instr	includes/op.h	/^	instr_t				*instr;$/;"	m	struct:header_s
 instr	includes/op.h	/^	int instr;$/;"	m	struct:instr_s
-instr1	includes/op.h	/^	char instr1[100];$/;"	m	struct:s_op
 instr_s	includes/op.h	/^typedef struct		instr_s$/;"	s
 instr_t	includes/op.h	/^}					instr_t;$/;"	t	typeref:struct:instr_s
+instruction	includes/corewar.h	/^	t_instruction		instruction;$/;"	m	struct:s_process
+is_pointed	sources/vm/debug.c	/^int			is_pointed(t_data *data, unsigned int pc)$/;"	f
 isinstruct	sources/asm/asm_parsing.c	/^static int isinstruct(char *s, header_t *header, int len)$/;"	f	file:
 islinevalid	sources/asm/asm_parsing.c	/^static int islinevalid(char *s, header_t *header)$/;"	f	file:
 itoa_neg	libft_old/ft_itoa.c	/^static char	*itoa_neg(int nb)$/;"	f	file:
@@ -974,6 +985,7 @@ ldi	ressources/champs/championships/2014/srabah-m/littlepuppy.s	/^ldi     %4, %6
 ldi	ressources/champs/championships/2014/srabah-m/littlepuppy.s	/^ldi     %8, %65343, r15$/;"	l
 lefork	ressources/champs/championships/2017/jaustry/mise_a_jour_windows95.s	/^lefork:$/;"	l
 len	gnl/get_next_line.h	/^	size_t				len;$/;"	m	struct:s_file
+len	includes/corewar.h	/^	int					len;$/;"	m	struct:s_arg
 len	includes/op.h	/^	int len;$/;"	m	struct:instr_s
 len	libft_old/libft.h	/^	size_t				len;$/;"	m	struct:s_file
 leon	ressources/champs/slider2.s	/^leon:		ld      %0,r2$/;"	l
@@ -1234,17 +1246,14 @@ move3	ressources/champs/championships/2014/cdivry/youforkmytralala.s	/^move3:$/;
 move4	ressources/champs/championships/2014/cdivry/youforkmytralala.s	/^move4:$/;"	l
 move5	ressources/champs/championships/2014/cdivry/youforkmytralala.s	/^move5:$/;"	l
 move_forward	ressources/champs/championships/2014/gudepard/Kappa.s	/^move_forward:$/;"	l
+name	includes/corewar.h	/^	char	*name;$/;"	m	struct:s_op
 nb	includes/op.h	/^	int nb;$/;"	m	struct:s_num
-nb	includes/op.h	/^	int nb;$/;"	m	struct:s_op
 nb2	includes/op.h	/^	int nb2;$/;"	m	struct:s_num
-nb2	includes/op.h	/^	t_num nb2;$/;"	m	struct:s_op
 nb3	includes/op.h	/^	int nb3;$/;"	m	struct:s_num
-nb3	includes/op.h	/^	int nb3;$/;"	m	struct:s_op
-nb4	includes/op.h	/^	int nb4;$/;"	m	struct:s_op
-nb5	includes/op.h	/^	int nb5;$/;"	m	struct:s_op
-nb6	includes/op.h	/^	int nb6;$/;"	m	struct:s_op
+nbr_args	includes/corewar.h	/^	int					nbr_args;$/;"	m	struct:s_instruction
 nbr_champs	includes/corewar.h	/^	int					nbr_champs;$/;"	m	struct:s_data
 new_champ	sources/vm/champ_load.c	/^int		new_champ(t_data *data, char *source, t_champid *champ_id)$/;"	f
+new_process	sources/vm/process_new.c	/^int			new_process(t_data *data, int loc, int champ_id)$/;"	f
 new_turn	sources/vm/battle.c	/^int		new_turn(t_data *data)$/;"	f
 next	gnl/get_next_line.h	/^	t_file				*next;$/;"	m	struct:s_file
 next	includes/corewar.h	/^	struct s_champ		*next;$/;"	m	struct:s_champ	typeref:struct:s_champ::s_champ
@@ -1268,8 +1277,10 @@ num3	includes/op.h	/^	int num3;$/;"	m	struct:instr_s
 numero1	ressources/champs/mortel.s	/^numero1: live %66$/;"	l
 numero2	ressources/champs/mortel.s	/^numero2: live %66$/;"	l
 ok	ressources/champs/tdc3.s	/^ok:$/;"	l
+op	includes/corewar.h	/^	int					op;$/;"	m	struct:s_instruction
 op_bzero	libft/op_bzero.c	/^void	op_bzero(void *s, size_t n)$/;"	f
 op_bzero	libft_old/op_bzero.c	/^void	op_bzero(void *s, size_t n)$/;"	f
+op_code	includes/corewar.h	/^	int		op_code;$/;"	m	struct:s_op
 op_tab	sources/asm/asm.c	/^static t_op		op_tab[17] =$/;"	v	file:
 op_tab	sources/asm/asm_parsing.c	/^static t_op		op_tab[17] =$/;"	v	file:
 op_tab	sources/asm/asm_parttwo.c	/^static t_op		op_tab[17] =$/;"	v	file:
@@ -1304,6 +1315,8 @@ p64li	ressources/champs/42.s	/^p64li:	live	%1$/;"	l
 padec2	ressources/champs/lde.s	/^padec2:	live %1$/;"	l
 padec2	ressources/champs/leeloo.s	/^padec2:	live %1$/;"	l
 padec2	ressources/champs/new.s	/^padec2:	live %1$/;"	l
+param_number	includes/corewar.h	/^	int		param_number;$/;"	m	struct:s_op
+param_possible_types	includes/corewar.h	/^	int		param_possible_types[4];$/;"	m	struct:s_op
 pare	ressources/champs/leeloo.s	/^pare:	st r16,:begin -52$/;"	l
 pare	ressources/champs/new.s	/^pare:	st r0,:begin -52$/;"	l
 pare1	ressources/champs/leeloo.s	/^pare1:	ld %0,r16$/;"	l
@@ -1319,6 +1332,8 @@ part4	ressources/champs/championships/2017/gnebie/ultima.s	/^part4:$/;"	l
 partone	sources/asm/asm.c	/^static void		partone(unsigned char *BUF, int *bufptout, header_t *header)$/;"	f	file:
 parttwo	sources/asm/asm_parttwo.c	/^void			parttwo(unsigned char *BUF, int *bufptout, header_t *header)$/;"	f
 payload	ressources/champs/championships/2017/pzarmehr/overwatch.s	/^payload:$/;"	l
+pc	includes/corewar.h	/^	t_reg				pc;$/;"	m	struct:s_process
+pc	includes/corewar.h	/^	unsigned int		pc;$/;"	m	struct:s_instruction
 pede	ressources/champs/championships/2014/mconraux/dubo.s	/^pede:$/;"	l
 petale	ressources/champs/championships/2014/ekocevar/mandragore.s	/^petale:$/;"	l
 pharah	ressources/champs/championships/2017/pzarmehr/overwatch.s	/^pharah:$/;"	l
@@ -1360,8 +1375,11 @@ r_p5	ressources/champs/championships/2014/gudepard/Kappa.s	/^r_p5:$/;"	l
 r_p5_2	ressources/champs/championships/2014/gudepard/Kappa.s	/^r_p5_2:$/;"	l
 rboucle	ressources/champs/tdc2.s	/^rboucle:$/;"	l
 rboucle2	ressources/champs/tdc2.s	/^rboucle2:$/;"	l
+read_bin_to_nbr	sources/common/endian.c	/^t_llu	read_bin_to_nbr(void *ptr, size_t len)$/;"	f
+read_operation	sources/vm/battle.c	/^int		read_operation()$/;"	f
 ready	ressources/champs/mortel.s	/^ready:	sti r6,r3,%:ecriture$/;"	l
 rebond	ressources/champs/championships/2017/gnebie/ultima.s	/^rebond:$/;"	l
+reg	includes/corewar.h	/^	t_reg				reg[REG_NUMBER];$/;"	m	struct:s_process
 reinhardt	ressources/champs/championships/2017/pzarmehr/overwatch.s	/^reinhardt:$/;"	l
 relive	ressources/champs/championships/2014/gpetrov/MarineKing.s	/^relive:$/;"	l
 replic1	ressources/champs/championships/2014/rabid-on/jinx.s	/^replic1:$/;"	l
@@ -1383,17 +1401,19 @@ s1	ressources/champs/championships/2017/adenis/Explosive_Kitty.s	/^s1:$/;"	l
 s2	ressources/champs/championships/2017/adenis/Explosive_Kitty.s	/^s2:$/;"	l
 s3	ressources/champs/championships/2017/adenis/Explosive_Kitty.s	/^s3:$/;"	l
 s4	ressources/champs/championships/2017/adenis/Explosive_Kitty.s	/^s4:$/;"	l
+s_arg	includes/corewar.h	/^typedef struct			s_arg$/;"	s
 s_buff	libft/includes/get_next_line.h	/^struct					s_buff$/;"	s
 s_champ	includes/corewar.h	/^typedef struct			s_champ$/;"	s
 s_champid	includes/corewar.h	/^typedef struct			s_champid$/;"	s
 s_data	includes/corewar.h	/^typedef struct			s_data$/;"	s
 s_file	gnl/get_next_line.h	/^struct					s_file$/;"	s
 s_file	libft_old/libft.h	/^struct					s_file$/;"	s
+s_instruction	includes/corewar.h	/^typedef struct			s_instruction$/;"	s
 s_list	libft/includes/libft.h	/^struct	s_list$/;"	s
 s_list	libft/libft.h	/^struct	s_list$/;"	s
 s_list	libft_old/libft.h	/^typedef	struct			s_list$/;"	s
 s_num	includes/op.h	/^typedef struct		s_num$/;"	s
-s_op	includes/op.h	/^typedef struct		s_op$/;"	s
+s_op	includes/corewar.h	/^typedef struct			s_op$/;"	s
 s_process	includes/corewar.h	/^typedef struct			s_process$/;"	s
 salut2	ressources/champs/championships/2017/iburel/gateau.s	/^salut2:$/;"	l
 salut3	ressources/champs/championships/2017/iburel/gateau.s	/^salut3:$/;"	l
@@ -1583,6 +1603,7 @@ sti	ressources/champs/examples/bee_gees.s	/^sti	r1, %:live2, %1			;change live b
 stlive	ressources/champs/championships/2014/hmichals/Wall.s	/^stlive:$/;"	l
 stock	ressources/champs/championships/2017/gnebie/ultima.s	/^stock:$/;"	l
 store_def	ressources/champs/championships/2017/adenis/Explosive_Kitty.s	/^store_def:$/;"	l
+str_join_free	sources/vm/debug.c	/^char		*str_join_free(char *one, char *two)$/;"	f
 strbitcpy	sources/asm/makecor.c	/^void strbitcpy(unsigned char *src, char *dest, int bits)$/;"	f
 strbitcpy	sources/asm/parserbit.c	/^void strbitcpy(unsigned char *src, char *dest, int bits)$/;"	f
 stuff1	ressources/champs/championships/2014/rabid-on/jinx.s	/^stuff1:$/;"	l
@@ -1608,6 +1629,7 @@ suite	ressources/champs/leeloo.s	/^suite:	live %1$/;"	l
 suite	ressources/champs/new.s	/^suite:	live %1$/;"	l
 super	ressources/champs/championships/2017/iburel/gateau.s	/^super:$/;"	l
 symmetra	ressources/champs/championships/2017/pzarmehr/overwatch.s	/^symmetra:$/;"	l
+t_arg	includes/corewar.h	/^}						t_arg;$/;"	t	typeref:struct:s_arg
 t_arg_type	includes/op.h	/^typedef char	t_arg_type;$/;"	t
 t_buff	libft/includes/get_next_line.h	/^typedef struct s_buff	t_buff;$/;"	t	typeref:struct:s_buff
 t_champ	includes/corewar.h	/^}						t_champ;$/;"	t	typeref:struct:s_champ
@@ -1615,13 +1637,19 @@ t_champid	includes/corewar.h	/^}						t_champid;$/;"	t	typeref:struct:s_champid
 t_data	includes/corewar.h	/^}						t_data;$/;"	t	typeref:struct:s_data
 t_file	gnl/get_next_line.h	/^typedef struct s_file	t_file;$/;"	t	typeref:struct:s_file
 t_file	libft_old/libft.h	/^typedef struct s_file	t_file;$/;"	t	typeref:struct:s_file
+t_instruction	includes/corewar.h	/^}						t_instruction;$/;"	t	typeref:struct:s_instruction
 t_list	libft/includes/libft.h	/^typedef struct s_list	t_list;$/;"	t	typeref:struct:s_list
 t_list	libft/libft.h	/^typedef struct s_list	t_list;$/;"	t	typeref:struct:s_list
 t_list	libft_old/libft.h	/^}						t_list;$/;"	t	typeref:struct:s_list
+t_llu	includes/corewar.h	/^typedef unsigned long long	t_llu;$/;"	t
 t_num	includes/op.h	/^}					t_num;$/;"	t	typeref:struct:s_num
-t_octet	includes/corewar.h	/^typedef unsigned char	t_octet;$/;"	t
-t_op	includes/op.h	/^}					t_op;$/;"	t	typeref:struct:s_op
+t_octet	includes/corewar.h	/^typedef unsigned char		t_octet;$/;"	t
+t_op	includes/corewar.h	/^}						t_op;$/;"	t	typeref:struct:s_op
 t_process	includes/corewar.h	/^}						t_process;$/;"	t	typeref:struct:s_process
+t_reg	includes/corewar.h	/^typedef unsigned char		t_reg;$/;"	t
+t_reg	includes/corewar.h	/^typedef unsigned int		t_reg;$/;"	t
+t_reg	includes/corewar.h	/^typedef unsigned long long	t_reg;$/;"	t
+t_reg	includes/corewar.h	/^typedef unsigned short		t_reg;$/;"	t
 tail	ressources/champs/championships/2014/gbir/_.s	/^tail:$/;"	l
 tampon	ressources/champs/mortel.s	/^tampon:	sti r6,r3,r5$/;"	l
 tart	ressources/42.s	/^tart:	sti	r1,%:p64li,%1$/;"	l
@@ -1674,6 +1702,7 @@ toto1	ressources/champs/leeloo.s	/^toto1:	zjmp %:toto	$/;"	l
 toto1	ressources/champs/new.s	/^toto1:	zjmp %:toto	$/;"	l
 trap	ressources/champs/championships/2014/esusseli/gedeon.s	/^trap:$/;"	l
 ttt	ressources/champs/championships/2017/tbillard/Douceur_power.s	/^ttt:$/;"	l
+type	includes/corewar.h	/^	t_arg_type			type;$/;"	m	struct:s_arg
 un	ressources/champs/championships/2017/gnebie/ultima.s	/^un poison ronge ton âme$/;"	l
 unused	ressources/champs/championships/2017/adenis/Explosive_Kitty.s	/^unused:$/;"	l
 up	ressources/champs/championships/2014/tdemay/champ.s	/^up:$/;"	l
@@ -1915,6 +1944,7 @@ wall_prep	ressources/champs/examples/helltrain.s	/^wall_prep:$/;"	l
 wallstart	ressources/champs/championships/2014/hmichals/Wall.s	/^wallstart:$/;"	l
 what_id	sources/vm/champ_load.c	/^int		what_id(t_champid *champ_id)$/;"	f
 write_front	ressources/champs/championships/2014/tdemay/champ.s	/^write_front:$/;"	l
+write_nbr_to_bin	sources/common/endian.c	/^void	write_nbr_to_bin(t_llu nbr, void *dst, size_t len)$/;"	f
 xor	ressources/champs/examples/bee_gees.s	/^xor	r2, %15, r4		;if (r4) {carry = 0}$/;"	l
 xxx	ressources/champs/Octobre_Rouge_V4.2.s	/^xxx:		live	%42$/;"	l
 youshallnotpass	ressources/champs/championships/2014/esusseli/gedeon.s	/^youshallnotpass:$/;"	l

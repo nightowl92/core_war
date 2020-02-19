@@ -6,7 +6,7 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:19:57 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/02/09 22:14:32 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/02/19 14:49:53 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct			s_process
 	unsigned int		carry;
 	t_reg				reg[REG_NUMBER];
 	t_instruction		instruction;
-	int					couldown;
+	int					cooldown;
 	struct s_process	*next;
 }						t_process;
 
@@ -116,6 +116,8 @@ int			show_mars(t_data *data);
 int			battle(t_data *data);
 void		hex_dump(t_octet *src, size_t len);
 int			champ_dump(t_champ *champ);
+int			dump_mars(t_data *data);
+int			buff_mars(t_data *data);
 
 /*
 ** init
@@ -130,4 +132,10 @@ int			new_champ(t_data *data, char *source, t_champid *champ_id);
 */
 
 int			new_process(t_data *data, int loc, int champ_id);
+
+/*
+ ** operation_reading
+ */
+int		read_operation(t_data *data, t_process *process);
+
 #endif
