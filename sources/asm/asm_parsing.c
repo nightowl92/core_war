@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/19 17:29:03 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:02:55 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ void	asmparsing(header_t *header)
 		printf("instr nb val%d data: %d %d %d\n", check->instr, check->data[0], check->data[1], check->data[2]);
 		check = check->next;
 	}
+	/*while (header->labels)
+	{
+		printf("labels :%s\n", header->labels->name);
+		header->labels = header->labels->next;
+	}*/
 	/*
 	   first instruct
 	   */

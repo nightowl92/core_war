@@ -6,11 +6,11 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 14:37:08 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/19 15:28:37 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:01:22 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/asm.h"
+#include "asm.h"
 
 static void getparam(header_t *header, char *s, char *str, char *dest)
 {
@@ -53,6 +53,5 @@ void	asmparsehead(header_t *header)
 	if (ft_strncmp(COMMENT_CMD_STRING, s, ft_strchlen(COMMENT_CMD_STRING, COMMENT_CHAR)))
 		errorparserasm("", header, 3, 0);
 	getparam(header, s, COMMENT_CMD_STRING, header->comment);
-	printf("magic nb %d\n", COREWAR_EXEC_MAGIC);
 	free(s);
 }
