@@ -6,7 +6,7 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 19:19:42 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/02/19 16:03:34 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/02/26 13:25:14 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		execute_operation()
 int		new_turn(t_data *data)
 {
 	t_process	*process;
+
 	process = data->processes;
 	while (process)
 	{

@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:19:57 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/02/19 18:00:22 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/26 14:42:53 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ typedef struct			s_arg
 typedef struct			s_instruction
 {
 	int					op;
+	int					op_id;
 	unsigned int		pc;
+	t_octet				encod;
 	int					nbr_args;
 	t_arg				args[4];
 }						t_instruction;
