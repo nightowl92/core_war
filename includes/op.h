@@ -92,7 +92,7 @@ typedef struct		instr_s
 	char			*labelname[3];
 	int				len;
 	int				ptlen;
-	int 			pterofinstr;
+	int				pterofinstr;
 	struct		instr_s *next;
 }					instr_t;
 

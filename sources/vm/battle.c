@@ -49,7 +49,6 @@ int		battle(t_data *data)
 		new_turn(data);
 		if (turn > 100000)
 			return (1);
-//		dump_mars(data);
 //		show_mars(data);
 		buff_mars(data);
 		ft_putstr("\n\n");

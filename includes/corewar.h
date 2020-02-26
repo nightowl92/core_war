@@ -12,6 +12,7 @@
 
 #ifndef COREWAR_H
 # define COREWAR_H
+
 # include <stdio.h>
 # include <stdlib.h>
 # include "op.h"
@@ -53,15 +54,17 @@ typedef unsigned long long	t_reg;
 
 typedef struct			s_op
 {
-	char	*name;
-	int		param_number;
-	int		param_possible_types[4];
-	int		op_code;
-	int		cycle;
-	char	*complete_name;
-	int		encoding_byte;
-	int		direct_size_two;
+	char		*name;
+	int			param_number;
+	int			param_possible_types[4];
+	t_octet		op_code;
+	int			cycle;
+	char			*complete_name;
+	t_octet		encoding_byte;
+	int			direct_size_two;
 }						t_op;
+
+//# include "../sources/common/op.c"
 
 typedef struct			s_process
 {
@@ -116,7 +119,6 @@ int			show_mars(t_data *data);
 int			battle(t_data *data);
 void		hex_dump(t_octet *src, size_t len);
 int			champ_dump(t_champ *champ);
-int			dump_mars(t_data *data);
 int			buff_mars(t_data *data);
 
 /*

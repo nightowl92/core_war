@@ -104,45 +104,6 @@ void		char_hexa_str(t_octet c, char *str)
 	str[2] = '\0';
 }
 
-char		*str_join_free(char *one, char *two)
-{
-	char	*str;
-
-	str = ft_strjoin(one, two);
-	free(one);
-	return (str);
-}
-
-int			dump_mars(t_data *data)
-{
-	int		i;
-	char	*str;
-	char	tmp[3];
-
-	i = 0;
-	str = ft_strdup("\e[H");
-	while (i < MEM_SIZE)
-	{
-		if (i != 0 && i % 64 == 0)
-		{
-			write(1, str, ft_strlen(str));
-			free(str);
-			str = ft_strdup("\n");
-		}
-		else if (i != 0)
-			str = str_join_free(str, " ");
-		if (is_pointed(data, i))
-			str = str_join_free(str, "\e[1m");
-		char_hexa_str(data->mars[i], tmp);
-		str = str_join_free(str, tmp);
-		if (is_pointed(data, i))
-			str = str_join_free(str, "\e[0m");
-		i++;
-	}
-//	sleep(1);
-	return (0);
-}
-
 int			write_in_buffer(char *buff, char *str, int i)
 {
 	int		a;
