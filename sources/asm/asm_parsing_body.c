@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/20 17:38:48 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/29 13:51:19 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,7 @@ static int parsecleanline(char *s, header_t *header)
 		++i;
 	if (s[i] == COMMENT_CHAR)
 		return (1);
-	if ((len = isvalidlabel(s + i, header)))
+	/*if ((len = isvalidlabel(s + i, header)))
 	{
 		addlabel(s + i, len, header);
 		i += len + 1;
@@ -231,7 +231,7 @@ static int parsecleanline(char *s, header_t *header)
 			errorparserasm("", header, 1, 0);
 		while (s[i] <= ' ')
 			++i;
-	}
+	}*/
 	if ((len = isinstruct(s + i,  header)))
 		getparams(s + i + len, header);
 	else
