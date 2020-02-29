@@ -25,7 +25,7 @@ typedef struct			s_arg
 {
 	t_arg_type			type;
 	int					len;
-	unsigned int		content;
+	t_octet				content[4];
 }						t_arg;
 
 typedef struct			s_instruction
@@ -61,7 +61,7 @@ typedef struct			s_op
 	int			param_possible_types[4];
 	t_octet		op_code;
 	int			cycle;
-	char			*complete_name;
+	char		*complete_name;
 	t_octet		encoding_byte;
 	int			direct_size_two;
 }						t_op;

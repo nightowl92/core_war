@@ -14,8 +14,9 @@
 #include "corewar.h"
 #include <unistd.h>
 
-int		execute_operation()
+int		execute_operation(t_data *data, t_process *process)
 {
+	process->cooldown--;
 	return (0);
 }
 
@@ -29,7 +30,7 @@ int		new_turn(t_data *data)
 		if (process->cooldown > 1)
 			process->cooldown--;
 		else if (process->cooldown == 1)
-			execute_operation();
+			execute_operation(data, process);
 		else if (read_operation(data, process))
 			;
 		else
@@ -47,12 +48,15 @@ int		battle(t_data *data)
 	write(1, "\e[2J", 4);
 	while (1)
 	{
-		new_turn(data);
 		if (turn > 100000)
 			return (1);
-//		show_mars(data);
 		buff_mars(data);
-		ft_putstr("\n\n");
+		ft_putstr("\n");
+		ft_putnbr(turn);
+		ft_putstr("\n");
+		ft_putnbr(data->processes->cooldown);
+		ft_putstr("\n");
+		new_turn(data);
 		turn++;
 	}
 	return (0);
