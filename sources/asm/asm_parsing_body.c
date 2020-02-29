@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 11:01:42 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/29 13:51:19 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/29 15:44:37 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,11 @@ void	getparams(char *s, header_t *header)
 	i = -1;
 	while (s[++i] <= ' ')
 		;
+	if (!header->labels->assigned)
+	{
+		header->labels->assigned = 1;
+		//header->labels->labinstrpt = ;
+	}
 	if (header->instr->instr == 1 || header->instr->instr == 9 || header->instr->instr == 12 || header->instr->instr == 15 || header->instr->instr == 16)
 		countargs(s + i, header, 1);
 	else if (header->instr->instr == 2 || header->instr->instr == 3 || header->instr->instr == 13)
@@ -209,6 +214,7 @@ void addlabel(char *s, int len, header_t *header)
 		errorparser("malloc error", header);
 	if (!(new->name = ft_strndup(s, len)))
 		errorparser("malloc error", header);
+	new->assigned = 0;
 	new->next = header->labels;
 	header->labels = new;
 }
@@ -217,24 +223,28 @@ static int parsecleanline(char *s, header_t *header)
 {
 	int i;
 	int len;
+	int islabel;
 
 	i = 0;
+	islabel = 0;
 	while (s[i] <= ' ')
 		++i;
 	if (s[i] == COMMENT_CHAR)
 		return (1);
-	/*if ((len = isvalidlabel(s + i, header)))
+	if ((len = isvalidlabel(s + i, header)))
 	{
+		header->thereisalabel = 1;
+		islabel = 1;
 		addlabel(s + i, len, header);
 		i += len + 1;
 		if (s[i - 1] != LABEL_CHAR)
 			errorparserasm("", header, 1, 0);
 		while (s[i] <= ' ')
 			++i;
-	}*/
+	}
 	if ((len = isinstruct(s + i,  header)))
 		getparams(s + i + len, header);
-	else
+	else if (!islabel)
 		errorparser("error label/instruc", header);
 	if (!(header->instr->next = malloc(sizeof(instr_t))))
 		errorparser("malloc error", header);

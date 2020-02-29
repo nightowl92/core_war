@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/02/19 18:17:54 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/29 15:50:57 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct		s_num
 typedef struct		labels_s
 {
 	char		*name;
+	int			assigned;
+	char		*labinstrpt;
 	struct		labels_s *next;
 }					labels_t;
 
@@ -109,7 +111,9 @@ typedef struct		header_s
 	int					col;
 	int					row;
 	int					par;
+	int					pointer;
 	labels_t			*labels;
+	int					thereisalabel;
 }					header_t;
 
 #endif

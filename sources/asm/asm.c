@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:02:22 by stherkil          #+#    #+#             */
-/*   Updated: 2020/02/29 13:48:59 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/02/29 15:51:01 by stherkil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void		asmtofile(header_t *header, char *name1)
 	char			*name2;
 	int				bufpt;
 
+	bufpt = 0;
 	if (findlastpt(name1) == ft_strlen(name1))
 		errorparser("Writing output program to .cor", header);
 	if (!(name2 = ft_strndup(name1, findlastpt(name1) + 3)))
@@ -58,7 +59,6 @@ static void		asmtofile(header_t *header, char *name1)
 	fd = open(name2, O_CREAT | O_RDWR, 0644);
 	partone(BUF, &bufpt, header);
 	parttwo(BUF, &bufpt, header);
-	printf("bufpt is %d\n", bufpt);
 	write(fd, BUF, bufpt);
 	free(name2);
 	close(fd);
@@ -78,7 +78,6 @@ int				main(int argc, char **argv)
 		errorparser(argv[1], header);
 	}
 	asmparsing(header);
-	printf("len is %d\n", header->tot_len);
 	close(header->fd);
 	asmtofile(header, argv[1]);
 	return (0);
