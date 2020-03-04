@@ -13,6 +13,12 @@
 #include <unistd.h>
 #include "corewar.h"
 
+int			err(char *s)
+{
+	printf("%s\n", s);
+	return (0);
+}
+
 void		char_hexa(t_octet c)
 {
 	char	base[] = "0123456789abcdef";
@@ -146,7 +152,6 @@ int			buff_mars(t_data *data)
 	buff[buff_i] = '\0';
 	write(1, buff, ft_strlen(buff));
 	write(1, "\n", 1);
-	sleep(1);
 	return (0);
 }
 

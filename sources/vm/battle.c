@@ -16,6 +16,7 @@
 
 int		execute_operation(t_data *data, t_process *process)
 {
+	usleep(1000000);
 	process->cooldown--;
 	return (0);
 }
@@ -49,13 +50,11 @@ int		battle(t_data *data)
 	while (1)
 	{
 		if (turn > 100000)
-			return (1);
+			return (1 + err("end turn"));
 		buff_mars(data);
-		ft_putstr("\n");
-		ft_putnbr(turn);
-		ft_putstr("\n");
+		ft_putstr("Turn = "); ft_putnbr(turn); ft_putstr("  ");
 		ft_putnbr(data->processes->cooldown);
-		ft_putstr("\n");
+		ft_putstr("           \n");
 		new_turn(data);
 		turn++;
 	}

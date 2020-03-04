@@ -64,7 +64,10 @@ int		get_without_encod_byte(t_data *data, t_process *process, int *pc)
 		else if (op_tab[process->instruction.op_id].param_possible_types[i] == T_IND)
 			bit = 3;
 		else
-			write(1, "ERROR\n", 6); exit (1);
+		{
+			write(1, "ERROR\n", 6);
+			exit (1);
+		}
 		fill_arg(&process->instruction.args[i], bit,
 				op_tab[process->instruction.op_id].direct_size_two);
 		i++;
@@ -141,13 +144,15 @@ int			read_operation(t_data *data, t_process *process)
 	int		pc;
 
 	pc = process->pc;
+
 	process->instruction.op_id = get_op(data, process, &pc);
 	if (process->instruction.op_id < 0)
 		return (0);
 	process->instruction.pc = process->pc;
-	process->instruction.nbr_args = op_tab[process->instruction.op_id].cycle;
+	process->instruction.nbr_args = op_tab[process->instruction.op_id].param_number;
 	process->cooldown = op_tab[process->instruction.op_id].cycle;
 	pc++;
+	
 	if (op_tab[process->instruction.op_id].encoding_byte)
 		get_encoding_byte(data, process, &pc);
 	else

@@ -58,7 +58,7 @@ typedef struct			s_op
 {
 	char		*name;
 	int			param_number;
-	int			param_possible_types[4];
+	t_octet		param_possible_types[4];
 	t_octet		op_code;
 	int			cycle;
 	char		*complete_name;
@@ -122,6 +122,7 @@ int			battle(t_data *data);
 void		hex_dump(t_octet *src, size_t len);
 int			champ_dump(t_champ *champ);
 int			buff_mars(t_data *data);
+int			err(char *s);
 
 /*
 ** init
