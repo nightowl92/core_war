@@ -143,4 +143,24 @@ int			new_process(t_data *data, int loc, int champ_id);
  */
 int		read_operation(t_data *data, t_process *process);
 
+/*
+ ** differents functions
+ */
+int		live(t_data *data, t_process *process);
+int		ld(t_data *data, t_process *process);
+int		st(t_data *data, t_process *process);
+int		add(t_data *data, t_process *process);
+int		sub(t_data *data, t_process *process);
+int		and(t_data *data, t_process *process);
+int		or(t_data *data, t_process *process);
+int		xor(t_data *data, t_process *process);
+int		zjmp(t_data *data, t_process *process);
+int		ldi(t_data *data, t_process *process);
+int		sti(t_data *data, t_process *process);
+int		fork(t_data *data, t_process *process);
+int		lld(t_data *data, t_process *process);
+int		lldi(t_data *data, t_process *process);
+int		lfork(t_data *data, t_process *process);
+int		aff(t_data *data, t_process *process);
+
 #endif

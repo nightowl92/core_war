@@ -14,9 +14,14 @@
 #include "corewar.h"
 #include <unistd.h>
 
+static int		*(func)(t_data *, t_process *)[17] = 
+{op_live, op_ld, op_st, op_add, op_sub, op_and, op_or, op_xor, op_zjmp,
+	op_ldi, op_sti, op_fork, op_lld, op_lldi, op_lfork, op_aff, NULL};
+
 int		execute_operation(t_data *data, t_process *process)
 {
 	usleep(1000000);
+	func[process->instruction->op_id](data, process);
 	process->cooldown--;
 	return (0);
 }
