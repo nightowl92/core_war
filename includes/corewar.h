@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:19:57 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/02/26 14:42:53 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/03/06 21:46:37 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct			s_process
 	t_reg				reg[REG_NUMBER];
 	t_instruction		instruction;
 	int					cooldown;
+	int					life;
 	struct s_process	*next;
 }						t_process;
 
@@ -112,6 +113,9 @@ typedef struct			s_data
 	int					nbr_champs;
 	t_champ				*champs;
 	t_process			*processes;
+	int					cycles_to_die;
+	int					max_cycles;
+	int					lives;
 }						t_data;
 
 /*
@@ -146,21 +150,21 @@ int		read_operation(t_data *data, t_process *process);
 /*
  ** differents functions
  */
-int		live(t_data *data, t_process *process);
-int		ld(t_data *data, t_process *process);
-int		st(t_data *data, t_process *process);
-int		add(t_data *data, t_process *process);
-int		sub(t_data *data, t_process *process);
-int		and(t_data *data, t_process *process);
-int		or(t_data *data, t_process *process);
-int		xor(t_data *data, t_process *process);
-int		zjmp(t_data *data, t_process *process);
-int		ldi(t_data *data, t_process *process);
-int		sti(t_data *data, t_process *process);
-int		fork(t_data *data, t_process *process);
-int		lld(t_data *data, t_process *process);
-int		lldi(t_data *data, t_process *process);
-int		lfork(t_data *data, t_process *process);
-int		aff(t_data *data, t_process *process);
+int		op_live(t_data *data, t_process *process);
+int		op_ld(t_data *data, t_process *process);
+int		op_st(t_data *data, t_process *process);
+int		op_add(t_data *data, t_process *process);
+int		op_sub(t_data *data, t_process *process);
+int		op_and(t_data *data, t_process *process);
+int		op_or(t_data *data, t_process *process);
+int		op_xor(t_data *data, t_process *process);
+int		op_zjmp(t_data *data, t_process *process);
+int		op_ldi(t_data *data, t_process *process);
+int		op_sti(t_data *data, t_process *process);
+int		op_fork(t_data *data, t_process *process);
+int		op_lld(t_data *data, t_process *process);
+int		op_lldi(t_data *data, t_process *process);
+int		op_lfork(t_data *data, t_process *process);
+int		op_aff(t_data *data, t_process *process);
 
 #endif
