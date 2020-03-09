@@ -115,7 +115,7 @@ typedef struct			s_data
 	t_process			*processes;
 	int					cycles_to_die;
 	int					max_cycles;
-	int					lives;
+	int					lives_count;
 }						t_data;
 
 /*

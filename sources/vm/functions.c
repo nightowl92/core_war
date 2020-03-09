@@ -16,12 +16,14 @@
 int		op_live(t_data *data, t_process *process)
 {
 	process->life = 1;
-	data->lives++;
-	if (data->lives == NBR_LIVE)
+	data->lives_count++;
+	if (data->lives_count == NBR_LIVE)
 	{
-		data->lives = 0;
-		if (data->max_cycles > 0)
+		data->lives_count = 0;
+		if (data->max_cycles - CYCLE_DELTA >= 0)
 			data->max_cycles -= CYCLE_DELTA;
+		else
+			data->max_cycles = 0;
 	}
 	return (0);
 }
