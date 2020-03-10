@@ -6,7 +6,7 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 19:19:42 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/03/06 22:25:49 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/03/10 17:39:52 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static int		(*func[17])(t_data *, t_process *) =
 
 int		execute_operation(t_data *data, t_process *process)
 {
-	usleep(1000000);
 	func[process->instruction.op_id](data, process);
 	process->cooldown--;
+	usleep(100000);
 	return (0);
 }
 
@@ -40,7 +40,10 @@ int		new_turn(t_data *data)
 		else if (read_operation(data, process))
 			;
 		else
+		{
+		//	usleep(100000);
 			process->pc = (process->pc + 1) % MEM_SIZE;
+		}
 		process = process->next;
 	}
 	return (0);
@@ -70,6 +73,17 @@ int		death_reaper(t_data *data)
 	return (0);
 }
 
+int		debug_global(t_data *data, int turn)
+{
+		ft_putstr("Turn = "); ft_putnbr(turn); ft_putstr("  ");
+		ft_putstr("max = "); ft_putnbr(data->max_cycles); ft_putstr("  ");
+		ft_putstr("lives = "); ft_putnbr(data->lives_count); ft_putstr("  ");
+		if (data->processes)
+			ft_putnbr(data->processes->cooldown);
+		ft_putstr("           \n");
+		return (0);
+}
+
 int		battle(t_data *data)
 {
 	int		turn;
@@ -81,11 +95,8 @@ int		battle(t_data *data)
 		if (turn > 100000)
 			return (1 + err("end turn"));
 		buff_mars(data);
-		ft_putstr("Turn = "); ft_putnbr(turn); ft_putstr("  ");
-		if (data->processes)
-			ft_putnbr(data->processes->cooldown);
-		ft_putstr("           \n");
 		new_turn(data);
+		debug_global(data, turn);
 		data->cycles_to_die--;
 		if (data->cycles_to_die == 0)
 			if (death_reaper(data))

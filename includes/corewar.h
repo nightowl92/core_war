@@ -6,7 +6,7 @@
 /*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:19:57 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/03/06 21:46:37 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/03/10 15:36:07 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void		hex_dump(t_octet *src, size_t len);
 int			champ_dump(t_champ *champ);
 int			buff_mars(t_data *data);
 int			err(char *s);
+int		debug_process(t_process *process);
 
 /*
 ** init

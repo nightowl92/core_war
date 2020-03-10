@@ -6,7 +6,7 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:56:00 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/02/19 16:52:50 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/03/10 18:13:57 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int			buff_mars(t_data *data)
 	i = 0;
 	buff_i = 0;
 	write(1, "\e[H", 3);
-	//write_in_buffer(buff, "\e[H", buff_i);
+//	write_in_buffer(buff, "\e[H", buff_i);
 //	write(1, "\[?25l", 6);
 	while (i < MEM_SIZE)
 	{
@@ -155,4 +155,25 @@ int			buff_mars(t_data *data)
 	return (0);
 }
 
-
+int		debug_process(t_process *process)
+{
+	ft_putstr("proc id=|");
+	ft_putnbr(process->id);
+	ft_putstr("| pc=|");
+	ft_putnbr(process->pc);
+	ft_putstr("| inst=");
+	ft_putnbr(process->instruction.op_id);
+	ft_putstr("| enc=");
+	char_hexa(process->instruction.encod);
+	ft_putstr("| nbr arg =");
+	ft_putnbr(process->instruction.nbr_args);
+	for (int i = 0; i < 4; i++)
+	{
+		ft_putstr(" arg");
+		ft_putnbr(i);
+		ft_putstr(" l=");
+		ft_putnbr(process->instruction.args[i].len);
+	}
+	ft_putstr("\n");
+	return (0);
+}

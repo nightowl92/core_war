@@ -6,12 +6,41 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 18:14:39 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/03/07 05:54:51 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/03/10 20:28:16 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 #include "corewar.h"
+
+int		big_to_int(int *nbr)
+{
+	int			dest;
+	t_octet		*dest_ptr;
+	t_octet		*nbr_ptr;
+
+	dest_ptr = (t_octet *)&dest;
+	nbr_ptr = (t_octet *)nbr;
+	dest_ptr[0] = nbr_ptr[3];
+	dest_ptr[1] = nbr_ptr[2];
+	dest_ptr[2] = nbr_ptr[1];
+	dest_ptr[3] = nbr_ptr[0];
+	return (dest);
+}
+
+short		big_to_short(short *nbr)
+{
+	short			dest;
+	t_octet		*dest_ptr;
+	t_octet		*nbr_ptr;
+
+	dest_ptr = (t_octet *)&dest;
+	nbr_ptr = (t_octet *)nbr;
+	dest_ptr[0] = nbr_ptr[1];
+	dest_ptr[1] = nbr_ptr[0];
+	return (dest);
+}
+
 
 int		op_live(t_data *data, t_process *process)
 {
@@ -30,6 +59,7 @@ int		op_live(t_data *data, t_process *process)
 
 int		op_ld(t_data *data, t_process *process)
 {
+	if (process->instruction->args[0]
 	return (0);
 }
 

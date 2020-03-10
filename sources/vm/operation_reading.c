@@ -6,7 +6,7 @@
 /*   By: vlaroque <vlaroque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 08:01:15 by vlaroque          #+#    #+#             */
-/*   Updated: 2020/02/26 16:12:35 by vlaroque         ###   ########.fr       */
+/*   Updated: 2020/03/10 16:04:56 by vlaroque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		get_encoding_byte(t_data *data, t_process *process, int *pc)
 	encod = data->mars[*pc];
 	while (arg_nbr)
 	{
-		fill_arg(&process->instruction.args[i], 3 & encod >> (3 - i),
+		fill_arg(&process->instruction.args[i], 3 & (encod >> ((3 * 2) - (i * 2))),
 				op_tab[process->instruction.op_id].direct_size_two);
 		i++;
 		arg_nbr--;
@@ -145,6 +145,7 @@ int			read_operation(t_data *data, t_process *process)
 
 	pc = process->pc;
 
+//	op_bzero(&process->instruction, sizeof(t_instruction));
 	process->instruction.op_id = get_op(data, process, &pc);
 	if (process->instruction.op_id < 0)
 		return (0);
