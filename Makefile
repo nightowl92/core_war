@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 10:33:13 by vlaroque          #+#    #+#              #
-#    Updated: 2020/02/19 18:58:49 by vlaroque         ###   ########.fr        #
+#    Updated: 2020/04/18 18:17:59 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS = # -Wextra -Werror -Wall -Wno-missing-field-initializers
 
 # SOURCES
 
-SRC_ASM = asm.c errors.c asm_parttwo.c asm_parsing.c itobighex.c asm_parsing_tools.c asm_parsing_head.c asm_parsing_body.c
+SRC_ASM = error.c  getbody.c  getheader.c  list.c  main.c  printdata.c  skipnl.c
 SRC_VM = main.c debug.c battle.c champ_load.c init_corewar.c process_new.c operation_reading.c
 SRC_COMMON = op.c
 

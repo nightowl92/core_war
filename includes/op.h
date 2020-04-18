@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stherkil <stherkil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/02/29 15:50:57 by stherkil         ###   ########.fr       */
+/*   Updated: 2020/04/18 18:25:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef char	t_arg_type;
 # define PROG_NAME_LENGTH		128
 # define COMMENT_LENGTH			2048
 # define COREWAR_EXEC_MAGIC 0xea83f3
-
+/*
 typedef struct		s_num
 {
 	int nb;
@@ -103,7 +103,7 @@ typedef struct		header_s
 	int					lastlabelnb;
 	instr_t				*instr;
 	instr_t				*firstinstr;
-	int					fd;
+	int					fd;i
 	char				prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int		prog_size;
 	char				comment[COMMENT_LENGTH + 1];
@@ -115,5 +115,5 @@ typedef struct		header_s
 	labels_t			*labels;
 	int					thereisalabel;
 }					header_t;
-
+*/
 #endif
