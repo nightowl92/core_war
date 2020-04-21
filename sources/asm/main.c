@@ -29,15 +29,6 @@ int main(int argc, char **argv)
     if ((fd = open(argv[1], O_RDONLY)) < 0)
 		ft_putstrexit("Can't read source file\n");
     list = initlist();
-	list->type = 1;
-	last = newlink(list);
-	last->type = 2;
-	last = newlink(last);
-	last->type = 3;
-	last = newlink(last);
-	last = newlink(last);
-	last->type = 0;
-	last = newlink(last);
     last = getheader(fd, list);
     getbody(fd, last);
     printdata(list);

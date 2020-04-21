@@ -16,6 +16,8 @@ static int isempty(char *s)
 {
     while (*s)
     {
+        if (*s == COMMENT_CHAR)
+            break ;
         if (*s > 32)
             return (0);
         s++;
@@ -23,14 +25,25 @@ static int isempty(char *s)
     return (1);
 }
 
-char *skipnl(int fd)
+int skipsp(char *s, list_t *list)
+{
+    int i;
+
+    i = -1;
+    while (!(s[++i] > 32))
+        list->y += i;
+    return (i);
+}
+
+char *skipnl(int fd, list_t *list)
 {
 	char    *s;
 	int     ret;
 
 	while ((ret = get_next_line(fd, &s)) > 0)
 	{
-        if (isempty(s))
+        ++list->x;
+        if (!isempty(s))
             return (s);
 		free(s);
 	}

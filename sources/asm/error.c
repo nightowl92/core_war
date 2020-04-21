@@ -12,6 +12,12 @@
 
 #include "asm.h"
 
+void freeline(char **s)
+{
+	free(*s);
+	*s = NULL;
+}
+
 void freelist(list_t *list)
 {
     list_t  *tmp;
@@ -21,6 +27,7 @@ void freelist(list_t *list)
 		printf("freeing one val is %d\n", list->type);
 		tmp = list;
 		list = list->next;
+		tmp = NULL;
 		free(tmp);
 	}
 	printf("freeing one val is %d\n", list->type);

@@ -14,5 +14,5 @@
 
 void printdata(list_t *list)
 {
-
+    printf("name is  %s %s\n", list->name, list->comment);
 }

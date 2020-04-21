@@ -15,6 +15,8 @@
 static void initvalues(list_t *list)
 {
 	list->type = -1;
+	list->x = 0;
+	list->y = 0;
 	list->next = NULL;
 }
 
