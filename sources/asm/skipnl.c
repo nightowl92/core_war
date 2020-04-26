@@ -61,13 +61,20 @@ char *skipnl(int fd, list_t *list)
 {
 	char    *s;
 	int     ret;
+	int		flag;
 
+	flag = 0;
 	while ((ret = get_next_line(fd, &s)) > 0)
 	{
+		flag = 1;
+		printf("ret is %d\n", ret);
         ++list->x;
         if (!isempty(s))
             return (s);
 		free(s);
 	}
+	if (list->type == 0 && !flag)
+		error(list, "File is empty\n");
+	printf("ret is %d\n", ret);
     return (NULL);
 }

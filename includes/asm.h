@@ -10,6 +10,7 @@
 
 typedef struct		list_s
 {
+	char			*filename;
     int				type;
 	int				ins;
 	int				code;
@@ -21,6 +22,7 @@ typedef struct		list_s
     struct list_s   *next;
 }                   list_t;
 
+char	*getfilename(list_t *list, char *s);
 int		dohex(int code, int pos, int typ);
 int		gethex(int code, int pos);
 void	freeline(char **s);

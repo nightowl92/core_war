@@ -70,12 +70,8 @@ static void checkend(char *s, list_t *list)
 
 	i = -1;
 	while (s[++i])
-	{
 		if (s[i] == COMMENT_CHAR)
 			break ;
-		//if (s[i] > 32)
-		//	error(list, "format error\n");
-	}
 }
 
 list_t *getheader(int fd, list_t *list)
@@ -83,6 +79,7 @@ list_t *getheader(int fd, list_t *list)
 	int		i;
 	int		len;
 
+	list->type = 0;
 	list->line = skipnl(fd, list);
 	i = skipsp(list->line, list);
 	len = ft_strlen(NAME_CMD_STRING);
@@ -92,7 +89,6 @@ list_t *getheader(int fd, list_t *list)
 	getname(list->line + i, list, list->name);
 	checkend(list->line + i, list);
 	freeline(&(list->line));
-
 	list->line = skipnl(fd, list);
 	i = skipsp(list->line, list);
 	len = ft_strlen(COMMENT_CMD_STRING);
@@ -101,7 +97,6 @@ list_t *getheader(int fd, list_t *list)
 	list->y += (i += len);
 	getname(list->line + i, list, list->comment);
 	checkend(list->line + i, list);
-	list->type = 0;
 	freeline(&(list->line));
 	return (newlink(list));
 }

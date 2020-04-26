@@ -31,21 +31,22 @@ void tohex(int fd, int nb, int len)
 
 void printdata(list_t *list)
 {
-   	unsigned char	BUF[3000];
-	int				fd;
-	int				bufpt;
+	int	fd;
+	char NUM[1];
 
 	printf("name is  %s %s\n", list->name, list->comment);
+	printf("outp %s\n", list->filename);
 	ft_putstr("Writing output program to .cor\n");
-	fd = open("output.cor", O_CREAT | O_RDWR, 0644);
+	fd = open(list->filename, O_CREAT | O_RDWR, 0644);
 	tohex(fd, COREWAR_EXEC_MAGIC, 4);
 	write(fd, list->name, PROG_NAME_LENGTH);
 	write(fd, list->comment, COMMENT_LENGTH);
 	list = list->next;
 	while (list)
 	{
+		NUM[0] = list->code;
 		if (!(list->ins == 0 || list->ins == 8 || list->ins == 11 || list->ins == 14))
-			write(fd, list->code, 1);
+			write(fd, NUM, 1);
 		list = list->next;
 	}
 	close(fd);

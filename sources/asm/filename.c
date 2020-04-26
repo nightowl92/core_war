@@ -12,36 +12,22 @@
 
 #include "asm.h"
 
-static void initvalues(list_t *list)
+char	*getfilename(list_t *list, char *s)
 {
-	list->filename = NULL;
-	list->type = -1;
-	list->code = 0;
-	list->x = 0;
-	list->y = 0;
-	list->next = NULL;
-}
+	int		len;
+	int		i;
+	char	*out;
 
-list_t *newlink(list_t *list)
-{
-	list_t *new;
-
-	if (!(new = malloc(sizeof(list_t))))
-		error(list, "malloc error\n");
-	initvalues(new);
-	list->next = new;
-	return (new);
-}
-
-list_t	*initlist(void)
-{
-	list_t *list;
-
-    if (!(list = malloc(sizeof(list_t))))
-	{
-		ft_putstr("malloc error\n");
-		exit(0);
-	}
-	initvalues(list);	
-	return (list);
+	i = -1;
+	len = ft_strlen(s);
+	printf("str and lenare %s %d %c\n", s, len, s[len - 1]);
+	if (s[len - 1] != 's' && s[len - 2] != '.')
+        error(list, "format error\n");
+    if (!(out = ft_strnew(len + 3)))
+        error(list, "malloc error\n");
+    ft_strcpy(out, s);
+    out[len - 1] = 'c';
+    out[len] = 'o';
+    out[len + 1] = 'r';
+	return (out);
 }
