@@ -81,7 +81,7 @@ static int	gettype(char *s, list_t *list)
 	return (1);
 }
 
-static int	getlabel(char *s, list_t *list)
+static void	getlabel(char *s, list_t *list)
 {
 	int i;
 	int j;
@@ -97,7 +97,7 @@ static int	getlabel(char *s, list_t *list)
 				if (LABEL_CHARS[j] == s[i])
 					break ;
 				if (len == i)
-					error("label char not ok\n", list);
+					error(list, "label char not ok\n");
 			}
 		}
 	if (!(list->labelname = ft_strnew(i)))
@@ -112,17 +112,19 @@ void getbody(int fd, list_t *list)
 
 	list->line = skipnl(fd, list);
 	if (list->line == NULL && list->type == 0)
-		error("no body\n");
+		error(list, "no body\n");
 	if (list->type == 3 && list->line == NULL)
-		error("stuff missing\n");
+		error(list, "stuff missing\n");
 	i = skipsp(list->line, list);
-	list->type = gettype(list->line + i, line);
+	list->type = gettype(list->line + i, list);
 	if (list->type == 1)
+	{
 		if (!(list->ins = instrnametonb(list->line + i)))
-			error(line, "error not instruction\n");
+			error(list, "error not instruction\n");
+	}
 	else
-		getlabel(list->line + i, line);
-	if (line->type == 3)
+		getlabel(list->line + i, list);
+	if (list->type == 3)
 	{
 		getbody(fd, list);
 		return ;
