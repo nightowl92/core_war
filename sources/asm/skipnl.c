@@ -12,6 +12,28 @@
 
 #include "asm.h"
 
+int     gethex(int code, int pos)
+{
+	if (pos == 0)
+		code /= 64;
+	else if (pos == 1)
+		code /= 16;
+	else
+		code /= 4;
+	return (code);
+}
+
+int		dohex(int code, int pos, int typ)
+{
+	if (pos == 0)
+		typ *= 64;
+	else if (pos == 1)
+		typ *= 16;
+	else
+        typ *= 4;
+	return (code + typ);
+}
+
 static int isempty(char *s)
 {
     while (*s)

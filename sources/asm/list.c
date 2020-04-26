@@ -15,6 +15,7 @@
 static void initvalues(list_t *list)
 {
 	list->type = -1;
+	list->code = 0;
 	list->x = 0;
 	list->y = 0;
 	list->next = NULL;
@@ -40,7 +41,6 @@ list_t	*initlist(void)
 		ft_putstr("malloc error\n");
 		exit(0);
 	}
-	list->type = -1;
 	initvalues(list);	
 	return (list);
 }

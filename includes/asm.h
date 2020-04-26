@@ -12,6 +12,7 @@ typedef struct		list_s
 {
     int				type;
 	int				ins;
+	int				code;
     int				x;
     int				y;
     char			name[PROG_NAME_LENGTH];
@@ -20,6 +21,8 @@ typedef struct		list_s
     struct list_s   *next;
 }                   list_t;
 
+int		dohex(int code, int pos, int typ);
+int		gethex(int code, int pos);
 void	freeline(char **s);
 int		skipsp(char *s, list_t *list);
 char	*skipnl(int fd, list_t *list);
