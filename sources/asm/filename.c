@@ -20,7 +20,6 @@ char	*getfilename(list_t *list, char *s)
 
 	i = -1;
 	len = ft_strlen(s);
-	printf("str and lenare %s %d %c\n", s, len, s[len - 1]);
 	if (s[len - 1] != 's' && s[len - 2] != '.')
         error(list, "format error\n");
     if (!(out = ft_strnew(len + 3)))

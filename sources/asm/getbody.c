@@ -62,19 +62,47 @@ static int	gettype(char *s, list_t *list)
 
 	i = -1;
 	while (s[++i])
-		if (s[i] == LABEL_CHAR)
-			break ;
-	if (i == ft_strlen(s))
-		error(list, "wrong format doesn't correspond to any type\n");
-	while (s[i])
 	{
-		if (s[i] > 32)
-			list->type = 3;
-			return (i);
-		++i;
+		if (s[i] == COMMENT_CHAR)
+			break ;
+		if (s[i] == LABEL_CHAR)
+			{
+				while (s[i])
+				{
+					if (s[i] == COMMENT_CHAR)
+						break ;
+					if (s[i] > ' ')
+						return (3);
+					++i;
+				}
+				return (2);
+			}
 	}
-	list->type = 2;
-	return (i);	
+	return (1);
+}
+
+static int	getlabel(char *s, list_t *list)
+{
+	int i;
+	int j;
+	int len;
+
+	len = ft_strlen(LABEL_CHARS);
+	i = -1;
+	while (s[++i] != LABEL_CHAR)
+		{
+			j = -1;
+			while (++j < len)
+			{
+				if (LABEL_CHARS[j] == s[i])
+					break ;
+				if (len == i)
+					error("label char not ok\n", list);
+			}
+		}
+	if (!(list->labelname = ft_strnew(i)))
+		error(list, "malloc error\n");
+	ft_strncpy(list->labelname, s, i);
 }
 
 void getbody(int fd, list_t *list)
@@ -83,8 +111,21 @@ void getbody(int fd, list_t *list)
 	int		len;
 
 	list->line = skipnl(fd, list);
+	if (list->line == NULL && list->type == 0)
+		error("no body\n");
+	if (list->type == 3 && list->line == NULL)
+		error("stuff missing\n");
 	i = skipsp(list->line, list);
-	list->type = 1;
-	if (!(list->ins = instrnametonb(list->line + i)))
-		i = gettype(list->line + i, list);
+	list->type = gettype(list->line + i, line);
+	if (list->type == 1)
+		if (!(list->ins = instrnametonb(list->line + i)))
+			error(line, "error not instruction\n");
+	else
+		getlabel(list->line + i, line);
+	if (line->type == 3)
+	{
+		getbody(fd, list);
+		return ;
+	}
+	getbody(fd, list);
 }

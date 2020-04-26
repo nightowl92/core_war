@@ -11,6 +11,7 @@
 typedef struct		list_s
 {
 	char			*filename;
+	char			*labelname;
     int				type;
 	int				ins;
 	int				code;
