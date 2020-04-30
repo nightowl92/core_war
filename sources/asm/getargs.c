@@ -12,31 +12,35 @@
 
 #include "asm.h"
 
-static void ft_putstrexit(char *str)
+static	int isnum(char *s)
 {
-	ft_putstr(str);
-	exit(0);
+	while (*s && *s > ' ')
+	{
+		if (!ft_isdigit(*s))
+			return (0);
+		s++;
+	}
+	return (1);
 }
 
-int main(int argc, char **argv)
+static  int getarg(char *s)
 {
-	int		fd;
-	list_t	*list;
-	list_t	*last;
+	if (*s == 'r')
+	{
+		//register
+	}
+	else if (*s == '%')
+	{
+		//direct
+	}
+	else if (isnum(s))
+		//indirect
+	else
+		return (0);
+}
 
-	if (argc != 2)
-		ft_putstrexit("Usage: ./asm [-a] <sourcefile.s>\n -a : Instead of creating a .cor file, outputs a stripped and annotated version of the code to the standard output\n");
-	if ((fd = open(argv[1], O_RDONLY)) < 0)
-		ft_putstrexit("Can't read source file\n");
-	//printf("okok fd is %d\n", fd);
-	list = initlist();
-	list->filename = getfilename(list, argv[1]);
-	last = getheader(fd, list);
-	if (!last->type && !(last = getbody(fd, last)))
-		error(list, "nothing in body\n");
-	while ((last = getbody(fd, last)))
-		;
-	printdata(list);
-	freelist(list);
-	return (0);
+int 	getargs(char *s, list_t *list)
+{
+	if (!getarg(s))
+		error(list);
 }

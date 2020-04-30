@@ -113,22 +113,16 @@ list_t *getbody(int fd, list_t *list)
 
 	if (!(list->line = skipnl(fd, list)))
 		return (NULL);
-	printf("line is %s\n", list->line);
 	i = skipsp(list->line, list);
-	if ((list->type = gettype(list->line + i, list)) == 2)
-	{
-		printf("you type is %d\n", list->type);
-		if (!(list = getbody(fd, list)))
-			error(list, "error arguments missing\n");
-	}
-	printf("lou type is %d\n", list->type);
-	printf("1rest is %s $$ %d\n", list->line + i, i);
+	list->type = gettype(list->line + i, list);
 	if (list->type > 1)
 		i += getlabel(list->line + i, list);
+	if (list->type == 2)
+		return (newlink(list));
 	i += skipsp(list->line + i, list);
-	printf("2rest is %s $$ %d\n", list->line + i, i);
 	if (!(list->ins = instrnametonb(list->line + i)))
 		error(list, "error not instruction\n");
-	//check if label
+	i += skipsp(list->line + i, list);
+	
 	return (newlink(list));
 }
