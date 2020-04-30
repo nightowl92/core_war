@@ -11,7 +11,7 @@
 typedef struct		list_s
 {
 	char			*filename;
-	char			*labelname;
+	char			*label;
     int				type;
 	int				ins;
 	int				code;
@@ -32,7 +32,7 @@ char	*skipnl(int fd, list_t *list);
 void	error(list_t *list, char *msg);
 void	freelist(list_t *list);
 list_t	*getheader(int fd, list_t *list);
-void	getbody(int fd, list_t *list);
+list_t	*getbody(int fd, list_t *list);
 list_t	*newlink(list_t *list);
 list_t	*initlist(void);
 void	printdata(list_t *list);

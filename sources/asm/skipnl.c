@@ -30,31 +30,31 @@ int		dohex(int code, int pos, int typ)
 	else if (pos == 1)
 		typ *= 16;
 	else
-        typ *= 4;
+		typ *= 4;
 	return (code + typ);
 }
 
 static int isempty(char *s)
 {
-    while (*s)
-    {
-        if (*s == COMMENT_CHAR)
-            break ;
-        if (*s > 32)
-            return (0);
-        s++;
-    }
-    return (1);
+	while (*s)
+	{
+		if (*s == COMMENT_CHAR)
+			break ;
+		if (*s > 32)
+			return (0);
+		s++;
+	}
+	return (1);
 }
 
 int skipsp(char *s, list_t *list)
 {
-    int i;
+	int i;
 
-    i = -1;
-    while (!(s[++i] > 32))
-        list->y += i;
-    return (i);
+	i = -1;
+	while (!(s[++i] > 32))
+		list->y += i;
+	return (i);
 }
 
 char *skipnl(int fd, list_t *list)
@@ -67,14 +67,12 @@ char *skipnl(int fd, list_t *list)
 	while ((ret = get_next_line(fd, &s)) > 0)
 	{
 		flag = 1;
-		printf("ret is %d\n", ret);
-        ++list->x;
-        if (!isempty(s))
-            return (s);
+		++list->x;
+		if (!isempty(s))
+			return (s);
 		free(s);
 	}
 	if (list->type == 0 && !flag)
 		error(list, "File is empty\n");
-	printf("ret is %d\n", ret);
-    return (NULL);
+	return (NULL);
 }

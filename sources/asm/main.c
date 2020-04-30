@@ -20,20 +20,23 @@ static void ft_putstrexit(char *str)
 
 int main(int argc, char **argv)
 {
-    int		fd;
-    list_t	*list;
+	int		fd;
+	list_t	*list;
 	list_t	*last;
 
-    if (argc != 2)
-        ft_putstrexit("Usage: ./asm [-a] <sourcefile.s>\n -a : Instead of creating a .cor file, outputs a stripped and annotated version of the code to the standard output\n");
-    if ((fd = open(argv[1], O_RDONLY)) < 0)
+	if (argc != 2)
+		ft_putstrexit("Usage: ./asm [-a] <sourcefile.s>\n -a : Instead of creating a .cor file, outputs a stripped and annotated version of the code to the standard output\n");
+	if ((fd = open(argv[1], O_RDONLY)) < 0)
 		ft_putstrexit("Can't read source file\n");
-    printf("okok fd is %d\n", fd);
-    list = initlist();
-    list->filename = getfilename(list, argv[1]);
-    last = getheader(fd, list);
-    getbody(fd, last);
-    printdata(list);
-	freelist(list);
-    return (0);
+	//printf("okok fd is %d\n", fd);
+	list = initlist();
+	list->filename = getfilename(list, argv[1]);
+	last = getheader(fd, list);
+	if (!last->type && !(last = getbody(fd, last)))
+		error(list, "nothing in body\n");
+	while ((last = getbody(fd, last)))
+		;
+	//printdata(list);
+	//freelist(list);
+	return (0);
 }

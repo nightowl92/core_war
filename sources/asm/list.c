@@ -37,7 +37,7 @@ list_t	*initlist(void)
 {
 	list_t *list;
 
-    if (!(list = malloc(sizeof(list_t))))
+	if (!(list = malloc(sizeof(list_t))))
 	{
 		ft_putstr("malloc error\n");
 		exit(0);

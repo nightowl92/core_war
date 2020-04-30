@@ -66,22 +66,22 @@ static int	gettype(char *s, list_t *list)
 		if (s[i] == COMMENT_CHAR)
 			break ;
 		if (s[i] == LABEL_CHAR)
+		{
+			while (s[++i])
 			{
-				while (s[i])
-				{
-					if (s[i] == COMMENT_CHAR)
-						break ;
-					if (s[i] > ' ')
-						return (3);
-					++i;
-				}
-				return (2);
+				if (s[i] == COMMENT_CHAR)
+					break ;
+				if (s[i] > ' ')
+					return (3);
+				++i;
 			}
+			return (2);
+		}
 	}
 	return (1);
 }
 
-static void	getlabel(char *s, list_t *list)
+static int	getlabel(char *s, list_t *list)
 {
 	int i;
 	int j;
@@ -90,44 +90,45 @@ static void	getlabel(char *s, list_t *list)
 	len = ft_strlen(LABEL_CHARS);
 	i = -1;
 	while (s[++i] != LABEL_CHAR)
+	{
+		j = -1;
+		while (++j < len)
 		{
-			j = -1;
-			while (++j < len)
-			{
-				if (LABEL_CHARS[j] == s[i])
-					break ;
-				if (len == i)
-					error(list, "label char not ok\n");
-			}
+			if (LABEL_CHARS[j] == s[i])
+				break ;
+			if (len == i)
+				error(list, "label char not ok\n");
 		}
-	if (!(list->labelname = ft_strnew(i)))
+	}
+	if (!(list->label = ft_strnew(i)))
 		error(list, "malloc error\n");
-	ft_strncpy(list->labelname, s, i);
+	ft_strncpy(list->label, s, i);
+	return (i + 1);
 }
 
-void getbody(int fd, list_t *list)
+list_t *getbody(int fd, list_t *list)
 {
 	int		i;
 	int		len;
 
-	list->line = skipnl(fd, list);
-	if (list->line == NULL && list->type == 0)
-		error(list, "no body\n");
-	if (list->type == 3 && list->line == NULL)
-		error(list, "stuff missing\n");
+	if (!(list->line = skipnl(fd, list)))
+		return (NULL);
+	printf("line is %s\n", list->line);
 	i = skipsp(list->line, list);
-	list->type = gettype(list->line + i, list);
-	if (list->type == 1)
+	if ((list->type = gettype(list->line + i, list)) == 2)
 	{
-		if (!(list->ins = instrnametonb(list->line + i)))
-			error(list, "error not instruction\n");
+		printf("you type is %d\n", list->type);
+		if (!(list = getbody(fd, list)))
+			error(list, "error arguments missing\n");
 	}
-	else
-		getlabel(list->line + i, list);
-	if (list->type == 3)
-	{
-		getbody(fd, list);
-		return ;
-	}
-	getbody(fd, list);
+	printf("lou type is %d\n", list->type);
+	printf("1rest is %s $$ %d\n", list->line + i, i);
+	if (list->type > 1)
+		i += getlabel(list->line + i, list);
+	i += skipsp(list->line + i, list);
+	printf("2rest is %s $$ %d\n", list->line + i, i);
+	if (!(list->ins = instrnametonb(list->line + i)))
+		error(list, "error not instruction\n");
+	//check if label
+	return (newlink(list));
 }

@@ -34,8 +34,8 @@ void printdata(list_t *list)
 	int	fd;
 	char NUM[1];
 
-	printf("name is  %s %s\n", list->name, list->comment);
-	printf("outp %s\n", list->filename);
+	//printf("name is  %s %s\n", list->name, list->comment);
+	//printf("outp %s\n", list->filename);
 	ft_putstr("Writing output program to .cor\n");
 	fd = open(list->filename, O_CREAT | O_RDWR, 0644);
 	tohex(fd, COREWAR_EXEC_MAGIC, 4);
