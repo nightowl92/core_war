@@ -123,6 +123,5 @@ list_t *getbody(int fd, list_t *list)
 	if (!(list->ins = instrnametonb(list->line + i)))
 		error(list, "error not instruction\n");
 	i += skipsp(list->line + i, list);
-	
 	return (newlink(list));
 }

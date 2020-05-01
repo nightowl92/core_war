@@ -17,6 +17,7 @@ typedef struct		list_s
 	int				code;
     int				x;
     int				y;
+    int             args[3];
     char			name[PROG_NAME_LENGTH];
 	char			comment[COMMENT_LENGTH];
     char            *line;

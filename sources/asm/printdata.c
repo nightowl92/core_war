@@ -34,6 +34,7 @@ void printdata(list_t *list)
 	int	fd;
 	char NUM[1];
 
+
 	printf("name is  %s %s\n", list->name, list->comment);
 	printf("outp %s\n", list->filename);
 	ft_putstr("Writing output program to .cor\n");
@@ -42,8 +43,12 @@ void printdata(list_t *list)
 	write(fd, list->name, PROG_NAME_LENGTH);
 	write(fd, list->comment, COMMENT_LENGTH);
 	list = list->next;
+
 	while (list)
 	{
+		NUM[0] = list->ins;
+		write(fd, NUM, 1);
+		printf("ins is %d \n", list->ins);
 		NUM[0] = list->code;
 		if (!(list->ins == 0 || list->ins == 8 || list->ins == 11 || list->ins == 14))
 			write(fd, NUM, 1);

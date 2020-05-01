@@ -28,7 +28,6 @@ int main(int argc, char **argv)
 		ft_putstrexit("Usage: ./asm [-a] <sourcefile.s>\n -a : Instead of creating a .cor file, outputs a stripped and annotated version of the code to the standard output\n");
 	if ((fd = open(argv[1], O_RDONLY)) < 0)
 		ft_putstrexit("Can't read source file\n");
-	//printf("okok fd is %d\n", fd);
 	list = initlist();
 	list->filename = getfilename(list, argv[1]);
 	last = getheader(fd, list);
