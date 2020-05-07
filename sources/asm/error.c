@@ -20,7 +20,7 @@ void freeline(char **s)
 
 void freelist(list_t *list)
 {
-	list_t  *tmp;
+	list_t	*tmp;
 
 	while (list->next != NULL)
 	{

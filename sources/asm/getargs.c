@@ -26,7 +26,9 @@ static	int isnum(char *s)
 static  int getarg(char *s, int *data)
 {
 	int out;
-
+	
+	s = s + 4;
+	printf("entry is %s\n", s);
 	if (*s == 'r')
 	{
 		out = ft_atoi(s + 1);
@@ -46,25 +48,30 @@ static  int getarg(char *s, int *data)
 	//indirect
 	else
 		return (0);
+	return (out);
 }
 
 int 	getargs(char *s, list_t *list)
 {
 	int data;
 	int ret;
-
+/*
+	printf("first\n");
 	if (!(list->args[0] = getarg(s, &data)))
 		error(list, "problem\n");
 	dohex(list->code, 0, data);
 
+printf("second\n");
 	list->args[1] = getarg(s, &data);
 	if (list->args[1] && (list->ins == 1 || list->ins == 9 || list->ins == 12 || list->ins == 15))
 		error(list, "problem\n");
 	dohex(list->code, 1, data);
 
+printf("third\n");
 	if (!(list->args[2] = getarg(s, &data)))
-		error(list);
+		error(list, "problem\n");
 	if (list->args[1] && (list->ins == 13 || list->ins == 16))
-		error(list);
-	dohex(list->code, 2, data);
+		error(list, "problem\n");
+	dohex(list->code, 2, data);*/
+	return (1);
 }
