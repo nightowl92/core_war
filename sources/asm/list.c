@@ -14,6 +14,8 @@
 
 static void initvalues(list_t *list)
 {
+	list->label = NULL;
+	list->labelarg = NULL;
 	list->filename = NULL;
 	list->type = -1;
 	list->code = 0;

@@ -19,7 +19,7 @@ CFLAGS = # -Wextra -Werror -Wall -Wno-missing-field-initializers
 
 # SOURCES
 
-SRC_ASM = error.c  getbody.c  getheader.c  list.c  main.c  printdata.c  skipnl.c filename.c
+SRC_ASM = error.c  getbody.c  getheader.c  list.c  main.c  printdata.c  skipnl.c filename.c getargs.c
 SRC_VM = main.c debug.c battle.c champ_load.c init_corewar.c process_new.c operation_reading.c
 SRC_COMMON = op.c
 

@@ -12,18 +12,20 @@ typedef struct		list_s
 {
 	char			*filename;
 	char			*label;
-    int				type;
+	char            *labelarg;
+	int				type;
 	int				ins;
 	int				code;
-    int				x;
-    int				y;
-    int             args[3];
-    char			name[PROG_NAME_LENGTH];
+	int				x;
+	int				y;
+	int             args[3];
+	char			name[PROG_NAME_LENGTH];
 	char			comment[COMMENT_LENGTH];
-    char            *line;
-    struct list_s   *next;
+	char            *line;
+	struct list_s   *next;
 }                   list_t;
 
+int 	getargs(char *s, list_t *list);
 char	*getfilename(list_t *list, char *s);
 int		dohex(int code, int pos, int typ);
 int		gethex(int code, int pos);

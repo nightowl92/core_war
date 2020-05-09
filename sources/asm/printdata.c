@@ -46,13 +46,15 @@ void printdata(list_t *list)
 
 	while (list)
 	{
-		NUM[0] = list->ins;
-		write(fd, NUM, 1);
-		printf("ins is %d \n", list->ins);
-		NUM[0] = list->code;
-		if (!(list->ins == 0 || list->ins == 8 || list->ins == 11 || list->ins == 14))
+		if (list->type != 2)
+		{
+			NUM[0] = list->ins;
 			write(fd, NUM, 1);
-		printf("type is %d\n", list->type);
+			NUM[0] = list->code;
+			if (!(list->ins == 0 || list->ins == 8 || list->ins == 11 || list->ins == 14))
+				write(fd, NUM, 1);
+			write(fd, list->args, 3);
+		}
 		list = list->next;
 	}
 	close(fd);

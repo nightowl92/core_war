@@ -23,48 +23,103 @@ static	int isnum(char *s)
 	return (1);
 }
 
-static  int getarg(char *s, int *data)
+static int labellen(char *s)
 {
+	int i;
+
+	i = -1;
+	while (s[i])
+	{
+		if (s[i] == SEPARATOR_CHAR)
+			break ;
+		++i;
+	}
+	return (i);
+}
+
+static  int getarg(char *s, int *data, list_t *list, int *skip)
+{
+	int	lablen;
 	int out;
 
+	*skip = 2;
 	if (*s == 'r')
 	{
 		out = ft_atoi(s + 1);
 		*data = 0;
+		if (out > 10)
+			*skip = 3;
 	}
 	else if (*s == '%')
 	{
-		out = ft_atoi(s + 1);
-		*data = 2;
-		//direct
+		s = s + 1;
+		if (*s == LABEL_CHAR)
+		{
+			s++;
+			lablen = labellen(s);
+			list->labelarg = ft_strnew(lablen);
+			ft_strncpy(list->labelarg, s, lablen);
+			*skip = lablen + 2;
+		}
+		else
+		{
+			out = ft_atoi(s + 1);
+			*data = 2;
+		}
 	}
 	else if (isnum(s))
 	{
 		out = ft_atoi(s);
 		*data = 1;
 	}
-	//indirect
 	else
 		return (0);
+	return (out);
+}
+
+static int skipinstr(list_t *list)
+{
+	if (list->ins == 1 || list->ins == 9 || list->ins == 12 || list->ins == 14)
+		return (4);
+	else if (list->ins == 15)
+		return (5);
+	else if (list->ins == 2 || list->ins == 3 || list->ins == 7)
+		return (2);
+	else
+		return (3);
+}
+
+static char	*onearg(char *s, list_t *list, int nb, int islast)
+{
+	int data;
+	int ret;
+	int skip;
+
+	list->args[nb] = getarg(s, &data, list, &skip);
+	dohex(list->code, 1, data);
+	printf("skip1 %s\n", s + skip);
+	s = s + skip;
+	printf("skip2 %s\n", s + skip);
+	if (!islast)
+		if (*s != SEPARATOR_CHAR || *s == COMMENT_CHAR)
+			error(list, "no space\n");
+	s += 1;
+	s = s + skipsp(s, list);
+	return (s);
 }
 
 int 	getargs(char *s, list_t *list)
 {
-	int data;
-	int ret;
+	s = s + skipinstr(list);
+	if (*s != ' ' || *s == COMMENT_CHAR)
+		error(list, "no space\n");
+	s = s + skipsp(s, list);
 
-	if (!(list->args[0] = getarg(s, &data)))
-		error(list, "problem\n");
-	dohex(list->code, 0, data);
-
-	list->args[1] = getarg(s, &data);
-	if (list->args[1] && (list->ins == 1 || list->ins == 9 || list->ins == 12 || list->ins == 15))
-		error(list, "problem\n");
-	dohex(list->code, 1, data);
-
-	if (!(list->args[2] = getarg(s, &data)))
-		error(list);
-	if (list->args[1] && (list->ins == 13 || list->ins == 16))
-		error(list);
-	dohex(list->code, 2, data);
+	printf("before first %s\n", s);
+	s = onearg(s, list, 0, 0);
+	printf("before second %s\n", s);
+	s = onearg(s, list, 1, 0);
+	printf("before third %s\n", s);
+	s = onearg(s, list, 2, 1);
+	return (1);
 }

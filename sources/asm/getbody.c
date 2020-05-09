@@ -77,6 +77,8 @@ static int	gettype(char *s, list_t *list)
 			}
 			return (2);
 		}
+		if (s[i] == ' ')
+			break ;
 	}
 	return (1);
 }
@@ -123,5 +125,6 @@ list_t *getbody(int fd, list_t *list)
 	if (!(list->ins = instrnametonb(list->line + i)))
 		error(list, "error not instruction\n");
 	i += skipsp(list->line + i, list);
+	getargs(list->line + i, list);
 	return (newlink(list));
 }
