@@ -12,10 +12,17 @@
 
 #include "asm.h"
 
-static void ft_putstrexit(char *str)
+void ft_putstrexit(char *str, char *str2, int isexit)
 {
-	ft_putstr(str);
-	exit(0);
+	while (*str)
+	{
+		ft_putchar(*str);
+		str++;
+	}
+	ft_putstr(str2);
+	ft_putchar('\n');
+	if (isexit)
+		exit(0);
 }
 
 int main(int argc, char **argv)
@@ -24,10 +31,10 @@ int main(int argc, char **argv)
 	list_t	*list;
 	list_t	*last;
 
-	if (argc != 2)
-		ft_putstrexit("Usage: ./asm [-a] <sourcefile.s>\n -a : Instead of creating a .cor file, outputs a stripped and annotated version of the code to the standard output\n");
+	if (argc < 2)
+		ft_putstrexit("Usage: ./asm [-a] <sourcefile.s>\t", " -a : Instead of creating a .cor file, outputs a stripped and annotated version of the code to the standard output", 1);
 	if ((fd = open(argv[1], O_RDONLY)) < 0)
-		ft_putstrexit("Can't read source file\n");
+		ft_putstrexit("Can't read source file ", argv[1], 0);
 	list = initlist();
 	list->filename = getfilename(list, argv[1]);
 	last = getheader(fd, list);

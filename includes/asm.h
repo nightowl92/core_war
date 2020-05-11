@@ -25,6 +25,7 @@ typedef struct		list_s
 	struct list_s   *next;
 }                   list_t;
 
+void	ft_putstrexit(char *str, char *str2, int isexit);
 int 	getargs(char *s, list_t *list);
 char	*getfilename(list_t *list, char *s);
 int		dohex(int code, int pos, int typ);

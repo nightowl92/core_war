@@ -46,7 +46,7 @@ static  int getarg(char *s, int *data, list_t *list, int *skip)
 	if (*s == 'r')
 	{
 		out = ft_atoi(s + 1);
-		*data = 0;
+		*data = 1;
 		if (out > 10)
 			*skip = 3;
 	}
@@ -64,13 +64,13 @@ static  int getarg(char *s, int *data, list_t *list, int *skip)
 		else
 		{
 			out = ft_atoi(s + 1);
-			*data = 2;
+			*data = 3;
 		}
 	}
 	else if (isnum(s))
 	{
 		out = ft_atoi(s);
-		*data = 1;
+		*data = 2;
 	}
 	else
 		return (0);
@@ -96,10 +96,8 @@ static char	*onearg(char *s, list_t *list, int nb, int islast)
 	int skip;
 
 	list->args[nb] = getarg(s, &data, list, &skip);
-	dohex(list->code, 1, data);
-	printf("skip1 %s\n", s + skip);
+	list->code = dohex(list->code, nb, data);
 	s = s + skip;
-	printf("skip2 %s\n", s + skip);
 	if (!islast)
 		if (*s != SEPARATOR_CHAR || *s == COMMENT_CHAR)
 			error(list, "no space\n");
@@ -114,12 +112,8 @@ int 	getargs(char *s, list_t *list)
 	if (*s != ' ' || *s == COMMENT_CHAR)
 		error(list, "no space\n");
 	s = s + skipsp(s, list);
-
-	printf("before first %s\n", s);
 	s = onearg(s, list, 0, 0);
-	printf("before second %s\n", s);
 	s = onearg(s, list, 1, 0);
-	printf("before third %s\n", s);
 	s = onearg(s, list, 2, 1);
 	return (1);
 }

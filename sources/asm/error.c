@@ -24,13 +24,11 @@ void freelist(list_t *list)
 
 	while (list->next != NULL)
 	{
-		printf("freeing one val is %d\n", list->type);
 		tmp = list;
 		list = list->next;
 		tmp = NULL;
 		free(tmp);
 	}
-	printf("freeing one val is %d\n", list->type);
 	free(list);
 }
 
